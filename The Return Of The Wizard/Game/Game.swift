@@ -9,6 +9,18 @@
 import Foundation
 
 
-// methode menu
-// What the player do accessing to the method create game from class Team
-//                                 the method fight from class team
+// method menu
+// method giveInfo -> before game
+//                 -> after game
+// method giveTheResult
+
+// What the player do call method create game from class Team
+//                         method fight from class team
+//                         method healing from class Team
+//                         method statusTeam -> Team 1
+//                                           -> Team 2
+
+class Game {
+    
+}
+
