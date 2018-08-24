@@ -9,4 +9,14 @@
 import Foundation
 
 
-// setting parameter each weapon
+class Weapon { // setting parameter for all weapons
+    
+    var weaponEffect: Int // definition of the property of all Weapon
+    
+    init(weaponEffect: Int) {
+        
+        self.weaponEffect = weaponEffect
+        
+    }
+}
+
