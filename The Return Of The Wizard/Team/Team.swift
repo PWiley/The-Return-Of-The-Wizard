@@ -7,3 +7,11 @@
 //
 
 import Foundation
+
+
+// method createTeam
+// method fight
+// method give info -> before action
+//                  -> after action
+
+// declaration of dictionaryTeam [String, Heroes]

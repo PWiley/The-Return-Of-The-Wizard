@@ -7,3 +7,8 @@
 //
 
 import Foundation
+
+
+// methode menu
+// What the player do accessing to the method create game from class Team
+//                                 the method fight from class team

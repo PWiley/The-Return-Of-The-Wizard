@@ -8,5 +8,6 @@
 
 import Foundation
 
-print("Hello, World!")
+// starting the game
+// Game()
 

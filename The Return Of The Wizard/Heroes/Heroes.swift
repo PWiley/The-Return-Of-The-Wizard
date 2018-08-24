@@ -7,3 +7,7 @@
 //
 
 import Foundation
+
+
+// setting parameter for each Character
+
