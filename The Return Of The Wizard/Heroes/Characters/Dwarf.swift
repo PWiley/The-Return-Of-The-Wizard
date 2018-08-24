@@ -9,4 +9,14 @@
 import Foundation
 
 
-// setting parameter for Dwarf
+
+
+
+class Dwarf: Heroes { // setting parameters for Dwarf
+    
+    init() {
+        // initialization of the properties
+        
+        super.init(lifeStrength: 50, shotStrength: 20, armorStrength: 10, name: "Dwarf", teamName: "teamName")
+    }
+}
