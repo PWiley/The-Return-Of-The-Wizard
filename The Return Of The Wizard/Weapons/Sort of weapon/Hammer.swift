@@ -8,5 +8,13 @@
 
 import Foundation
 
+class Hammer { // setting parameter for Hammer
 
-// setting parameter for Hammer
+    
+    var hammerEffect : Int// definition of the property for the Hammer
+    
+    init() {
+        
+        self.hammerEffect = 6 // hammer injured 6 points
+    }
+}
