@@ -7,3 +7,14 @@
 //
 
 import Foundation
+
+
+class Axe { // setting parameter for Axe
+    
+    var axeEffect: Int // definition of the property for the Axe
+    
+    init() {
+        
+        self.axeEffect = 8 // axe injured 8 points
+    }
+}

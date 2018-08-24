@@ -7,3 +7,15 @@
 //
 
 import Foundation
+
+
+class Sword { // setting parameter for Sword
+    
+    var swordEffect : Int// definition of the property for the sword
+    
+    init() {
+        self.swordEffect = 5 // sword injured 5 points
+        
+    }
+}
+

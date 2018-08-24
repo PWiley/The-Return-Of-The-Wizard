@@ -7,3 +7,15 @@
 //
 
 import Foundation
+
+
+
+class Wizard: Heroes { // setting parameters for Wizard
+    
+    init() {
+        // initialization of the properties
+        
+        super.init(lifeStrength: 80, shotStrength: 20, armorStrength: 5, name: "Wizard", teamName: "teamName")
+    }
+    
+}

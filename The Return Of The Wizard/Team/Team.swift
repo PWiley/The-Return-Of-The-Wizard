@@ -7,3 +7,35 @@
 //
 
 import Foundation
+
+
+
+// declaration of dictionaryTeam [String, Heroes]
+// method createTeam
+// method fight
+// method healing
+// method statusTeam -> Team 1
+//                   -> Team 2
+
+
+class Team {
+    
+    var dictionaryTeam : [String: Heroes] = [:] // declaration of dictionaryTeam [String, Heroes]
+    
+    func createTeam() { // method createTeam
+        
+        
+    }
+    
+    func fight() { // method fight
+    
+    }
+    
+    func healing() { // method healing
+        
+    }
+    
+    func statusTeam() { // method statusTeam -> Team 1
+                        //                   -> Team 2
+    }
+}

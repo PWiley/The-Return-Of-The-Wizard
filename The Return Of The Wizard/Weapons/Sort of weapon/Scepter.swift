@@ -7,3 +7,15 @@
 //
 
 import Foundation
+
+
+class Scepter { // setting parameter for Scepter
+    
+    var scepterEffect : Int// definition of the property for the Scepter
+    
+    init() {
+        
+        self.scepterEffect = 7 // // scepter heal 7 points
+        
+    }
+}

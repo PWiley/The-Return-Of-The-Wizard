@@ -7,3 +7,16 @@
 //
 
 import Foundation
+
+
+
+class Warrior: Heroes { // setting parameter for Warrior
+
+    
+    init() {
+        
+        // initialization of Warrior properties
+        
+        super.init(lifeStrength: 100, shotStrength: 20, armorStrength: 10, name: "Warrior", teamName: "teamName")
+    }
+}

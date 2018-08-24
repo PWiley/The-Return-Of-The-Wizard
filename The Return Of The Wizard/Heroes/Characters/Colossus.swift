@@ -7,3 +7,16 @@
 //
 
 import Foundation
+
+
+
+
+class Colossus: Heroes { // setting parameter for Colossus
+    
+    init() {
+        // initialization of the properties
+        
+        super.init(lifeStrength: 120, shotStrength: 5, armorStrength: 10, name: "Colossus", teamName: "teamName")
+    }
+}
+
