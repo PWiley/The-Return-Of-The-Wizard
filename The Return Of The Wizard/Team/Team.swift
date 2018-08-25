@@ -20,9 +20,10 @@ import Foundation
 
 class Team {
     
-    var dictionaryTeam : [String: Heroes] = [:] // declaration of dictionaryTeam [String, Heroes]
+    static var arrayTeam : [Heroes] = [] // declaration of arrayTeam [Heroes]
     
     static func createTeam() { // method createTeam
+        
         var teamName : String // It will be easy to manage
         var choicePlayer : String
         var numberOfTeam : String = "First"
@@ -44,7 +45,7 @@ class Team {
                 print("\n1. Warrior"
                     + "\n2. Dwarf"
                     + "\n3. Colossus"
-                    + "\n4. Wizzard")
+                    + "\n4. Wizard")
                 choicePlayer = readLine()!
                 
                 switch choicePlayer {
@@ -53,21 +54,29 @@ class Team {
                     print("Warrior")
                     numberOfHeroes += 1
                     print("you choose the Warrior")
+                    let warrior = Warrior()
+                    arrayTeam.append(warrior)
                     
                 case "2" :
                     print("Dwarf")
                     numberOfHeroes += 1
                     print("you choose the Dwarf")
+                    let dwarf = Dwarf()
+                    arrayTeam.append(dwarf)
                     
                 case "3" :
                     print("Colossus")
                     numberOfHeroes += 1
                     print("you choose the Colossus")
+                    let colossus = Colossus()
+                    arrayTeam.append(colossus)
                     
                 case "4" :
                     print("Wizzard")
                     numberOfHeroes += 1
-                    print("you choose the Wizzard")
+                    print("you choose the Wizard")
+                    let wizard = Wizard()
+                    arrayTeam.append(wizard)
                     
                 default : print("You must choose a player")
                     
