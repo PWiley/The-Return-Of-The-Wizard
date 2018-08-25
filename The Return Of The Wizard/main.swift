@@ -9,5 +9,7 @@
 import Foundation
 
 // starting the game
-// Game()
+Game.gameMenu()
+
+
 
