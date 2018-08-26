@@ -70,7 +70,8 @@ import Foundation
                 
             case "2": // see the status of the Game
                 
-                print("The status of the game")
+                    print("The status of the game")
+                    Team.statusTeam()
                 
             case "3": // Doing an action
                 
