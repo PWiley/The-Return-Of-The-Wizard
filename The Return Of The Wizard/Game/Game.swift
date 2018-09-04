@@ -44,6 +44,8 @@ import Foundation
         
         init() {}
         
+        let teamFactory = TeamFactory()
+        
         func gameMenu() {
             
             print("**************************************************************************************"
@@ -62,11 +64,6 @@ import Foundation
             + "\n"
             + "Your choice:")
             
-            //var teamFactory: TeamFactory!
-            
-            let teamFactory = TeamFactory()
-            
-            
             
         // We get the answer of the player
         if let choice = readLine() {
@@ -83,7 +80,7 @@ import Foundation
                 repeat{ // will create two teams
                     
                     var numberOfHeroes : Int = 0
-                    //let teamFactory = TeamFactory()
+
                     print("Which name would you like to give to your Team?") // Asking the name of the Team
                     let teamName = teamFactory.getStarterTeam()
                     print("You give \(teamName) to your team")
@@ -98,11 +95,12 @@ import Foundation
                         + "\n4. Wizard")
                     let choicePlayer = readLine()!
                         
-                        let numberHeroes = teamFactory.composeTeam(teamName: "\(teamName)", heroesInt: "\(choicePlayer)")
-                    numberOfHeroes += 1
-                    print("\(numberHeroes)")
+                    teamFactory.composeTeam(teamName: "\(teamName)", heroesInt: "\(choicePlayer)") // adding the Heroes
                     
-                    //print("You have picked \((teamFactory.teamName)). It is a \((teamFactory.teamName)) Heroes")
+                    numberOfHeroes += 1
+                        
+                
+                    
                 } while numberOfHeroes < maxHeroes
                 
                 
@@ -111,15 +109,14 @@ import Foundation
                 
                 } while teamAlias != 2
                 
-                
                 game.gameMenu()
                 
             case "2": // see the status of the Game
                 
-                    print("The status of the game")
-                    //let numberHeroes: Int = teamFactory.numberHeroes
-                    //teamFactory.statusTeam(team: Team)
-                
+                print("The status of the game")
+                    
+                teamFactory.statusTeam()
+                game.gameMenu()
                 
             case "3": // Doing an action
                 
