@@ -66,7 +66,7 @@ import Foundation
             
             let teamFactory = TeamFactory()
             
-            let numberHeroes: Int
+            
             
         // We get the answer of the player
         if let choice = readLine() {
