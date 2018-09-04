@@ -38,11 +38,13 @@ import Foundation
     // Which Fighter of the other team would you like to attack?
     // Show the result of the fight
     // If healing // Which heroe would like to heal?
+    // method gameMenu
+
     class Game {
         
         init() {}
         
-        static func gameMenu() {
+        func gameMenu() {
             
             print("**************************************************************************************"
             + "\n*                              The Return Of The Wizard                              *"
@@ -59,19 +61,65 @@ import Foundation
             + "\n"
             + "\n"
             + "Your choice:")
+            
+            //var teamFactory: TeamFactory!
+            
+            let teamFactory = TeamFactory()
+            
+            let numberHeroes: Int
+            
         // We get the answer of the player
         if let choice = readLine() {
             switch choice {
-            case "1": // Start a new game
-                print("\n"
-                     + "\nYou decide to create a team")
                 
-                    Team.createTeam()
+            case "1": // Start a new game
+                
+                // asking the teamName doing that 2 times
+                
+                print("You decide to start a new Game")
+                var teamAlias = 0
+                
+                
+                repeat{ // will create two teams
+                    
+                    var numberOfHeroes : Int = 0
+                    //let teamFactory = TeamFactory()
+                    print("Which name would you like to give to your Team?") // Asking the name of the Team
+                    let teamName = teamFactory.getStarterTeam()
+                    print("You give \(teamName) to your team")
+                    
+                    let maxHeroes = 3
+                    repeat { // Asking what his player team
+                        
+                    print("\nWhich Heroe: number \(numberOfHeroes + 1) , would you like to choose?")
+                    print("\n1. Warrior"
+                        + "\n2. Dwarf"
+                        + "\n3. Colossus"
+                        + "\n4. Wizard")
+                    let choicePlayer = readLine()!
+                        
+                        let numberHeroes = teamFactory.composeTeam(teamName: "\(teamName)", heroesInt: "\(choicePlayer)")
+                    numberOfHeroes += 1
+                    print("\(numberHeroes)")
+                    
+                    //print("You have picked \((teamFactory.teamName)). It is a \((teamFactory.teamName)) Heroes")
+                } while numberOfHeroes < maxHeroes
+                
+                
+                teamAlias += 1
+            
+                
+                } while teamAlias != 2
+                
+                
+                game.gameMenu()
                 
             case "2": // see the status of the Game
                 
                     print("The status of the game")
-                    Team.statusTeam()
+                    //let numberHeroes: Int = teamFactory.numberHeroes
+                    //teamFactory.statusTeam(team: Team)
+                
                 
             case "3": // Doing an action
                 
@@ -85,10 +133,12 @@ import Foundation
                     case "1": // Fighting
                         
                         print("You would like to fight")
+                        //teamFactory().fight()
                         
                     case "2": // Healing someone
                         
                         print("You want to heal someone")
+                        //teamFactory().healing()
                         
                     default:
                         
@@ -97,9 +147,13 @@ import Foundation
                 }
             default:
                 print("I don't understand")
-            }
+            
         }
-    }
- 
+}
+        
 }
 
+        
+
+
+}
