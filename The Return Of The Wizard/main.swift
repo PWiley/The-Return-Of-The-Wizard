@@ -9,7 +9,8 @@
 import Foundation
 
 // starting the game
-Game.gameMenu()
+let game = Game()
+game.gameMenu()
 
 
 
