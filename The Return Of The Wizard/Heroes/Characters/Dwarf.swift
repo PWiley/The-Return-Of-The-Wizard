@@ -9,14 +9,10 @@
 import Foundation
 
 
+class Dwarf: Heroes { // setting proporties for Dwarf
 
-
-
-class Dwarf: Heroes { // setting parameters for Dwarf
-    
-    init() {
-        // initialization of the properties
+    init() {    // initialization of the proporties
         
-        super.init(lifeStrength: 50, shotStrength: 20, armorStrength: 10, name: "Dwarf", teamName: "teamName")
+        super.init(lifeStrength: 50, shotStrength: 20, armorStrength: 10, name: "Dwarf", teamName: "", alive: true, equipment : Equipment.Axe)
     }
 }

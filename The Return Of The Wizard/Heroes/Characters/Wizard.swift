@@ -9,13 +9,11 @@
 import Foundation
 
 
-
-class Wizard: Heroes { // setting parameters for Wizard
+class Wizard: Heroes { // setting proporties for Wizard
     
-    init() {
-        // initialization of the properties
+    init() {     // initialization of the proporties
         
-        super.init(lifeStrength: 80, shotStrength: 20, armorStrength: 5, name: "Wizard", teamName: "teamName")
+        super.init(lifeStrength: 80, shotStrength: 20, armorStrength: 5, name: "Wizard", teamName: "", alive: true, equipment : Equipment.Scepter)
     }
     
 }
