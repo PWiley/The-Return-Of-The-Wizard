@@ -10,18 +10,11 @@ import Foundation
 
 
 enum Equipment: Int {
-
+    
     case Axe = 8 // Axe effect at 8 points
-    case Hammer = 6 // Hammer effect at 6 points
-    case Sword = 5 // Sword effect at 6 points
-    case Scepter = 7 // Scepter effect at 6 points
-    
-    func effect() -> Int {
-        
-     return self.rawValue
-    }
-    
-    
+    case Hammer = 10 // Hammer effect at 10 points
+    case Sword = 6 // Sword effect at 6 points
+    case Scepter = 5 // Scepter effect at 5 points
 }
 
 
