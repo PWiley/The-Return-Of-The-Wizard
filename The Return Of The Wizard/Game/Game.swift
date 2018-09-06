@@ -106,7 +106,7 @@ class Game {
                                 + "\n4. Wizard")
                             let choicePlayer = readLine()!
                             
-                            teamFactory.composeTeam(teamName: "\(heroeName)", heroesInt: "\(choicePlayer)") // adding the Heroes
+                            teamFactory.composeTeam(heroeName: "\(heroeName)", heroesInt: "\(choicePlayer)") // adding the Heroes
                             
                             print("\nwhich Weapon would you like to choose?")
                             print("\n1. Axe"
@@ -117,7 +117,7 @@ class Game {
                             
                             let choiceWeaponPlayer = readLine()!
                             
-                            teamFactory.chooseYourWeapon(teamName: "\(heroeName)", heroesInt: "\(choicePlayer)", weaponChoice: "\(choiceWeaponPlayer)")
+                            teamFactory.chooseYourWeapon(heroeName: "\(heroeName)", heroesInt: "\(choicePlayer)", weaponChoice: "\(choiceWeaponPlayer)")
                             
                             
                             numberOfHeroes += 1

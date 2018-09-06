@@ -16,7 +16,7 @@ class TeamFactory {
     let heroesFactory = HeroesFactory()
     let team = Team()
     
-    func getHeroeName() -> String{ // create the teamName
+    func getHeroeName() -> String{ // create the heroeName
         
         var heroeName = ""
         
@@ -28,11 +28,11 @@ class TeamFactory {
     }
     
     
-    func composeTeam(teamName : String, heroesInt: String)-> (String, String) { // method createTeam
+    func composeTeam(heroeName : String, heroesInt: String)-> (String, String) { // method createTeam
         
         
         let choicePlayer = heroesInt
-        let name = teamName
+        let name = heroeName
         let heroe = heroesFactory.getHeroe(heroesInt: choicePlayer)!
         heroe.heroeName = name
         teamFactory.arrayTeam.append(heroe)
@@ -42,10 +42,10 @@ class TeamFactory {
         
     }
     
-    func chooseYourWeapon(teamName : String, heroesInt: String, weaponChoice: String) { // method for choosing the Weapon // First not choosable
+    func chooseYourWeapon(heroeName : String, heroesInt: String, weaponChoice: String) { // method for choosing the Weapon // First not choosable
         
         let choicePlayer = heroesInt
-        let name = teamName
+        let name = heroeName
         
         let choiceWeaponPlayer = weaponChoice
         switch choiceWeaponPlayer {
