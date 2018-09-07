@@ -89,15 +89,7 @@ class Game {
                             
                             let heroeName = teamFactory.getHeroeName()
                             
-                            //                        if heroeName == "" {
-                            //                            print("You must give a name to your Team")
-                            //                            print("Which name would you like to give to your Team?") // Asking the name of the Team
-                            //                            heroeName = teamFactory.getHeroeName()
-                            //                        }
-                            //                        else if heroeName != "" {
-                            //                            heroeName = teamFactory.getHeroeName()
-                            //                            print("You give \(heroeName) to your team")
-                            //                        }
+                            
                             print("You give \(heroeName) to your Heroe")
                             print("\nWhich Heroe: number \(numberOfHeroes + 1) , would you like to choose?")
                             print("\n1. Warrior"
