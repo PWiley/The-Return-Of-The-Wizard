@@ -65,6 +65,8 @@ class Game {
         
         // We get the answer of the player // testing if the answer is acceptable
         
+        let teamTurn = "First" // property for the roll of the game
+        
         if let choice = readLine() {
             
             repeat {
@@ -98,7 +100,7 @@ class Game {
                                 + "\n4. Wizard")
                             let choicePlayer = readLine()!
                             
-                            teamFactory.composeTeam(heroeName: "\(heroeName)", heroesInt: "\(choicePlayer)") // adding the Heroes
+                            teamFactory.composeTeam(heroeName: "\(heroeName)", heroesInt: "\(choicePlayer)",teamNameAlias: "\(teamNameAlias)") // adding the Heroes
                             
                             print("\nwhich Weapon would you like to choose?")
                             print("\n1. Axe"
@@ -128,15 +130,33 @@ class Game {
                     game.gameMenu()
                     
                 case "2": // see the status of the Game
+                   // var choiceGiven: String?
                     
-                    print("The status of the game")
+                    print("For which Team would you like to see the status?"
+                        + "\n1. First Team"
+                        + "\n2. Second Team")
                     
-                    teamFactory.statusTeam()
-                    game.gameMenu()
+                    if let choicePlayer = readLine() {
+                        
+                        switch choicePlayer {
+                        case "1":
+                            teamFactory.statusTeam(statusChoice: "first")
+                        case "2":
+                            teamFactory.statusTeam(statusChoice: "second")
+                        default :
+                            print("I don't understand")
+                        }
+                        
+                    }
+                   
+                
+//                    teamFactory.statusTeam()
+//                    game.gameMenu()
                     
                 case "3": // Doing an action  // testing if there is a Wizard in the team and if that is the turn of the team with it
-                    
-                    print("What Would you like to do:"
+                                                // giving the status of each team turn start with first team then second
+                    print("\(teamTurn) Team")
+                    print("What Would you like to do:"   // the game should propose first team to start then Second team and so on
                         + "\n1. Would you like to fight?"
                         + "\n2. Would You like to heal someone?")
                     
@@ -159,6 +179,7 @@ class Game {
                             game.gameMenu()
                         }
                     }
+                    
                 default:
                     print("I don't understand")
                     game.gameMenu()
