@@ -18,17 +18,26 @@ class TeamFactory {
     
     func getHeroeName() -> String{ // create the heroeName
         
-        var heroeName = ""
-        
-        if let choicePlayer = readLine(){
+        //var choicePlayer: String
+        var nameUnique: Bool = true
+        var heroeName: String = ""
+        var choicePlayer: String
+        repeat {
+            
+
+            choicePlayer = readLine()!
+                
+            nameUnique = checkUniqueNameHeroe(heroeNameGiven : heroeName)
+                
+            
+        }while nameUnique == false
         heroeName = choicePlayer
-        }
         return heroeName
         
     }
     
     
-    func composeTeam(heroeName : String, heroesInt: String)-> (String, String) { // method createTeam
+    func composeTeam(heroeName : String, heroesInt: String) { // method createTeam
         
         
         let choicePlayer = heroesInt
@@ -38,7 +47,7 @@ class TeamFactory {
         teamFactory.arrayTeam.append(heroe)
         //print("We have: \(teamFactory.arrayTeam.count) Heroes in the array of teams")
         print(teamFactory.arrayTeam)
-        return (name, choicePlayer)
+       // return (name, choicePlayer)
         
     }
     
@@ -58,7 +67,7 @@ class TeamFactory {
             heroe.heroeName = name
             heroe.equipment = equipment
             
-           
+            
         case "2" :
             
             let equipment = Equipment.Hammer
@@ -78,7 +87,7 @@ class TeamFactory {
             let heroe = heroesFactory.getHeroe(heroesInt: choicePlayer)!
             heroe.heroeName = name
             heroe.equipment = equipment
-        
+            
         case "4" :
             
             let equipment = Equipment.Scepter
@@ -95,7 +104,7 @@ class TeamFactory {
             heroe.heroeName = name
             
         default : print("You must choose a Weapon")
-                
+            
         }
         
         
@@ -108,17 +117,13 @@ class TeamFactory {
         print("that is the content of teamFactory.arrayTeam \(teamFactory.arrayTeam)")
         
         for element in 0..<teamFactory.arrayTeam.count {
-//            print("LifeStregth : \(teamFactory.arrayTeam[element].lifeStrength)")
-//            print("ShotStrength : \(teamFactory.arrayTeam[element].shotStrength)")
-//            print("ArmorStrength : \(teamFactory.arrayTeam[element].armorStrength)")
-//            print("Name : \(teamFactory.arrayTeam[element].name)")
-//            print("TeamName : \(teamFactory.arrayTeam[element].teamName)")
+
             print("We have in Team  \(teamFactory.arrayTeam[element].heroeName) :  A  \(teamFactory.arrayTeam[element].name) : with lifeStrength: \(teamFactory.arrayTeam[element].lifeStrength) and a shotStrength : \(teamFactory.arrayTeam[element].shotStrength) protected by \(teamFactory.arrayTeam[element].armorStrength) of armorStrength, is having \(teamFactory.arrayTeam[element].equipment) as an equipment")
             
         }
-       
-//        print("We have: \(index) Heroes in the array of teams")
-//        print(index)    //should print the arrayTeam content
+        
+        //        print("We have: \(index) Heroes in the array of teams")
+        //        print(index)    //should print the arrayTeam content
         
         
         
@@ -130,7 +135,7 @@ class TeamFactory {
             game.gameMenu()
         }
         else {
-        print("You would like to heal someone")
+            print("You would like to heal someone")
         }
     }
     func fight() {
@@ -139,10 +144,24 @@ class TeamFactory {
             game.gameMenu()
         }
         else {
-        print("You would like to fight against someone")
+            print("You would like to fight against someone")
         }
     }
-    
+    func checkUniqueNameHeroe(heroeNameGiven : String) -> Bool {
+        var unique: Bool = false
+        let heroeNameEnter = heroeNameGiven
+        
+        for element in 0..<teamFactory.arrayTeam.count {
+            if heroeNameEnter == teamFactory.arrayTeam[element].heroeName {
+                print("There is already an Heroe with that name")
+                print("Give another name to your Heroe")
+                unique = true
+            }
+
+        }
+        
+        return unique
+    }
 }
 
 
