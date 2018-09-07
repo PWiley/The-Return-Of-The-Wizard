@@ -44,7 +44,7 @@ class Game {
     init() {}
     
     let teamFactory = TeamFactory()
-    
+    var whoseTurn: String = "First" // whoseTurn ll allow to manage the roll of the game
     
     func gameStartMenu() {
         var correctAnswer: Bool = true
@@ -88,7 +88,7 @@ class Game {
             let maxHeroes = 3
             repeat { // create the Teams
                 print("You are creating the \(teamNameAlias) Team")
-                print("How do you want to name your heroe??") // Asking the name of the Team
+                print("How do you want to name your heroe?") // Asking the name of the Team
                 
                 let heroeName = teamFactory.getHeroeName()
                 
@@ -146,7 +146,7 @@ class Game {
                 + "\n*                                                                                    *"
                 + "\n*                                                                                    *"
                 + "\n* 1. Would You like to see the status of the Game ?                                  *"
-                + "\n* 2. Would you like to do some action ?                                                 *"
+                + "\n* 2. Would you like to do some action ?                                              *"
                 + "\n**************************************************************************************"
                 + "\n"
                 + "\n"
@@ -156,7 +156,7 @@ class Game {
                 
                 switch choicePlayer {
                 case "1": game.statusMenu()
-                case "2": game.actionMenu()
+                case "2": game.actionMenu(whoseTurn: whoseTurn)
                 default: print("I don't understand")
                     
                 }
@@ -175,9 +175,9 @@ class Game {
             correctAnswer = game.controlAnswerTwo(choiceplayer: choicePlayer)
             switch choicePlayer {
             case "1":
-                teamFactory.statusTeam(statusChoice: "first")
+                teamFactory.statusTeam(statusChoice: "First")
             case "2":
-                teamFactory.statusTeam(statusChoice: "second")
+                teamFactory.statusTeam(statusChoice: "Second")
             default :
                 print("I don't understand")
             }
@@ -185,10 +185,11 @@ class Game {
         }
         } while correctAnswer == false
     }
-    func actionMenu() { // menu for the action
+    func actionMenu(whoseTurn: String) { // menu for the action
         // giving action choice
         //Doing an action  // testing if there is a Wizard in the team and if that is the turn of the team with it
-        
+        var gameTurn: String = whoseTurn
+        print("It is the turn for Team \(gameTurn) to play")
         print("What Would you like to do:"   // the game should propose first team to start then Second team and so on
             + "\n1. Would you like to fight?"
             + "\n2. Would You like to heal someone?")
@@ -197,27 +198,26 @@ class Game {
             
             switch choice {
             case "1": // Fighting // testing if the Heroe is a not a Wizard
-                
+                if game.whoseTurn == "First" {
+                   gameTurn = "First"
+                }
+                if game.whoseTurn == "Second" {
+                   gameTurn = "Second"
+                }
                 //print("You would like to fight")
-                teamFactory.fight()
+                teamFactory.fight(whoseTurn: "\(gameTurn)")
                 
             case "2": // Healing someone  // testing if the Heroe is  a Wizard
                 
                 //print("You want to heal someone")
-                teamFactory.healing()
+                teamFactory.heal(whoseTurn: whoseTurn)
                 
             default:
                 
                 print("I don't understand")
                 
             }
-            
-            
-            
-            
-            
-            
-            
+        
         }
     }
     func controlAnswerTwo(choiceplayer: String) -> Bool { // verify that the player type the possible answer // here Two
