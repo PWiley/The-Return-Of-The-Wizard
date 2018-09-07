@@ -10,7 +10,7 @@ import Foundation
 
 // starting the game
 let game = Game()
-game.gameMenu()
+game.gameStartMenu()
 
 
 
