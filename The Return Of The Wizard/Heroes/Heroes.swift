@@ -18,22 +18,22 @@ class Heroes {
     var lifeStrength: Int
     var shotStrength: Int
     var armorStrength: Int
-    var name: String // it will be set by the player
-    var heroeName: String // it will be set by the program
+    var type: String // it will be set by the player
+    var heroeName: String // it will be set by the player
     var alive: Bool
     var equipment: Equipment
-    var teamAlias: String
+    var teamNameAlias: String
     
-    init(lifeStrength: Int, shotStrength: Int, armorStrength: Int, name: String, heroeName: String, alive: Bool, equipment: Equipment, teamAlias: String ) {
+    init(lifeStrength: Int, shotStrength: Int, armorStrength: Int, typeHeroe: String, heroeName: String, alive: Bool, equipment: Equipment, teamNameAlias: String ) {
         
         self.lifeStrength = lifeStrength
         self.shotStrength = shotStrength
         self.armorStrength = armorStrength
-        self.name = name
+        self.type = typeHeroe
         self.heroeName = heroeName
         self.alive = alive
         self.equipment = equipment
-        self.teamAlias = teamAlias
+        self.teamNameAlias = teamNameAlias
     }
 }
 
