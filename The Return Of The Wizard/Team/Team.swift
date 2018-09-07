@@ -16,7 +16,9 @@ import Foundation
 
 class Team {
     
-    var arrayTeam : [Heroes] = [] // declaration of arrayTeam [Heroes]
+    var arrayTeamFirst : [Heroes] = [] // declaration of arrayTeamFirst [Heroes] for First Team
+    var arrayTeamSecond : [Heroes] = [] // declaration of arrayTeamFirst [Heroes] for Second Team
+    
     
     var teamName : String
     
