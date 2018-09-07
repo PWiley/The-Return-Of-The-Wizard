@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		DAC48A232137FBB400B272A0 /* HeroesFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC48A222137FBB400B272A0 /* HeroesFactory.swift */; };
 		DAC48A252137FD3600B272A0 /* TeamFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC48A242137FD3600B272A0 /* TeamFactory.swift */; };
+		DADC28052142D837008E91A7 /* TheReturn_test.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADC28042142D837008E91A7 /* TheReturn_test.swift */; };
 		DAE1BA90212DBF58008FEE18 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE1BA8F212DBF58008FEE18 /* main.swift */; };
 		DAE1BA9D212DC2AE008FEE18 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE1BA9C212DC2AE008FEE18 /* Game.swift */; };
 		DAE1BA9F212DC2CB008FEE18 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE1BA9E212DC2CB008FEE18 /* Team.swift */; };
@@ -35,6 +36,9 @@
 /* Begin PBXFileReference section */
 		DAC48A222137FBB400B272A0 /* HeroesFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroesFactory.swift; sourceTree = "<group>"; };
 		DAC48A242137FD3600B272A0 /* TeamFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamFactory.swift; sourceTree = "<group>"; };
+		DADC28022142D837008E91A7 /* TheReturn_test.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheReturn_test.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DADC28042142D837008E91A7 /* TheReturn_test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheReturn_test.swift; sourceTree = "<group>"; };
+		DADC28062142D837008E91A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DAE1BA8C212DBF58008FEE18 /* The Return Of The Wizard */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "The Return Of The Wizard"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAE1BA8F212DBF58008FEE18 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		DAE1BA9C212DC2AE008FEE18 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
@@ -48,6 +52,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		DADC27FF2142D837008E91A7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DAE1BA89212DBF58008FEE18 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -58,10 +69,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DADC28032142D837008E91A7 /* TheReturn_test */ = {
+			isa = PBXGroup;
+			children = (
+				DADC28042142D837008E91A7 /* TheReturn_test.swift */,
+				DADC28062142D837008E91A7 /* Info.plist */,
+			);
+			path = TheReturn_test;
+			sourceTree = "<group>";
+		};
 		DAE1BA83212DBF57008FEE18 = {
 			isa = PBXGroup;
 			children = (
 				DAE1BA8E212DBF58008FEE18 /* The Return Of The Wizard */,
+				DADC28032142D837008E91A7 /* TheReturn_test */,
 				DAE1BA8D212DBF58008FEE18 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -70,6 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				DAE1BA8C212DBF58008FEE18 /* The Return Of The Wizard */,
+				DADC28022142D837008E91A7 /* TheReturn_test.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -135,6 +157,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		DADC28012142D837008E91A7 /* TheReturn_test */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DADC28072142D837008E91A7 /* Build configuration list for PBXNativeTarget "TheReturn_test" */;
+			buildPhases = (
+				DADC27FE2142D837008E91A7 /* Sources */,
+				DADC27FF2142D837008E91A7 /* Frameworks */,
+				DADC28002142D837008E91A7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TheReturn_test;
+			productName = TheReturn_test;
+			productReference = DADC28022142D837008E91A7 /* TheReturn_test.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		DAE1BA8B212DBF58008FEE18 /* The Return Of The Wizard */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = DAE1BA93212DBF58008FEE18 /* Build configuration list for PBXNativeTarget "The Return Of The Wizard" */;
@@ -162,6 +201,9 @@
 				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = "Patrick Wiley";
 				TargetAttributes = {
+					DADC28012142D837008E91A7 = {
+						CreatedOnToolsVersion = 9.4.1;
+					};
 					DAE1BA8B212DBF58008FEE18 = {
 						CreatedOnToolsVersion = 9.4.1;
 					};
@@ -180,11 +222,30 @@
 			projectRoot = "";
 			targets = (
 				DAE1BA8B212DBF58008FEE18 /* The Return Of The Wizard */,
+				DADC28012142D837008E91A7 /* TheReturn_test */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		DADC28002142D837008E91A7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		DADC27FE2142D837008E91A7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DADC28052142D837008E91A7 /* TheReturn_test.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DAE1BA88212DBF58008FEE18 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -206,6 +267,42 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		DADC28082142D837008E91A7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 52T6VV3859;
+				INFOPLIST_FILE = TheReturn_test/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "DevBerlinIos.TheReturn-test";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		DADC28092142D837008E91A7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 52T6VV3859;
+				INFOPLIST_FILE = TheReturn_test/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "DevBerlinIos.TheReturn-test";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
 		DAE1BA91212DBF58008FEE18 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -342,6 +439,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		DADC28072142D837008E91A7 /* Build configuration list for PBXNativeTarget "TheReturn_test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DADC28082142D837008E91A7 /* Debug */,
+				DADC28092142D837008E91A7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		DAE1BA87212DBF57008FEE18 /* Build configuration list for PBXProject "The Return Of The Wizard" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
