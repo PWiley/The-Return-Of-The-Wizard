@@ -13,6 +13,6 @@ class Warrior: Heroes { // setting proporties for Warrior
 
     init() {     // initialization of Warrior proporties
         
-        super.init(lifeStrength: 100, shotStrength: 20, armorStrength: 10, name: "Warrior", heroeName: "", alive: true, equipment : Equipment.Sword)
+        super.init(lifeStrength: 100, shotStrength: 20, armorStrength: 10, name: "Warrior", heroeName: "", alive: true, equipment : Equipment.Sword, teamAlias: "teamAlias")
     }
 }

@@ -22,8 +22,9 @@ class Heroes {
     var heroeName: String // it will be set by the program
     var alive: Bool
     var equipment: Equipment
+    var teamAlias: String
     
-    init(lifeStrength: Int, shotStrength: Int, armorStrength: Int, name: String, heroeName: String, alive: Bool, equipment : Equipment) {
+    init(lifeStrength: Int, shotStrength: Int, armorStrength: Int, name: String, heroeName: String, alive: Bool, equipment: Equipment, teamAlias: String ) {
         
         self.lifeStrength = lifeStrength
         self.shotStrength = shotStrength
@@ -32,6 +33,7 @@ class Heroes {
         self.heroeName = heroeName
         self.alive = alive
         self.equipment = equipment
+        self.teamAlias = teamAlias
     }
 }
 
