@@ -88,7 +88,7 @@ class Game {
             let maxHeroes = 3
             repeat { // create the Teams
                 print("You are creating the \(teamNameAlias) Team")
-                print("Which name would you like to give to your Heroe?") // Asking the name of the Team
+                print("How do you want to name your heroe??") // Asking the name of the Team
                 
                 let heroeName = teamFactory.getHeroeName()
                 
@@ -106,19 +106,19 @@ class Game {
                     
                 } while correctAnswer == false
                 teamFactory.composeTeam(heroeName: "\(heroeName)", heroesInt: "\(choicePlayer)",teamNameAlias: "\(teamNameAlias)") // adding the Heroes
+
                 var choiceWeaponPlayer = ""
                 repeat {
-                print("\nwhich Weapon would you like to choose?")
-                print("\n1. Axe"
-                    + "\n2. Hammer"
-                    + "\n3. Sword"
-                    + "\n4. Scepter"
-                    + "\n5. I don't want to choose")
-                
-                choiceWeaponPlayer = readLine()!
-                correctAnswer = game.controlAnswerFour(choicePlayer: choicePlayer)
+                    print("\nwhich Weapon would you like to choose?")
+                    print("\n1. Axe"
+                        + "\n2. Hammer"
+                        + "\n3. Sword"
+                        + "\n4. Scepter")
                     
-                } while correctAnswer
+                    
+                    choiceWeaponPlayer = readLine()!
+                    correctAnswer = game.controlAnswerFour(choicePlayer: choiceWeaponPlayer)
+                } while correctAnswer == false
                 teamFactory.chooseYourWeapon(heroeName: "\(heroeName)", heroesInt: "\(choicePlayer)", weaponChoice: "\(choiceWeaponPlayer)")
                 
                 
@@ -146,7 +146,7 @@ class Game {
                 + "\n*                                                                                    *"
                 + "\n*                                                                                    *"
                 + "\n* 1. Would You like to see the status of the Game ?                                  *"
-                + "\n* 2. Would you like do some action ?                                                 *"
+                + "\n* 2. Would you like to do some action ?                                                 *"
                 + "\n**************************************************************************************"
                 + "\n"
                 + "\n"
