@@ -136,7 +136,7 @@ class TeamFactory {
         
         if teamFactory.arrayTeam.isEmpty { // testing if the teams are created
             print("You must create two teams")
-            game.gameMenu()
+            game.createTeamMenu()
         }
         for element in 0..<teamFactory.arrayTeam.count {
             if teamFactory.arrayTeam[element].type == "Wizard" {
@@ -147,7 +147,7 @@ class TeamFactory {
     func fight() {
         if teamFactory.arrayTeam.isEmpty { // testing if the teams are created
             print("You must create two teams")
-            game.gameMenu()
+            game.createTeamMenu()
         }
         else {
             print("You would like to fight against someone")
