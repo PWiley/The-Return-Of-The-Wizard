@@ -13,7 +13,8 @@ class TeamFactory {
     
     let teamFactory = Team()
     let heroesFactory = HeroesFactory()
-    let team = Team()
+    
+    
     
     func getHeroeName() -> String{ // create the heroeName
         
@@ -58,7 +59,7 @@ class TeamFactory {
             print(teamFactory.arrayTeamSecond)
             print(heroe.teamNameAlias)
         }
-
+        
         
     }
     
@@ -130,18 +131,18 @@ class TeamFactory {
         let chosenTeamStatus: String = statusChoice
         
         if chosenTeamStatus == "First" {
-        for element in 0..<teamFactory.arrayTeamFirst.count {
-            
-            print("We have the player of type\(teamFactory.arrayTeamFirst[element].heroeName) in Team  \(teamFactory.arrayTeamFirst[element].teamNameAlias)")
+            for element in 0..<teamFactory.arrayTeamFirst.count {
+                
+                print("We have the player of type\(teamFactory.arrayTeamFirst[element].heroeName) in Team  \(teamFactory.arrayTeamFirst[element].teamNameAlias)")
                 
             }
         }
         if chosenTeamStatus == "Second" {
-        for element in 0..<teamFactory.arrayTeamSecond.count {
-        
-            print("We have the player of type\(teamFactory.arrayTeamSecond[element].heroeName) in Team  \(teamFactory.arrayTeamSecond[element].teamNameAlias)")
-            
-        }
+            for element in 0..<teamFactory.arrayTeamSecond.count {
+                
+                print("We have the player of type\(teamFactory.arrayTeamSecond[element].heroeName) in Team  \(teamFactory.arrayTeamSecond[element].teamNameAlias)")
+                
+            }
         }
         game.mainMenu()
     }
@@ -168,10 +169,10 @@ class TeamFactory {
                 }
             }
         }
-       
+        
     }
-    func fight(whoseTurn: String) {
-        let whoseTurn: String = whoseTurn
+    func fight(whoseTurn: String, attacker: String, defendant: String) {
+        let playerTurn: String = whoseTurn
         if teamFactory.arrayTeamFirst.isEmpty && teamFactory.arrayTeamSecond.isEmpty { // testing if the teams are created
             print("You must create two teams")
             game.createTeamMenu()
@@ -179,14 +180,32 @@ class TeamFactory {
         else {
             print("You would like to fight against someone")
             
-            if whoseTurn == "First" {
+            if playerTurn == "First" {
                 print("It is the time for team \(whoseTurn) to fight")
+                print("Which fighter would you like to play with?")
+                for element in 0..<teamFactory.arrayTeamFirst.count { // show the players in team First
+                    print(teamFactory.arrayTeamFirst[element].type)
+                }
+                print("Which fighter would you like to play with?")
                 print("againt who do you want to fight?")
+                for element in 0..<teamFactory.arrayTeamSecond.count { // show the players in team Second
+                    print(teamFactory.arrayTeamSecond[element].type)
+                }
+                
             }
             
-            if whoseTurn == "Second" {
+            if playerTurn == "Second" {
                 print("It is the time for team \(whoseTurn) to fight")
+                print("Which fighter would you like to play with?")
+                for element in 0..<teamFactory.arrayTeamSecond.count { // show the players in team Second
+                    print(teamFactory.arrayTeamSecond[element].type)
+                }
+                print("Which fighter would you like to play with?")
                 print("againt who do you want to fight?")
+                for element in 0..<teamFactory.arrayTeamFirst.count { // show the players in team First
+                    print(teamFactory.arrayTeamFirst[element].type)
+                }
+                
             }
             
         }
@@ -216,9 +235,9 @@ class TeamFactory {
         var numberHeroesFirst: Int = 0 // number of heroes in First Team
         
         for _ in 0..<teamFactory.arrayTeamFirst.count { // counting number of heroes in First Team
-//            if teamFactory.arrayTeamFirst[element].teamNameAlias == "first" { // counting number of heroes in First Team
-//                numberHeroesFirst += 1
-//            }
+            //            if teamFactory.arrayTeamFirst[element].teamNameAlias == "first" { // counting number of heroes in First Team
+            //                numberHeroesFirst += 1
+            //            }
             numberHeroesFirst += 1
         }
         return numberHeroesFirst
@@ -227,12 +246,70 @@ class TeamFactory {
         
         var numberHeroesSecond: Int = 0// number of heroes in Second Team
         for _ in 0..<teamFactory.arrayTeamSecond.count { // counting number of heroes in First Team
-//            if teamFactory.arrayTeamSecond[element].teamNameAlias == "second" { // counting number of heroes in Second Team
-//                numberHeroesSecond += 1
-//            }
+            //            if teamFactory.arrayTeamSecond[element].teamNameAlias == "second" { // counting number of heroes in Second Team
+            //                numberHeroesSecond += 1
+            //            }
             numberHeroesSecond += 1
         }
         return numberHeroesSecond
+    }
+    func getDispensersTeam(whoseTurn: String, sortAction: String) { // getDispensersTeam
+        // giving the attackers in the team in  action
+        var arrayAttackers = [Heroes]()
+        
+        if whichTeamTurn == "First" && sortAction == "Fight" { // will give to the player First in roll his possible Heroes for Fighting
+            arrayAttackers = teamFactory.arrayTeamFirst
+            
+            for element in 0..<arrayAttackers.count {
+                if arrayAttackers[element].type == "Warrior" || arrayAttackers[element].type == "Colossus" || arrayAttackers[element].type == "Dwarf" {
+                    print(arrayAttackers[element].type)
+                }
+            }
+            whoseTurn += 1
+            game.actionMenu(whoseTurn: whoseTurn) // getting back to the action Menu avec change of the player roll
+            
+        }
+        if whichTeamTurn == "Second" && sortAction == "Fight"{ // will give to the player Second in roll his possible Heroes for Fighting
+            arrayAttackers = teamFactory.arrayTeamSecond
+            
+            for element in 0..<arrayAttackers.count {
+                if arrayAttackers[element].type == "Warrior" || arrayAttackers[element].type == "Colossus" || arrayAttackers[element].type == "Dwarf" {
+                    print(arrayAttackers[element].type)
+                }
+            }
+            whoseTurn += 1
+            game.actionMenu(whoseTurn: whoseTurn) // getting back to the action Menu avec change of the player roll
+        }
+        
+        
+        
+    }
+    func getRecipientsTeam(whoseTurn: String, sortAction: String) {  //  getRecipientsTeam
+        // giving the defendants in the adverse team
+        var arrayDefendants = [Heroes]()
+        
+        if whoseTurn == "First" { // will give to the player First in roll his possible Heroes
+            arrayDefendants = teamFactory.arrayTeamSecond
+            
+            for element in 0..<arrayDefendants.count {
+                if arrayDefendants[element].type == "Warrior" || arrayDefendants[element].type == "Colossus" || arrayDefendants[element].type == "Dwarf" {
+                    print(arrayDefendants[element].type)
+                }
+            }
+            game.actionMenu(whoseTurn: "Second") // getting back to the action Menu avec change of the player roll
+        }
+        if whoseTurn == "Second" { // will give to the player Second in roll his possible Heroes
+            arrayDefendants = teamFactory.arrayTeamFirst
+            
+            for element in 0..<arrayDefendants.count {
+                if arrayDefendants[element].type == "Warrior" || arrayDefendants[element].type == "Colossus" || arrayDefendants[element].type == "Dwarf" {
+                    print(arrayDefendants[element].type)
+                    
+                }
+            }
+            game.actionMenu(whoseTurn: "First") // getting back to the action Menu avec change of the player roll
+        }
+        
     }
 }
 
