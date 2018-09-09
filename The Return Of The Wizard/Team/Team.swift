@@ -18,6 +18,7 @@ class Team {
     
     var arrayTeamFirst : [Heroes] = [] // declaration of arrayTeamFirst [Heroes] for First Team
     var arrayTeamSecond : [Heroes] = [] // declaration of arrayTeamFirst [Heroes] for Second Team
+    var arrayWithoutWizard : [Heroes] = [] // declaration of rrayWithoutWizard ( without any Wizard selected as dispenser
     
     
     var teamName : String
