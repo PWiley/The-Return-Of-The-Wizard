@@ -643,7 +643,7 @@ class Game {
         }
         return correctTwo
     }
-    func controlAnswerThree(choicePlayer: String) -> Bool { // verify that the player type the possible answer // here Two
+    func controlAnswerThree(choicePlayer: String) -> Bool { // verify that the player type the possible answer // here Three
         var correctThree = true
         let choiceGiven = choicePlayer
         
@@ -672,50 +672,6 @@ class Game {
         }
         return correctTwo
     }
-    //    func getFightersType(whoseTurn: String, sortAction: String) {
-    //
-    //        // case one if whoseTurn == "First"      attackers are team First   and defendants are Team Second
-    //        if whoseTurn == "First" {
-    //
-    //            if sortAction == "Fight" {
-    //
-    //            print("You can chose these Heroes for attacking")
-    //            teamFactory.getDispensersTeam(whoseTurn: "First", sortAction: "Fight")
-    //
-    //            print("You can attack these Heroes")
-    //            teamFactory.getRecipientsTeam(whoseTurn: "First", sortAction: "Fight")
-    //            }
-    //            if sortAction == "Heal" {
-    //
-    //            print("You can chose these Heroes for healing")
-    //            teamFactory.getDispensersTeam(whoseTurn: "First", sortAction: "Heal")
-    //
-    //            print("You can Heal these Heroes")
-    //            teamFactory.getRecipientsTeam(whoseTurn: "First", sortAction: "Heal")
-    //
-    //            }
-    //
-    //        }
-    //
-    //        // case two if whoseTurn == "Second"     attakers are team Second   and defendants are Team First
-    //        if whoseTurn == "Second" {
-    //            print("You can chose these Heroes for attacking")
-    //            teamFactory.getDispensersTeam(whoseTurn: "Second", sortAction: "Fight")
-    //
-    //            print("You can attack these Heroes")
-    //            teamFactory.getRecipientsTeam(whoseTurn: "First", sortAction: "Fight")
-    //
-    //
-    //        }
-    //
-    //    }
-//    func whoseTurn(playerTurn: Int) -> (Int,Int) {
-//        var whoseTurn = playerTurn
-//        var numberTurn: Int
-//        whoseTurn = playerTurn % 2
-//        numberTurn += 1
-//        print("\(whoseTurn)")
-//        return (whoseTurn,numberTurn)
-//    }
+ 
 }
 
