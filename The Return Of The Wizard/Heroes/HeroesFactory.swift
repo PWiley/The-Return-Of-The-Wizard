@@ -15,13 +15,13 @@ class HeroesFactory {
         
         switch heroesInt {
         case "1" :
-            return Warrior()
+            return Fighter()
         case "2" :
-            return Dwarf()
+            return Wizard()
         case "3" :
             return Colossus()
         case "4" :
-            return Wizard()
+            return Dwarf()
         default :
             return nil
         }
