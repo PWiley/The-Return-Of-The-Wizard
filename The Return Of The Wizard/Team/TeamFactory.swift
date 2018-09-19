@@ -244,14 +244,21 @@ class TeamFactory {
     func teamAttacking(dispenser: Int, recipient: Int, whoseTurn: Bool) { // team is attacking
         if whoseTurn == true {
             
-            let newLifeStrength: Int = teamFactory.arrayTeamSecond[recipient].lifeStrength - (teamFactory.arrayTeamFirst[dispenser].shotStrength-(teamFactory.arrayTeamSecond[recipient].armorStrength / 5))
+            print("Points de vie de l'attaqué : \(teamFactory.arrayTeamSecond[recipient].lifeStrength)")
+            print("Points de coup porté : \(teamFactory.arrayTeamFirst[dispenser].shotStrength)")
+            print("Protection du bouclier de l'attaqué : \(teamFactory.arrayTeamSecond[recipient].armorStrength)")
+            
+            let newLifeStrength: Int = teamFactory.arrayTeamSecond[recipient].lifeStrength - (teamFactory.arrayTeamFirst[dispenser].shotStrength-teamFactory.arrayTeamSecond[recipient].armorStrength)
             teamFactory.arrayTeamSecond[recipient].lifeStrength = newLifeStrength
             print("le hero que vous venez dàttaquer a à présent : \(teamFactory.arrayTeamSecond[recipient].lifeStrength)")
             
         }
         if whoseTurn == false {
+            print("Points de vie de l'attaqué : \(teamFactory.arrayTeamFirst[recipient].lifeStrength)")
+            print("Points de coup porté : \(teamFactory.arrayTeamSecond[dispenser].shotStrength)")
+            print("Protection du bouclier de l'attaqué : \(teamFactory.arrayTeamFirst[recipient].armorStrength)")
             
-            let newLifeStrength: Int = teamFactory.arrayTeamFirst[recipient].lifeStrength - (teamFactory.arrayTeamSecond[dispenser].shotStrength-(teamFactory.arrayTeamFirst[recipient].armorStrength / 5))
+            let newLifeStrength: Int = teamFactory.arrayTeamFirst[recipient].lifeStrength - (teamFactory.arrayTeamSecond[dispenser].shotStrength-teamFactory.arrayTeamFirst[recipient].armorStrength)
             teamFactory.arrayTeamFirst[recipient].lifeStrength = newLifeStrength
             print("le hero que vous venez dàttaquer a à présent : \(teamFactory.arrayTeamFirst[recipient].lifeStrength)")
             
@@ -406,9 +413,13 @@ class TeamFactory {
         
         var wizardExist: Bool = false // boolean set at true managing if there is a wizard in the team
         if whoseTurn == true { // will give to the player First in roll his possible Heroes
+            
             for element in 0..<teamFactory.arrayTeamFirst.count {
                 if teamFactory.arrayTeamFirst[element].type == "Wizard" {
                     wizardExist = true
+                }
+                else {
+                    wizardExist = false
                 }
             }
             
@@ -417,6 +428,9 @@ class TeamFactory {
             for element in 0..<teamFactory.arrayTeamSecond.count {
                 if teamFactory.arrayTeamSecond[element].type == "Wizard" {
                     wizardExist = true
+                }
+                else {
+                    wizardExist = false
                 }
             }
             
