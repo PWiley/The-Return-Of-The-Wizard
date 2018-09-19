@@ -1,677 +1,468 @@
-//
-//  Game.swift
-//  The Return Of The Wizard
-//
-//  Created by Patrick Wiley on 22/08/2018.
-//  Copyright © 2018 Patrick Wiley. All rights reserved.
-//
-
-import Foundation
-
-
-// method menu
-// method giveInfo -> before game
-//                 -> after game
-// method giveTheResult
-
-// What the player do call method create game from class Team
-//                         method fight from class team
-//                         method healing from class Team
-//                         method statusTeam -> Team 1
-//                                           -> Team 2
-
-// setting here the game:
-
-//Welcome of the players
-//What do you want to do?
-//Start a new game / Fight
-//If start a new game   // Ask the team name
-// Ask the Player name
-// Ask Choice heroes (Three times) // Ask the Heroe Name
-// Show the status of the team
-
-//If start a fight      // Showing the team status
-// Do you want to attack or heal someone
-// If Attacking     // which heroe would you like to be?
-// Which Fighter of the other team would you like to attack?
-// Show the result of the fight
-// If healing // Which heroe would you like to heal?
-// method gameMenu
-
-
 class Game {
     
-    init() {}
+    var whoseTurn: Bool = true // whoseTurn is initialized at 0 so Team First will start choosing action either fighting or healing
+    
+    init(whoseTurn: Bool) {
+        self.whoseTurn = whoseTurn
+    }
     
     let teamFactory = TeamFactory()
-    var whoseTurn: Int = 0 // whoseTurn is initialized at 0 so Team First will start choosing action either fighting or healing
+    
+    
+    
+    //=========================
+    // MARK: - CONVERSATION   =
+    //=========================
     
     func gameStartMenu() {
         var correctAnswer: Bool = true
         repeat {
-            print("**************************************************************************************"
-                + "\n*                              The Return Of The Wizard                              *"
-                + "\n**************************************************************************************"
-                + "\n*                                 Welome to the game                                 *"
-                + "\n*                                                                                    *"
-                + "\n**************************************************************************************"
+            print("           **************************************************************************************"
+                + "\n           *                              The Return Of The Wizard                              *"
+                + "\n           **************************************************************************************"
+                + "\n           *                                                                                    *"
+                + "\n           *                                 WELCOME TO THE GAME                                *"
+                + "\n           *                                                                                    *"
+                + "\n           **************************************************************************************"
                 + "\n"
-                + "\nStart a new game? :Yes(y) / No(n)?"
-                + "\nYour choice:")
+                + "\nWould you like to start playing ? "
+                + "\nYes(y) / No(n)"
+                + "\nYour choice:❓")
+            
             if let choicePlayer = readLine() {
                 
-                correctAnswer = game.controlAnswerTwoLetters(choicePlayer: choicePlayer)
+                correctAnswer = game.controAnswerLetters(choicePlayer: choicePlayer)
+                
                 switch choicePlayer {
-                case "y":
-                    print("Lets start the game")
+                case "y": // If the users answer is Yes(y) then he can start creating the first Team
+                    
+                    print("\n"
+                        + "\n           **********************************"
+                        + "\n           *      Lets start the game       *"
+                        + "\n           **********************************")
+                    
                     createTeamMenu()
                     
-                case "n":
-                    print("Too bad!! maybe next time")
-                default:
-                    print("I don't understand")
+                case "n": // If the users answer is No(N) then we get back to the start Menu
+                    
+                    print("\n"
+                        + "\n           **************************"
+                        + "\n           *    Maybe next time     *"
+                        + "\n           **************************")
+                    
+                    game.gameStartMenu()
+                    
+                default: // as far the answer is not correct either Yes(Y) or No(n) the start menu will be on screen
+                    
+                    print(" 🤔 I don't understand")
                 }
             }
         }while correctAnswer == false
     }
     
-    func createTeamMenu() {
-        // We get the answer of the player // testing if the answer is acceptable
+    func createTeamMenu() { /* the game will create with the two teams with that method
+                               We get the answer of the player // testing if the answer is acceptable */
         
         //playerTurn = "First" // property for the roll of the game
         
-        // asking the teamName doing that 2 times
-        
-        //print("You decide to start a new Game")
-        var teamAlias = 0
-        var teamNameAlias = "First"
-        
+        var teamAlias = 0 // teamAlias will block the team creation at 2, set at begin at 0
+        var teamNameAlias = "First" /* teamNameAlias is having two states -> First for the first Team
+                                                                          -> Second for the Second Team*/
+        print("\n           ▶️ Description of the game ◀️"
+           + "\n\n"
+           + "\n ⚠️ At the beginning of the game, each player will build his team by choosing from these types of possible characters."
+           + "\n Fighter: The classic attacker."
+           + "\n Wizard: The Savior."
+           + "\n Colossus: Imposing and very resistant."
+           + "\n Dwarf: His axe is powerful."
+           + "\n"
+           + "\n ⚠️ Each team must have 3 characters (no matter the type)."
+           + "\n"
+           + "\n Then the game will start. Each player will be able to fight against another chosen opponent, or he can heal someone of his team."
+           + "\n ⚠️ To heal, you must have at least one wizard in your team."
+           + "\n"
+           + "\n\n Fight well, but always with honor."
+           + "\n\n           ***************************** ")
         
         repeat{ // will create two teams
-            var correctAnswer: Bool = true
+            var playerAnswer: String? // that is the player answer
             var numberOfHeroes : Int = 0
             let maxHeroes = 3
-            repeat { // create the Teams
-                print("You are creating the \(teamNameAlias) Team")
-                print("How do you want to name your heroe?") // Asking the name of the Team
-                
-                let heroeName = teamFactory.getHeroeName()
-                
-                var choicePlayer: String = ""
-                //print("You give \(heroeName) to your Heroe")
+            repeat { // loop allowing to create the two teams
+                print("\n"
+                    + "\n 👉 \(teamNameAlias) Team"
+                    + "\n"
+                    + "\n You have to choose three heroes.")
                 
                 repeat {
-                    print("\nWhich Heroe: number \(numberOfHeroes + 1) , would you like to choose?")
-                    print("\n1. Warrior"
-                        + "\n2. Dwarf"
-                        + "\n3. Colossus"
-                        + "\n4. Wizard")
-                    choicePlayer = readLine()!
-                    correctAnswer = game.controlAnswerFour(choicePlayer: choicePlayer)
                     
-                } while correctAnswer == false
-                teamFactory.composeTeam(heroeName: "\(heroeName)", heroesInt: "\(choicePlayer)",teamNameAlias: "\(teamNameAlias)") // adding the Heroes
+                    game.heroesChoice() // printing the possible choice of heroes
+                  
+                    playerAnswer = game.choicePlayer(maxValue: 4) // checking if the answer is in betwwen 1 and 4
+                    
+                } while playerAnswer == nil
                 
-                //                var choiceWeaponPlayer = ""
-                //                repeat {
-                //                    print("\nwhich Weapon would you like to choose?")
-                //                    print("\n1. Axe"
-                //                        + "\n2. Hammer"
-                //                        + "\n3. Sword"
-                //                        + "\n4. Scepter")
-                //
-                //
-                //                    choiceWeaponPlayer = readLine()!
-                //                    correctAnswer = game.controlAnswerFour(choicePlayer: choiceWeaponPlayer)
-                //                } while correctAnswer == false
-                //teamFactory.chooseYourWeapon(heroeName: "\(heroeName)", heroesInt: "\(choicePlayer)", weaponChoice: "\(choiceWeaponPlayer)")
+                var heroName: String  // that will be the name of the hero chose by the Player
                 
+                repeat {
+                    
+                    print("How do you want to name your heroe?") // Asking the name of the Team
+                    heroName = teamFactory.getHeroeName()
+                    
+                    
+                } while heroName.isEmpty // check if no input of name which is forbidden
                 
-                numberOfHeroes += 1
+                teamFactory.composeTeam(heroeName: heroName, heroesInt: playerAnswer! ,teamNameAlias: teamNameAlias) // adding the Heroes
+                print("👋 \(heroName) is created")
                 
+                numberOfHeroes += 1 // accounting one hero added
                 
                 
             } while numberOfHeroes < maxHeroes
-            
-            
+
+            game.statusTeam(whoseTurn: true) // print the status of Team ONE
             teamAlias += 1
             teamNameAlias = "Second"
+            whoseTurn.toggle() // give the hand to player Two
             
             
-        } while teamAlias != 2
-        game.mainMenu()
+        } while teamAlias != 2 // teamAlias is checked if the teams are already created
+        
+        //print("\nThank You, the Second team is created")
+        game.statusTeam(whoseTurn: false) // will show the status of team Two
+        whoseTurn.toggle() // give the hand to player One
+        
+        game.actionMenu(whoseTurn: true) //
     }
     
-    func mainMenu() { // prints the choice between statusMenu and actionMenu
-        var correctAnswer: Bool = true
+    
+    
+    func actionMenu(whoseTurn: Bool) {  // give access to the main menu and will dispatch either actionFirstTeamMenu or actionSecondTeamMenu
+        // based on whoseTurn(boolean true Team First/ false team Second)
+        self.whoseTurn = whoseTurn
         
-        repeat {
-            print("**************************************************************************************"
-                + "\n*                              The Return Of The Wizard                              *"
-                + "\n**************************************************************************************"
-                + "\n*                                                                                    *"
-                + "\n*                                                                                    *"
-                + "\n* 1. Would You like to see the status of the Game ?                                  *"
-                + "\n* 2. Would you like to do some action ?                                              *"
-                + "\n**************************************************************************************"
-                + "\n"
-                + "\n"
-                + "Your choice:")
-            if let choicePlayer = readLine() {
-                correctAnswer = game.controlAnswerTwo(choicePlayer: choicePlayer)
-                
-                switch choicePlayer {
-                case "1": game.statusMenu()
-                case "2": game.actionMenu(arrayStatusTeamFirst: teamFactory.statusTeam().0, arrayStatusTeamSecond: teamFactory.statusTeam().1)
-                default: print("I don't understand")
-                    
-                }
-            }
-        }while correctAnswer == false
+        print("           *****************************"
+            + "\n           ⚡️  THE GAME                *"
+            + "\n           *****************************")
+        
+        if whoseTurn == true { // if that is the roll of team First, then will go on actionFirstTeamMenu
+            
+            actionTeamMenu(whoseTurn: true)
+                    }
+        if whoseTurn == false { // if that is the roll of team Second, then will go on actionSecondTeamMenu
+            
+            actionTeamMenu(whoseTurn: false)
+            
+        }
         
     }
-    func statusMenu() { // menu Status of teams
+    //==============================
+    // MARK: - CONVERSATION  TEAM  =
+    //==============================
+    
+    func actionTeamMenu(whoseTurn: Bool) {  // managing either fight or heal action for the First Team
+        var playerAnswer: String? // that is the player answer
+        var choiceGiven: Int = 0
+        var correctAnswer: Bool = true
         
-            print("Here is the status of First Team")
+        if whoseTurn == true {
+            
+            //game.statusTeam(whoseTurn: true) // will shows status of team One
+            //game.statusTeam(whoseTurn: false) // will shows status of team Two
+            
+            repeat {
+                print("What Would you like to do:"   // the game should propose First team to play with an action to do
+                    + "\n1. Would you like to fight?"
+                    + "\n2. Would You like to heal someone?")
+                
+                //if let choicePlayer = Int(readLine()!) { // control correct answer, here either 1 or 2 no letters accepted
+                    playerAnswer = (game.choicePlayer(maxValue: 2)) // control if answer is correct 1 or 2 and no letters
+                    //choiceGiven = choicePlayer
+                //}
+            }while playerAnswer == nil // not correct answer
+            choiceGiven = Int(playerAnswer!)!
+            if choiceGiven == 1 { // will show the Fight menu for First Team
+                fightTeamMenu(whoseTurn: true)
+            }
+            if choiceGiven == 2 { // will show the Heal menu for first Team
+                healTeamMenu(whoseTurn: true)
+            }
+        }
+        if whoseTurn == false {
+            
+            //statusTeam(whoseTurn: false) // will shows status of team Two
+            //statusTeam(whoseTurn: true) // will shows status of team One
+            
+            repeat {
+                print("What Would you like to do:"   // the game should propose Second team to play with an action to do
+                    + "\n1. Would you like to fight?"
+                    + "\n2. Would You like to heal someone?")
+                
+                //if let choicePlayer = Int(readLine()!) { // control correct answer, here either 1 or 2 no letters accepted
+                    playerAnswer = (game.choicePlayer(maxValue: 2)) // control if answer is correct 1 or 2 and no letters
+                    choiceGiven = Int(playerAnswer!)!
+              // }
+            }while playerAnswer == nil // not correct answer
+            
+            if choiceGiven == 1 { // will show the Fight menu for Second Team
+                fightTeamMenu(whoseTurn: false)
+                
+            }
+            if choiceGiven == 2 { // will show the Heal menu for Second Team
+                healTeamMenu(whoseTurn: false)
+            }
+        }
+    }
+    
+    
+    func fightTeamMenu(whoseTurn: Bool) {  /* menu for fight action for the Teams
+                                            this menu will give him the choice of which hero he ll like to use and the opportunity to choose which hero of the opposite
+                                            team, he ll like to attack.that menu will give him also before taking a decision the status of his team and the status of the
+                                            opposite team */
         
-            print(teamFactory.statusTeam().0) // print arrayStatusTeamFirst
- 
-            print("Here is the status of Second Team")
+        var playerAnswer: String? // the answer of the user
+        var dispenserRow: Int = 0 // this is the dispenser heros row
+        var recipientRow: Int = 0 // this is the recipient heros row
+        var maxValueDispenser: Int = 0 // Value max for showing the heroes of dispenser team
+        var maxValueRecipient: Int = 0 // Value max for showing the heroes of recipient team
        
-            print(teamFactory.statusTeam().1) // print arrayStatusTeamSecond
+        if whoseTurn == true {
+            maxValueDispenser = game.statusTeam(whoseTurn: true) // so will start our possible choice by 1 for the dispensers possibility
+            maxValueRecipient = game.statusTeam(whoseTurn: false) // so will start our possible choice by 1 for the recipients possibility
+            print(" 👉 First Team"
+                + "\n choose you hero: ❓")
+            repeat {
+                playerAnswer = ((game.choicePlayer(maxValue: maxValueDispenser)))
+                dispenserRow = Int(playerAnswer!)!
+            }while playerAnswer == nil
+            
+            print(" 👉 First Team"
+                + "\n Choose your opponent: ❓")
+            
+            repeat {
+                playerAnswer = (game.choicePlayer(maxValue: maxValueRecipient))
+                recipientRow = Int(playerAnswer!)!
+            }while playerAnswer == nil
+            
+            teamFactory.teamAttacking(dispenser: dispenserRow, recipient: recipientRow, whoseTurn: whoseTurn)
+            game.actionMenu(whoseTurn: false)
+        }
         
+        if whoseTurn == false {
+            maxValueDispenser = game.statusTeam(whoseTurn: false) // so will start our possible choice by 1 for the dispensers possibility
+            maxValueRecipient = game.statusTeam(whoseTurn: true) // so will start our possible choice by 1 for the recipients possibility
+        }
+        print(" 👉 Second Team"
+            + "\n choose you hero: ❓")
+        repeat {
+            playerAnswer = ((game.choicePlayer(maxValue: maxValueDispenser)))
+            dispenserRow = Int(playerAnswer!)!
+        }while playerAnswer == nil
+        
+        print(" 👉 Second Team"
+            + "\n Choose your opponent: ❓")
+        repeat {
+            playerAnswer = (game.choicePlayer(maxValue: maxValueRecipient))
+            recipientRow = Int(playerAnswer!)!
+        }while playerAnswer == nil
+        
+        teamFactory.teamAttacking(dispenser: dispenserRow, recipient: recipientRow, whoseTurn: whoseTurn)
+        game.actionMenu(whoseTurn: true)
+    }
 
-            }
-    
-    
-    
-    func actionMenu(arrayStatusTeamFirst: [Heroes], arrayStatusTeamSecond: [Heroes]){ // menu for the action
-        var correctAnswer: Bool = true
+
+    func healTeamMenu(whoseTurn: Bool) {  /* menu for heal action for the First Team
+         if the owner of team First is having one or multiple wizzards in his team. This menu will give him the choice of which wizard he ll
+         like to use and the opportunity to choose which hero, he ll like to heal.*/
         
-        print("That is the status of the game")
+        var playerAnswer: String? // the answer of the user
+        var dispenserRow: Int = 0 // this is the dispenser heros row
+        var recipientRow: Int = 0 // this is the recipient heros row
+        var maxValueDispenser: Int = 0 // Value max for showing the wizard of dispenser team
+        //var maxValueRecipient: Int = 0 // Value max for showing the heroes of recipient team
         
-        //print("For Team First:")
-        
-        for element in 0..<arrayStatusTeamFirst.count { // give the info for team One
-            print(arrayStatusTeamFirst[element].type)
-        }
-        for element in 0..<arrayStatusTeamSecond.count { // give the info for team Two
-            print(arrayStatusTeamSecond[element].type)
-        }
-        var rollGame: Int = 0
-        var playerTurn: String = ""
-        repeat {
+        if whoseTurn == true {
             
-            let modulo = rollGame%2
-            if modulo == 0 {
-                playerTurn = "First"
+            maxValueDispenser = game.statusTeamWizard(whoseTurn: true) // so will start our possible choice by 1 for the dispensers possibility
+            
+            if maxValueDispenser == 0 {
+                print("You don't have any wizard in you team")
+                game.actionMenu(whoseTurn: true)
             }
-            if modulo == 1 {
-                playerTurn = "Second"
-            }
-        print("It is the turn for Team \(playerTurn) to play") // gameturn -> modulo
-        print("What Would you like to do:"   // the game should propose first team to start then Second team and so on
-            + "\n1. Would you like to fight?"
-            + "\n2. Would You like to heal someone?")
-       
-            
-        if let choice = readLine() {
-            
-//            var dispenserAlias: Int = 0 // dispensers row
-//            var recipientAlias: Int = 0 // recipients row
-            
-            switch choice {
-            case "1": // Fighting //
+            else {
+                //maxValueRecipient = game.statusTeam(whoseTurn: true) // so will start our possible choice by 1 for the recipients possibility
+                print(" 👉 First Team"
+                    + "\n choose you wizard: ❓")
+                repeat {
+                    playerAnswer = ((game.choicePlayer(maxValue: maxValueDispenser)))
+                    dispenserRow = Int(playerAnswer!)!
+                }while playerAnswer == nil
                 
-                if modulo == 0 {
-                    var dispenserRow: Int = 0
-                    print("First Team you have these fighters that you can choose: ")
-                    for elementDispensers in 0..<arrayStatusTeamFirst.count {
-                        print("\n\(elementDispensers) \(teamFactory.getDispensersTeam(playerTurn: "First", heroeRow: elementDispensers))")
-                        dispenserRow = elementDispensers
-                    }
-                    
-                    if dispenserRow == 0 {
-                        repeat {
-                            
-                            if let choiceDispenser = Int(readLine()!) {
-                                let valueRow = "1"
-                                correctAnswer = game.controlAnswerOne(choicePlayer: valueRow)
-                                dispenserRow = choiceDispenser
-                            }
-                        }while correctAnswer == false
-                    
-                    }
-                    if dispenserRow == 1 {
-                        repeat {
-                            
-                            if let choiceDispenser = Int(readLine()!) {
-                                let valueRow = "2"
-                                correctAnswer = game.controlAnswerTwo(choicePlayer: valueRow)
-                                dispenserRow = choiceDispenser
-                            }
-                        }while correctAnswer == false
-                        
-                    }
-                    if dispenserRow == 2 {
-                        repeat {
-                            
-                            if let choiceDispenser = Int(readLine()!) {
-                                let valueRow = "3"
-                                correctAnswer = game.controlAnswerThree(choicePlayer: valueRow)
-                                dispenserRow = choiceDispenser
-                            }
-                        }while correctAnswer == false
-                        
-                    }
-                    print("You can choose these heroes to attack: ")
-                    
-                    var recipientRow: Int = 0
-                    
-                    for elementRecipients in 0..<arrayStatusTeamSecond.count {
-                        print("\n\(elementRecipients) \(teamFactory.getRecipientsTeam(playerTurn: "Second", heroeRow: elementRecipients))")
-                        recipientRow = elementRecipients
-                    }
-                    if recipientRow == 0 {
-                        repeat {
-                            
-                            if let choiceRecipient = Int(readLine()!) {
-                                let valueRow = "1"
-                                correctAnswer = game.controlAnswerOne(choicePlayer: valueRow)
-                                recipientRow = choiceRecipient
-                            }
-                        }while correctAnswer == false
-                      
-                    }
-                    if recipientRow == 1 {
-                        repeat {
-                            
-                            if let choiceRecipient = Int(readLine()!) {
-                                let valueRow = "2"
-                                correctAnswer = game.controlAnswerTwo(choicePlayer: valueRow)
-                                recipientRow = choiceRecipient
-                            }
-                        }while correctAnswer == false
-                       
-                    }
-                    if recipientRow == 2 {
-                        repeat {
-                            
-                            if let choiceRecipient = Int(readLine()!) {
-                                let valueRow = "3"
-                                correctAnswer = game.controlAnswerThree(choicePlayer: valueRow)
-                                recipientRow = choiceRecipient
-                            }
-                        }while correctAnswer == false
-                       
-                    }
-                    //print("With which Fighter would you like to attack?:")
-                    
-                    
-                    teamFactory.fight(dispenser: dispenserRow, recipient: recipientRow, dispenserTeam: "First")
-                }
+                print(" 👉 First Team"
+                    + "\n Choose the hero to heal: ❓")
                 
+                repeat {
+                    playerAnswer = (game.choicePlayer(maxValue: maxValueDispenser))
+                    recipientRow = Int(playerAnswer!)!
+                }while playerAnswer == nil
                 
-                
-                
-                
-                if modulo == 1 {
-                    var dispenserRow: Int = 0
-                    print("Second Team you have these fighters that you can choose: ")
-                    for elementDispensers in 0..<arrayStatusTeamSecond.count {
-                        print("\n\(elementDispensers) \(teamFactory.getDispensersTeam(playerTurn: "Second", heroeRow: elementDispensers))")
-                        dispenserRow = elementDispensers
-                    }
-                    if dispenserRow == 0 {
-                        repeat {
-                            
-                            if let choiceDispenser = Int(readLine()!) {
-                                let valueRow = "1"
-                                correctAnswer = game.controlAnswerOne(choicePlayer: valueRow)
-                                dispenserRow = choiceDispenser
-                            }
-                        }while correctAnswer == false
-                        
-                    }
-                    if dispenserRow == 1 {
-                        repeat {
-                            
-                            if let choiceDispenser = Int(readLine()!) {
-                                let valueRow = "2"
-                                correctAnswer = game.controlAnswerTwo(choicePlayer: valueRow)
-                                dispenserRow = choiceDispenser
-                            }
-                        }while correctAnswer == false
-                        
-                    }
-                    if dispenserRow == 2 {
-                        repeat {
-                            
-                            if let choiceDispenser = Int(readLine()!) {
-                                let valueRow = "3"
-                                correctAnswer = game.controlAnswerThree(choicePlayer: valueRow)
-                                dispenserRow = choiceDispenser
-                            }
-                        }while correctAnswer == false
-                        
-                    }
-                    print("You can choose these heroes to attack: ")
-                    
-                    var recipientRow: Int = 0
-                    
-                    for elementRecipients in 0..<arrayStatusTeamFirst.count {
-                        print("\n\(elementRecipients) \(teamFactory.getRecipientsTeam(playerTurn: "First", heroeRow: elementRecipients))")
-                        recipientRow = elementRecipients
-                    }
-                    if recipientRow == 0 {
-                        repeat {
-                            
-                            if let choiceRecipient = Int(readLine()!) {
-                                let valueRow = "1"
-                                correctAnswer = game.controlAnswerOne(choicePlayer: valueRow)
-                                recipientRow = choiceRecipient
-                            }
-                        }while correctAnswer == false
-                        
-                    }
-                    if recipientRow == 1 {
-                        repeat {
-                            
-                            if let choiceRecipient = Int(readLine()!) {
-                                let valueRow = "2"
-                                correctAnswer = game.controlAnswerTwo(choicePlayer: valueRow)
-                                recipientRow = choiceRecipient
-                            }
-                        }while correctAnswer == false
-                        
-                    }
-                    if recipientRow == 2 {
-                        repeat {
-                            
-                            if let choiceRecipient = Int(readLine()!) {
-                                let valueRow = "3"
-                                correctAnswer = game.controlAnswerThree(choicePlayer: valueRow)
-                                recipientRow = choiceRecipient
-                            }
-                        }while correctAnswer == false
-                        
-                    }
-                    
-                    teamFactory.fight(dispenser: dispenserRow, recipient: recipientRow, dispenserTeam: "Second")
-                }
-                
-                
-                
-            case "2": // Healing someone  // testing if the Heroe is  a Wizard
-                
-                if modulo == 0 { // check if there is a wizard in team First
-                    
-                    var dispenserRow: Int = 0
-                    print("First Team you have this/these Wizard(s) that you can choose: ")
-                    for elementDispensers in 0..<arrayStatusTeamFirst.count {
-                        print("\n\(elementDispensers) \(teamFactory.getDispensersTeam(playerTurn: "First", heroeRow: elementDispensers))")
-                        dispenserRow = elementDispensers
-                    }
-                    if dispenserRow == 0 {
-                        repeat {
-                            
-                            if let choiceDispenser = Int(readLine()!) {
-                                let valueRow = "1"
-                                correctAnswer = game.controlAnswerOne(choicePlayer: valueRow)
-                                dispenserRow = choiceDispenser
-                            }
-                        }while correctAnswer == false
-                        
-                    }
-                    if dispenserRow == 1 {
-                        repeat {
-                            
-                            if let choiceDispenser = Int(readLine()!) {
-                                let valueRow = "2"
-                                correctAnswer = game.controlAnswerTwo(choicePlayer: valueRow)
-                                dispenserRow = choiceDispenser
-                            }
-                        }while correctAnswer == false
-                        
-                    }
-                    if dispenserRow == 2 {
-                        repeat {
-                            
-                            if let choiceDispenser = Int(readLine()!) {
-                                let valueRow = "3"
-                                correctAnswer = game.controlAnswerThree(choicePlayer: valueRow)
-                                dispenserRow = choiceDispenser
-                            }
-                        }while correctAnswer == false
-                        
-                    }
-                    
-                    
-                    print("You can heal these heroes: ")
-                    
-                    var recipientRow: Int = 0
-                    //let elementDispensers: Int = 0
-                    var arrayWithoutWizard = [Heroes]()
-                    for elementDispensers in 0..<arrayStatusTeamFirst.count {
-                        if arrayStatusTeamFirst[dispenserRow].heroeName != arrayStatusTeamFirst[recipientRow].heroeName {
-                            
-                          arrayWithoutWizard = teamFactory.getDispensersTeamWithoutWizardSelected(element: recipientRow, playerTurn: "First")
-                            
-                            
-                        }
-                        
-                        recipientRow = elementDispensers
-                        //recipientRow = elementDispensers
-                    }
-                    for element in 0..<arrayWithoutWizard.count {
-                        print(arrayWithoutWizard[element].type)
-                    }
-                    if recipientRow == 0 {
-                        repeat {
-                            
-                            if let choiceRecipient = Int(readLine()!) {
-                                let valueRow = "1"
-                                correctAnswer = game.controlAnswerOne(choicePlayer: valueRow)
-                                recipientRow = choiceRecipient
-                            }
-                        }while correctAnswer == false
-                        
-                    }
-                    if recipientRow == 1 {
-                        repeat {
-                            
-                            if let choiceRecipient = Int(readLine()!) {
-                                let valueRow = "2"
-                                correctAnswer = game.controlAnswerTwo(choicePlayer: valueRow)
-                                recipientRow = choiceRecipient
-                            }
-                        }while correctAnswer == false
-                        
-                    }
-                    if recipientRow == 2 {
-                        repeat {
-                            
-                            if let choiceRecipient = Int(readLine()!) {
-                                let valueRow = "3"
-                                correctAnswer = game.controlAnswerThree(choicePlayer: valueRow)
-                                recipientRow = choiceRecipient
-                            }
-                        }while correctAnswer == false
-                        
-                    }
-                    
-                    teamFactory.heal(dispenser: dispenserRow, recipient: recipientRow, dispenserTeam: "First")
-                }
-                
-                
-                if modulo == 1 {
-                    var dispenserRow: Int = 0
-                    print("First Team you have this/these Wizard(s) that you can choose: ")
-                    for elementDispensers in 0..<arrayStatusTeamFirst.count {
-                        print("\n\(elementDispensers) \(teamFactory.getDispensersTeam(playerTurn: "Second", heroeRow: elementDispensers))")
-                        dispenserRow = elementDispensers
-                    }
-                    if dispenserRow == 0 {
-                        repeat {
-                            
-                            if let choiceDispenser = Int(readLine()!) {
-                                let valueRow = "1"
-                                correctAnswer = game.controlAnswerOne(choicePlayer: valueRow)
-                                dispenserRow = choiceDispenser
-                            }
-                        }while correctAnswer == false
-                        
-                    }
-                    if dispenserRow == 1 {
-                        repeat {
-                            
-                            if let choiceDispenser = Int(readLine()!) {
-                                let valueRow = "2"
-                                correctAnswer = game.controlAnswerTwo(choicePlayer: valueRow)
-                                dispenserRow = choiceDispenser
-                            }
-                        }while correctAnswer == false
-                        
-                    }
-                    if dispenserRow == 2 {
-                        repeat {
-                            
-                            if let choiceDispenser = Int(readLine()!) {
-                                let valueRow = "3"
-                                correctAnswer = game.controlAnswerThree(choicePlayer: valueRow)
-                                dispenserRow = choiceDispenser
-                            }
-                        }while correctAnswer == false
-                        
-                    }
-                    
-                    
-                    print("You can heal these heroes: ")
-                    
-                    var recipientRow: Int = 0
-                    //let elementDispensers: Int = 0
-                    var arrayWithoutWizard = [Heroes]()
-                    for elementDispensers in 0..<arrayStatusTeamFirst.count {
-                        if arrayStatusTeamFirst[dispenserRow].heroeName != arrayStatusTeamFirst[recipientRow].heroeName {
-                            
-                         arrayWithoutWizard = teamFactory.getDispensersTeamWithoutWizardSelected(element: recipientRow, playerTurn: "Second")
-                            
-                            
-                        }
-                        
-                        recipientRow = elementDispensers
-                        //recipientRow = elementDispensers
-                    }
-                    for element in 0..<arrayWithoutWizard.count {
-                        print(arrayWithoutWizard[element].type)
-                        recipientRow = element
-                    }
-                    if recipientRow == 0 {
-                        repeat {
-                            
-                            if let choiceRecipient = Int(readLine()!) {
-                                let valueRow = "1"
-                                correctAnswer = game.controlAnswerOne(choicePlayer: valueRow)
-                                recipientRow = choiceRecipient
-                            }
-                        }while correctAnswer == false
-                        
-                    }
-                    if recipientRow == 1 {
-                        repeat {
-                            
-                            if let choiceRecipient = Int(readLine()!) {
-                                let valueRow = "2"
-                                correctAnswer = game.controlAnswerTwo(choicePlayer: valueRow)
-                                recipientRow = choiceRecipient
-                            }
-                        }while correctAnswer == false
-                        
-                    }
-                    if recipientRow == 2 {
-                        repeat {
-                            
-                            if let choiceRecipient = Int(readLine()!) {
-                                let valueRow = "3"
-                                correctAnswer = game.controlAnswerThree(choicePlayer: valueRow)
-                                recipientRow = choiceRecipient
-                            }
-                        }while correctAnswer == false
-                        
-                    }
-                    teamFactory.heal(dispenser: dispenserRow, recipient: recipientRow, dispenserTeam: "First")
-                }
-                
-                
-            default:
-                
-                print("I don't understand")
-                
-            
-            rollGame += 1
+                teamFactory.teamHealing(dispenser: dispenserRow, recipient: recipientRow, whoseTurn: true)
+                game.actionMenu(whoseTurn: false)
             }
         }
-}while arrayStatusTeamFirst.count != 0 || arrayStatusTeamSecond.count != 0
-    }
         
-    
-//    func fightMenu() -> Int {
-//        
-//        // need the content of team depending of whoseturn
-//        
-//        return whoseTurn
-//    }
-//    func healMenu() -> Int {
-//        // need the content of team depending of whoseturn
-//        return whoseTurn
-//    }
-    func controlAnswerOne(choicePlayer: String) -> Bool { // verify that the player type the possible answer // here One
-        var correctOne = true
-        let choiceGiven = choicePlayer
-        
-        if choiceGiven != "1" {
-            correctOne = false
+        if whoseTurn == false {
+            maxValueDispenser = game.statusTeamWizard(whoseTurn: true) // so will start our possible choice by 1 for the dispensers possibility
+            if maxValueDispenser == 0 {
+                print("You don't have any wizard in you team")
+                game.actionMenu(whoseTurn: true)
+            }
+                //maxValueRecipient = game.statusTeam(whoseTurn: false) // so will start our possible choice by 1 for the recipients possibility
+            else {
+                
+                print(" 👉 Second Team"
+                    + "\n choose you hero: ❓")
+                repeat {
+                    playerAnswer = ((game.choicePlayer(maxValue: maxValueDispenser)))
+                    dispenserRow = Int(playerAnswer!)!
+                }while playerAnswer == nil
+                
+                print(" 👉 Second Team"
+                    + "\n Choose the hero to heal: ❓")
+                repeat {
+                    playerAnswer = (game.choicePlayer(maxValue: maxValueDispenser))
+                    recipientRow = Int(playerAnswer!)!
+                }while playerAnswer == nil
+                
+                teamFactory.teamHealing(dispenser: dispenserRow, recipient: recipientRow, whoseTurn: false)
+                game.actionMenu(whoseTurn: true)
+            }
         }
-        return correctOne
-    }
-    func controlAnswerTwo(choicePlayer: String) -> Bool { // verify that the player type the possible answer // here Two
-        var correctTwo = true
-        let choiceGiven = choicePlayer
         
-        if choiceGiven != "1" && choiceGiven != "2" {
-            correctTwo = false
-        }
-        return correctTwo
-    }
-    func controlAnswerThree(choicePlayer: String) -> Bool { // verify that the player type the possible answer // here Three
-        var correctThree = true
-        let choiceGiven = choicePlayer
-        
-        if choiceGiven != "1" && choiceGiven != "2" && choiceGiven != "3"{
-            correctThree = false
-        }
-        return correctThree
     }
     
-    func controlAnswerFour(choicePlayer: String) -> Bool { // verify that the player type the possible answer // here Four
-        var correctFour = true
-        let choiceGiven = choicePlayer
+    func statusTeam(whoseTurn: Bool) -> Int {
+        var elementHeroe: Int = 0 // number of heroes in the array for each teams
         
-        if choiceGiven != "1" && choiceGiven != "2" && choiceGiven != "3" && choiceGiven != "4" {
-            correctFour = false
+        if whoseTurn == true {
+            print(""
+                + "\n ▶️ TEAM ONE HEROES ◀️")
+            
+                for element in 0..<teamFactory.statusFactoryTeam(whoseTurn: true).count {
+                    
+                    if teamFactory.statusFactoryTeam(whoseTurn: true)[element].alive == true { // print the alived heroes only
+                        
+                        print("\n🤺 Hero name : \(teamFactory.statusFactoryTeam(whoseTurn: true)[element].heroName)"
+                            + " 🤺 Hero Type : \(teamFactory.statusFactoryTeam(whoseTurn: true)[element].type)"
+                            + "\n🤺 LifeStrenght : \(teamFactory.statusFactoryTeam(whoseTurn: true)[element].lifeStrength)"
+                            + " 🤺 ShotStrenght : \(teamFactory.statusFactoryTeam(whoseTurn: true)[element].shotStrength)"
+                            + "\n🤺 ArmorStrength : \(teamFactory.statusFactoryTeam(whoseTurn: true)[element].armorStrength)"
+                            + " 🤺 Equipement : \(teamFactory.statusFactoryTeam(whoseTurn: true)[element].equipment)")
+                        elementHeroe += 1
+                    }
+                }
+            }
+        if whoseTurn == false {
+            print(""
+                + "\n ▶️ TEAM TWO HEROES ◀️")
+            
+            for element in 0..<teamFactory.statusFactoryTeam(whoseTurn: false).count {
+                
+                if teamFactory.statusFactoryTeam(whoseTurn: false)[element].alive == true { // print the alived heroes only
+                    
+                    print("\n🔱 Hero name : \(teamFactory.statusFactoryTeam(whoseTurn: false)[element].heroName)"
+                        + " 🔱 Hero Type : \(teamFactory.statusFactoryTeam(whoseTurn: false)[element].type)"
+                        + "\n🔱 LifeStrenght : \(teamFactory.statusFactoryTeam(whoseTurn: false)[element].lifeStrength)"
+                        + " 🔱 ShotStrenght : \(teamFactory.statusFactoryTeam(whoseTurn: false)[element].shotStrength)"
+                        + "\n🔱 ArmorStrength : \(teamFactory.statusFactoryTeam(whoseTurn: false)[element].armorStrength)"
+                        + " 🔱 Equipement : \(teamFactory.statusFactoryTeam(whoseTurn: false)[element].equipment)")
+                    elementHeroe += 1
+                }
+            }
         }
-        return correctFour
+        return elementHeroe
     }
+    func statusTeamWizard(whoseTurn: Bool) -> Int {
+        
+        var elementHeroe: Int = 0 // number of heroes in the array for each teams
+        
+        if whoseTurn == true {
+           
+            if teamFactory.getDispensersTeamWithoutWizardSelected(whoseTurn: true) == true {
+                elementHeroe = game.statusTeam(whoseTurn: true)
+            }
+            else {
+                print(" 😢 You don't have any wizard in your team")
+                game.actionMenu(whoseTurn: true) // return to the action Menu because no wizard
+            }
+        }
+        
+        if whoseTurn == false {
+            if teamFactory.getDispensersTeamWithoutWizardSelected(whoseTurn: false) == true {
+                elementHeroe = game.statusTeam(whoseTurn: true)
+            }
+            else {
+                print(" 😢 You don't have any wizard in your team")
+                game.actionMenu(whoseTurn: false) // return to the action Menu because no wizard
+            }
+        }
+        return elementHeroe
+    }
+//========================
+//  MARK:  - PARAMETERS  =
+//========================
+
+func controAnswerLetters(choicePlayer: String) -> Bool { // verify that the player type the possible answer // here Two
+    var correctTwo = true
+    let choiceGiven = choicePlayer
     
-    func controlAnswerTwoLetters(choicePlayer: String) -> Bool { // verify that the player type the possible answer // here Two
-        var correctTwo = true
-        let choiceGiven = choicePlayer
-        
-        if choiceGiven != "y" && choiceGiven != "n" {
-            correctTwo = false
-        }
-        return correctTwo
+    if choiceGiven != "y" && choiceGiven != "n" {
+        correctTwo = false
     }
- 
+    return correctTwo
 }
 
+func choicePlayer(maxValue: Int) -> String? {
+    
+    let choicePlayer = readLine()!
+    
+    guard (choicePlayer.isInt) else {  // test if the answer is only Int no letters
+        print("I don`t understand your answer")
+        return nil
+        
+    }
+    
+    let control = controlAnswer(choicePlayer: Int(choicePlayer)!, maxValue: maxValue)
+    if control { // if the answer is in between the gap of possible answers
+        //print("all is perfect")
+        return choicePlayer}
+    else {
+        print("I don`t understand your answer")
+        return nil
+    }
+}
+
+func controlAnswer(choicePlayer: Int,maxValue: Int) -> Bool {
+    for num in 1...maxValue {
+        if choicePlayer == num { // Answer must be contained between 1 and max for 2 possible answers then 1 or 2
+            //print("Your value is in between the possible answers")
+            return true
+        }
+        //return false
+    }
+    return false
+}
+  
+
+    func heroesChoice() {
+        
+        print("\n Which hero would you like to choose?")
+        print("\n 1. Fighter"
+            + "\n 2. Wizard"
+            + "\n 3. Colossus"
+            + "\n 4. Dwarf"
+            + "\n"
+            + "\n Your choice: ❓")
+    }
+
+}
