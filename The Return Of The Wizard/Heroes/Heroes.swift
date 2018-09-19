@@ -15,22 +15,23 @@ class Heroes {
     
     // declaration properties
     
-    var lifeStrength: Int
-    var shotStrength: Int
-    var armorStrength: Int
+    var lifeStrength: Int // points of life
+    var shotStrength: Int // power of shot
+    var armorStrength: Int // level of protection
     var type: String // it will be set by the player
-    var heroeName: String // it will be set by the player
-    var alive: Bool
-    var equipment: Equipment
+    var heroName: String // it will be set by the player
+    var alive: Bool // alive or not
+    var equipment: Equipment // type of equipement
     var teamNameAlias: String
     
-    init(lifeStrength: Int, shotStrength: Int, armorStrength: Int, typeHeroe: String, heroeName: String, alive: Bool, equipment: Equipment, teamNameAlias: String ) {
+    
+    init(lifeStrength: Int, shotStrength: Int, armorStrength: Int, typeHero: String, heroName: String, alive: Bool, equipment: Equipment, teamNameAlias: String) {
         
         self.lifeStrength = lifeStrength
         self.shotStrength = shotStrength
         self.armorStrength = armorStrength
-        self.type = typeHeroe
-        self.heroeName = heroeName
+        self.type = typeHero
+        self.heroName = heroName
         self.alive = alive
         self.equipment = equipment
         self.teamNameAlias = teamNameAlias
