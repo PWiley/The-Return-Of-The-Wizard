@@ -13,7 +13,7 @@ class Colossus: Heroes { // setting parameter for Colossus
     
     init() {     // initialization of the properties
         
-        super.init(lifeStrength: 120, shotStrength: 5, armorStrength: 40, typeHero: "Colossus", heroName: "", alive: true, equipment : Equipment.Hammer,teamNameAlias: "teamAlias")
+        super.init(lifeStrength: 120, shotStrength: 5, armorStrength: 3, typeHero: "Colossus", heroName: "", alive: true, equipment : Equipment.Hammer,teamNameAlias: "teamAlias")
     }
 }
 
