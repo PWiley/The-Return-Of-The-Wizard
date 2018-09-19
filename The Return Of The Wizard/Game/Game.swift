@@ -25,9 +25,9 @@ class Game {
                 + "\n           *                                                                                    *"
                 + "\n           **************************************************************************************"
                 + "\n"
-                + "\nWould you like to start playing ? "
-                + "\nYes(y) / No(n)"
-                + "\nYour choice:❓")
+                + "\n Would you like to start playing ? "
+                + "\n Yes(y) / No(n)"
+                + "\n 👉 Your choice:❓")
             
             if let choicePlayer = readLine() {
                 
@@ -106,7 +106,7 @@ class Game {
                 
                 repeat {
                     
-                    print("How do you want to name your heroe?") // Asking the name of the Team
+                    print(" 👉 How do you want to name your heroe?") // Asking the name of the Team
                     heroName = teamFactory.getHeroeName()
                     
                     
@@ -141,9 +141,9 @@ class Game {
         // based on whoseTurn(boolean true Team First/ false team Second)
         self.whoseTurn = whoseTurn
         
-        print("           *****************************"
-            + "\n           ⚡️  THE GAME                *"
-            + "\n           *****************************")
+        print("           ***************************"
+            + "\n           ⚡️  THE GAME: ACTION MENU *"
+            + "\n           ***************************")
         
         if whoseTurn == true { // if that is the roll of team First, then will go on actionFirstTeamMenu
             
@@ -163,17 +163,19 @@ class Game {
     func actionTeamMenu(whoseTurn: Bool) {  // managing either fight or heal action for the First Team
         var playerAnswer: String? // that is the player answer
         var choiceGiven: Int = 0
-        var correctAnswer: Bool = true
+        //var correctAnswer: Bool = true
         
         if whoseTurn == true {
             
-            //game.statusTeam(whoseTurn: true) // will shows status of team One
-            //game.statusTeam(whoseTurn: false) // will shows status of team Two
+            game.statusTeam(whoseTurn: true) // will shows status of team One
+            game.statusTeam(whoseTurn: false) // will shows status of team Two
             
             repeat {
-                print("What Would you like to do:"   // the game should propose First team to play with an action to do
-                    + "\n1. Would you like to fight?"
-                    + "\n2. Would You like to heal someone?")
+                print(" What Would you like to do:"   // the game should propose First team to play with an action to do
+                    + "\n 1. Would you like to fight?"
+                    + "\n 2. Would You like to heal someone?"
+                    + "\n"
+                    + "\n 👉 Your choice:❓")
                 
                 //if let choicePlayer = Int(readLine()!) { // control correct answer, here either 1 or 2 no letters accepted
                     playerAnswer = (game.choicePlayer(maxValue: 2)) // control if answer is correct 1 or 2 and no letters
@@ -190,13 +192,15 @@ class Game {
         }
         if whoseTurn == false {
             
-            //statusTeam(whoseTurn: false) // will shows status of team Two
-            //statusTeam(whoseTurn: true) // will shows status of team One
+            game.statusTeam(whoseTurn: false) // will shows status of team Two
+            game.statusTeam(whoseTurn: true) // will shows status of team One
             
             repeat {
-                print("What Would you like to do:"   // the game should propose Second team to play with an action to do
-                    + "\n1. Would you like to fight?"
-                    + "\n2. Would You like to heal someone?")
+                print(" What Would you like to do:"   // the game should propose Second team to play with an action to do
+                    + "\n 1. Would you like to fight?"
+                    + "\n 2. Would You like to heal someone?"
+                    + "\n"
+                    + "\n 👉 Your choice:❓")
                 
                 //if let choicePlayer = Int(readLine()!) { // control correct answer, here either 1 or 2 no letters accepted
                     playerAnswer = (game.choicePlayer(maxValue: 2)) // control if answer is correct 1 or 2 and no letters
@@ -228,42 +232,49 @@ class Game {
        
         if whoseTurn == true {
             maxValueDispenser = game.statusTeam(whoseTurn: true) // so will start our possible choice by 1 for the dispensers possibility
+            print("maxValueDispenser = \(maxValueDispenser)")
             maxValueRecipient = game.statusTeam(whoseTurn: false) // so will start our possible choice by 1 for the recipients possibility
-            print(" 👉 First Team"
-                + "\n choose you hero: ❓")
+            print("maxValueRecipient = \(maxValueRecipient)")
+            
+            print(" ▶️ TEAM ONE ◀️"
+                + "\n 👉 Choose you hero: ❓")
             repeat {
                 playerAnswer = ((game.choicePlayer(maxValue: maxValueDispenser)))
-                dispenserRow = Int(playerAnswer!)!
+                dispenserRow = (Int(playerAnswer!)! - 1) // correcting the index for the array // index starts at 0
+                print("dispenser row = \(dispenserRow)")
             }while playerAnswer == nil
             
-            print(" 👉 First Team"
-                + "\n Choose your opponent: ❓")
+            print(" ▶️ TEAM ONE ◀️"
+                + "\n 👉 Choose your opponent: ❓")
             
             repeat {
                 playerAnswer = (game.choicePlayer(maxValue: maxValueRecipient))
-                recipientRow = Int(playerAnswer!)!
+                recipientRow = (Int(playerAnswer!)! - 1) // correcting the index for the array // index starts at 0
+                print("recipient row = \(recipientRow)")
             }while playerAnswer == nil
             
             teamFactory.teamAttacking(dispenser: dispenserRow, recipient: recipientRow, whoseTurn: whoseTurn)
-            game.actionMenu(whoseTurn: false)
+            game.actionTeamMenu(whoseTurn: false)
         }
         
         if whoseTurn == false {
             maxValueDispenser = game.statusTeam(whoseTurn: false) // so will start our possible choice by 1 for the dispensers possibility
+            print("maxValueDispenser = \(maxValueDispenser)")
             maxValueRecipient = game.statusTeam(whoseTurn: true) // so will start our possible choice by 1 for the recipients possibility
+            print("maxValueRecipient = \(maxValueRecipient)")
         }
-        print(" 👉 Second Team"
-            + "\n choose you hero: ❓")
+        print(" ▶️ TEAM TWO ◀️"
+            + "\n 👉 choose you hero: ❓")
         repeat {
             playerAnswer = ((game.choicePlayer(maxValue: maxValueDispenser)))
-            dispenserRow = Int(playerAnswer!)!
+            dispenserRow = (Int(playerAnswer!)! - 1) // correcting the index for the array // index starts at 0
         }while playerAnswer == nil
         
-        print(" 👉 Second Team"
-            + "\n Choose your opponent: ❓")
+        print(" ▶️ TEAM TWO ◀️"
+            + "\n 👉 Choose your opponent: ❓")
         repeat {
             playerAnswer = (game.choicePlayer(maxValue: maxValueRecipient))
-            recipientRow = Int(playerAnswer!)!
+            recipientRow = (Int(playerAnswer!)! - 1) // correcting the index for the array // index starts at 0
         }while playerAnswer == nil
         
         teamFactory.teamAttacking(dispenser: dispenserRow, recipient: recipientRow, whoseTurn: whoseTurn)
@@ -284,9 +295,9 @@ class Game {
         if whoseTurn == true {
             
             maxValueDispenser = game.statusTeamWizard(whoseTurn: true) // so will start our possible choice by 1 for the dispensers possibility
-            
+            print(maxValueDispenser)
             if maxValueDispenser == 0 {
-                print("You don't have any wizard in you team")
+                print(" ⚠️ You don't have any wizard in you team")
                 game.actionMenu(whoseTurn: true)
             }
             else {
@@ -295,7 +306,7 @@ class Game {
                     + "\n choose you wizard: ❓")
                 repeat {
                     playerAnswer = ((game.choicePlayer(maxValue: maxValueDispenser)))
-                    dispenserRow = Int(playerAnswer!)!
+                    dispenserRow = (Int(playerAnswer!)!-1) // correcting the index for the array // index starts at 0
                 }while playerAnswer == nil
                 
                 print(" 👉 First Team"
@@ -303,7 +314,7 @@ class Game {
                 
                 repeat {
                     playerAnswer = (game.choicePlayer(maxValue: maxValueDispenser))
-                    recipientRow = Int(playerAnswer!)!
+                    recipientRow = (Int(playerAnswer!)!-1) // correcting the index for the array // index starts at 0
                 }while playerAnswer == nil
                 
                 teamFactory.teamHealing(dispenser: dispenserRow, recipient: recipientRow, whoseTurn: true)
@@ -312,10 +323,12 @@ class Game {
         }
         
         if whoseTurn == false {
+            
             maxValueDispenser = game.statusTeamWizard(whoseTurn: true) // so will start our possible choice by 1 for the dispensers possibility
+            print(maxValueDispenser)
             if maxValueDispenser == 0 {
                 print("You don't have any wizard in you team")
-                game.actionMenu(whoseTurn: true)
+                game.actionMenu(whoseTurn: false)
             }
                 //maxValueRecipient = game.statusTeam(whoseTurn: false) // so will start our possible choice by 1 for the recipients possibility
             else {
@@ -324,14 +337,14 @@ class Game {
                     + "\n choose you hero: ❓")
                 repeat {
                     playerAnswer = ((game.choicePlayer(maxValue: maxValueDispenser)))
-                    dispenserRow = Int(playerAnswer!)!
+                    dispenserRow = (Int(playerAnswer!)! - 1) // correcting the index for the array // index starts at 0
                 }while playerAnswer == nil
                 
                 print(" 👉 Second Team"
                     + "\n Choose the hero to heal: ❓")
                 repeat {
                     playerAnswer = (game.choicePlayer(maxValue: maxValueDispenser))
-                    recipientRow = Int(playerAnswer!)!
+                    recipientRow = (Int(playerAnswer!)! - 1) // correcting the index for the array // index starts at 0
                 }while playerAnswer == nil
                 
                 teamFactory.teamHealing(dispenser: dispenserRow, recipient: recipientRow, whoseTurn: false)
@@ -389,9 +402,9 @@ class Game {
         if whoseTurn == true {
            
             if teamFactory.getDispensersTeamWithoutWizardSelected(whoseTurn: true) == true {
-                elementHeroe = game.statusTeam(whoseTurn: true)
+                elementHeroe = game.statusTeamWizard(whoseTurn: true)
             }
-            else {
+            if teamFactory.getDispensersTeamWithoutWizardSelected(whoseTurn: true) == false {
                 print(" 😢 You don't have any wizard in your team")
                 game.actionMenu(whoseTurn: true) // return to the action Menu because no wizard
             }
@@ -399,9 +412,9 @@ class Game {
         
         if whoseTurn == false {
             if teamFactory.getDispensersTeamWithoutWizardSelected(whoseTurn: false) == true {
-                elementHeroe = game.statusTeam(whoseTurn: true)
+                elementHeroe = game.statusTeamWizard(whoseTurn: false)
             }
-            else {
+            if teamFactory.getDispensersTeamWithoutWizardSelected(whoseTurn: false) == false {
                 print(" 😢 You don't have any wizard in your team")
                 game.actionMenu(whoseTurn: false) // return to the action Menu because no wizard
             }
@@ -462,7 +475,7 @@ func controlAnswer(choicePlayer: Int,maxValue: Int) -> Bool {
             + "\n 3. Colossus"
             + "\n 4. Dwarf"
             + "\n"
-            + "\n Your choice: ❓")
+            + "\n 👉 Your choice: ❓")
     }
 
 }
