@@ -9,10 +9,10 @@
 import Foundation
 
 
-class Warrior: Heroes { // setting proporties for Warrior
+class Fighter: Heroes { // setting proporties for Warrior
 
     init() {     // initialization of Warrior proporties
         
-        super.init(lifeStrength: 100, shotStrength: 20, armorStrength: 10, typeHeroe: "Warrior", heroeName: "", alive: true, equipment : Equipment.Sword, teamNameAlias: "teamAlias")
+        super.init(lifeStrength: 100, shotStrength: 10, armorStrength: 30, typeHero: "Fighter", heroName: "", alive: true, equipment : Equipment.Sword, teamNameAlias: "teamAlias")
     }
 }
