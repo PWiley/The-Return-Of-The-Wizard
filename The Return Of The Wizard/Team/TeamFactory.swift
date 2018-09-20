@@ -11,8 +11,10 @@ import Foundation
 
 class TeamFactory {
     
-    let teamFactory = Team()
+    //let teamFactory = Team()
     let heroesFactory = HeroesFactory()
+    let teamFirst = Team()
+    let teamSecond = Team()
     
     //==============================
     // MARK: - METHODS  HEROES  =
@@ -45,16 +47,16 @@ class TeamFactory {
         let choicePlayer = heroesInt
         let heroe = heroesFactory.getHeroe(heroesInt: choicePlayer)!
         heroe.heroName = heroeName
-        heroe.teamNameAlias = teamNameAlias
+        //heroe.teamNameAlias = teamNameAlias
         
         if teamNameAlias == "First" {
             
-            teamFactory.arrayTeamFirst.append(heroe)
-            //print("We have: \(teamFactory.arrayTeamFirst.count) Heroes in the array of teams")
+            teamFirst.arrayTeam.append(heroe)
+            //print("We have: \(teamFirst.arrayTeam.count) Heroes in the array of teams")
         }
         if teamNameAlias == "Second" {
-            teamFactory.arrayTeamSecond.append(heroe)
-            //print("We have: \(teamFactory.arrayTeamSecond.count) Heroes in the array of teams")
+            teamSecond.arrayTeam.append(heroe)
+            //print("We have: \(teamSecond.arrayTeam.count) Heroes in the array of teams")
         }
         
         
@@ -76,7 +78,7 @@ class TeamFactory {
             let equipment = Equipment.Axe
             let equipmentEffect = equipment.rawValue // Printing the value of Axe
             print("The effect of your equipment is \(equipmentEffect)")
-            
+
             let heroe = heroesFactory.getHeroe(heroesInt: choicePlayer)!
             heroe.heroName = name
             heroe.equipment = equipment
@@ -107,7 +109,7 @@ class TeamFactory {
             let equipment = Equipment.Scepter
             let equipmentEffect = equipment.rawValue // Printing the value of Scepter
             print("The effect of your equipment is \(equipmentEffect)")
-            
+
             let heroe = heroesFactory.getHeroe(heroesInt: choicePlayer)!
             heroe.heroName = name
             heroe.equipment = equipment
@@ -121,21 +123,18 @@ class TeamFactory {
             
         }
         
-        
-        
-        
     }
    
     func statusFactoryTeam(whoseTurn: Bool,wizard: Bool) -> [Heroes] { /* getting the status of the team by returning either the content of arrayTeam for team One
          or the content of arrayTeam for team Two */
-        
+        //print("I am in statusFactoryTeam ")
         var arrayStatusTeam = [Heroes]() // declaration and initialisation of the arrayStatusTeam(return by that method)
         var arrayTeam = [Heroes]() // declaration and initialisation of the arrayTeam which will be append to arrayStatusTeam
         if whoseTurn == true {
-            arrayTeam = teamFactory.arrayTeamFirst // arrayTeam set at teamFactory.arrayTeamFirst
+            arrayTeam = teamFirst.arrayTeam // arrayTeam set at teamFirst.arrayTeam
         }
         if whoseTurn == false {
-            arrayTeam = teamFactory.arrayTeamSecond // arrayTeam set at teamFactory.arrayTeamSecond
+            arrayTeam = teamSecond.arrayTeam // arrayTeam set at teamSecond.arrayTeam
         }
         //        if whoseTurn == true { // if it is the turn for team One
         
@@ -148,8 +147,9 @@ class TeamFactory {
         }
         if wizard == true {
             for element in 0..<arrayTeam.count {
-                if arrayTeam[element].type == "wizard" {
+                if arrayTeam[element].type == "Wizard" {
                     arrayStatusTeam.append(arrayTeam[element]) // arrayStatusTeam will get the content of ArrayTeam
+                    //print(arrayStatusTeam)
                     
                 }
             }
@@ -159,15 +159,15 @@ class TeamFactory {
     // if whoseTurn == false { // if it is the turn for team Two
     
     //            if wizard == false {
-    //                for element in 0..<teamFactory.arrayTeamSecond.count { // Browse arrayTeamFirst(array of team One
+    //                for element in 0..<teamSecond.arrayTeam.count { // Browse arrayTeamFirst(array of team One
     //
-    //                    arrayStatusTeam.append(teamFactory.arrayTeamSecond[element]) // arrayStatusTeam will get the content of ArrayTeamFirst
+    //                    arrayStatusTeam.append(teamSecond.arrayTeam[element]) // arrayStatusTeam will get the content of ArrayTeamFirst
     //                }
     //            }
     //            if wizard == true {
-    //                for element in 0..<teamFactory.arrayTeamSecond.count {
-    //                    if teamFactory.arrayTeamSecond[element].type == "wizard" {
-    //                        arrayStatusTeam.append(teamFactory.arrayTeamSecond[element]) // arrayStatusTeam will get the content of ArrayTeamFirst
+    //                for element in 0..<teamSecond.arrayTeam.count {
+    //                    if teamSecond.arrayTeam[element].type == "wizard" {
+    //                        arrayStatusTeam.append(teamSecond.arrayTeam[element]) // arrayStatusTeam will get the content of ArrayTeamFirst
     //
     //                    }
     //                }
@@ -182,16 +182,16 @@ class TeamFactory {
 //        var newLifeStrength: Int
 //        if whoseTurn == true {
 //            
-//            newLifeStrength = ((teamFactory.arrayTeamFirst[recipient].lifeStrength) + 5)
-//            teamFactory.arrayTeamFirst[recipient].lifeStrength = newLifeStrength
-//            print(" 🤺 The hero you have just healed has now : \(teamFactory.arrayTeamFirst[recipient].lifeStrength) points of life")
+//            newLifeStrength = ((teamFirst.arrayTeam[recipient].lifeStrength) + 5)
+//            teamFirst.arrayTeam[recipient].lifeStrength = newLifeStrength
+//            print(" 🤺 The hero you have just healed has now : \(teamFirst.arrayTeam[recipient].lifeStrength) points of life")
 //            
 //        }
 //        if whoseTurn == false {
 //            
-//            newLifeStrength = ((teamFactory.arrayTeamSecond[recipient].lifeStrength) + 5)
-//            teamFactory.arrayTeamSecond[recipient].lifeStrength = newLifeStrength
-//            print(" 🔱 The hero you have just healed has now : \(teamFactory.arrayTeamSecond[recipient].lifeStrength) points of life")
+//            newLifeStrength = ((teamSecond.arrayTeam[recipient].lifeStrength) + 5)
+//            teamSecond.arrayTeam[recipient].lifeStrength = newLifeStrength
+//            print(" 🔱 The hero you have just healed has now : \(teamSecond.arrayTeam[recipient].lifeStrength) points of life")
 //        }
 //        return newLifeStrength
 //            }
@@ -247,15 +247,15 @@ class TeamFactory {
         let heroeNameEnter = choiceNameHeroe
         
         
-        for element in 0..<teamFactory.arrayTeamFirst.count {
-            if heroeNameEnter == teamFactory.arrayTeamFirst[element].heroName {
+        for element in 0..<teamFirst.arrayTeam.count {
+            if heroeNameEnter == teamFirst.arrayTeam[element].heroName {
                 print("There is already an Heroe with that name")
                 print("Give another name to your Heroe")
                 unique = false
             }
         }
-        for element in 0..<teamFactory.arrayTeamSecond.count {
-            if heroeNameEnter == teamFactory.arrayTeamSecond[element].heroName {
+        for element in 0..<teamSecond.arrayTeam.count {
+            if heroeNameEnter == teamSecond.arrayTeam[element].heroName {
                 print("There is already an Heroe with that name")
                 print("Give another name to your Heroe")
                 unique = false
@@ -267,35 +267,35 @@ class TeamFactory {
     
 
     
-    func getDispensersTeamWithoutWizardSelected(whoseTurn: Bool) -> Bool{ // getDispensersTeam
-        
-        var wizardExist: Bool = false // boolean set at true managing if there is a wizard in the team
-        
-        if whoseTurn == true { // will give to the player First in roll his possible Heroes
-            
-            for element in 0..<teamFactory.arrayTeamFirst.count {
-                if teamFactory.arrayTeamFirst[element].type == "Wizard" {
-                    wizardExist = true
-                }
-                else {
-                    wizardExist = false
-                }
-            }
-            
-        }
-        if whoseTurn == false { // will give to the player First in roll his possible Heroes
-            for element in 0..<teamFactory.arrayTeamSecond.count {
-                if teamFactory.arrayTeamSecond[element].type == "Wizard" {
-                    wizardExist = true
-                }
-                else {
-                    wizardExist = false
-                }
-            }
-            
-        }
-        return wizardExist
-    }
+//    func getDispensersTeamWithoutWizardSelected(whoseTurn: Bool) -> Bool{ // getDispensersTeam
+//        
+//        var wizardExist: Bool = true // boolean set at true managing if there is a wizard in the team
+//        
+//        if whoseTurn == true { // will give to the player First in roll his possible Heroes
+//            
+//            for element in 0..<teamFirst.arrayTeam.count {
+//                if teamFirst.arrayTeam[element].type == "Wizard" {
+//                    wizardExist = true
+//                }
+//                else {
+//                    wizardExist = false
+//                }
+//            }
+//            
+//        }
+//        if whoseTurn == false { // will give to the player First in roll his possible Heroes
+//            for element in 0..<teamSecond.arrayTeam.count {
+//                if teamSecond.arrayTeam[element].type == "Wizard" {
+//                    wizardExist = true
+//                }
+//                else {
+//                    wizardExist = false
+//                }
+//            }
+//            
+//        }
+//        return wizardExist
+//    }
 
     
     
