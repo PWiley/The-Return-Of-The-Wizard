@@ -8,29 +8,11 @@
 
 import Foundation
 
-
-
-// declaration of dictionaryTeam [String, Heroes]
-
-
-
-class Team {
+class Team { // class Team
     
-    var arrayTeamFirst : [Heroes] = [] // declaration of arrayTeamFirst [Heroes] for First Team
-    var arrayTeamSecond : [Heroes] = [] // declaration of arrayTeamFirst [Heroes] for Second Team
-    var arrayWithoutWizard : [Heroes] = [] // declaration of rrayWithoutWizard ( without any Wizard selected as dispenser
+    var arrayTeam : [Heroes] = [] // declaration of arrayTeamFirst [Heroes] for First Team
     
-    
-    var teamName : String
-    
-    
-    init() {
-        
-        self.teamName = "TeamName"
-        
-        //("\(TeamFactory().getStarterTeam())")
-        }
-    
+    init() {}
     
 }
   
