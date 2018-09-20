@@ -226,22 +226,27 @@ class TeamFactory {
     func heal(dispenser: Int,recipient: Int,whoseTurn: Bool) -> Int {
         
         var arrayDispenser = [Heroes]()
+        var arrayRecipient = [Heroes]()
         let recipient: Int = 0
         let dispenser: Int = 0
         var newLifeStrength: Int
         
         
         if game.whoseTurn == true {
-            arrayDispenser = statusFactoryTeam(whoseTurn: true, wizard: false)
+            
+            arrayDispenser = statusFactoryTeam(whoseTurn: true, wizard: true)
+            arrayRecipient = statusFactoryTeam(whoseTurn: true, wizard: false)
+            
+            
         }
         if game.whoseTurn == false {
             
-            arrayDispenser = statusFactoryTeam(whoseTurn: false, wizard: false)
-            
-            
+            arrayDispenser = statusFactoryTeam(whoseTurn: false, wizard: true)
+            arrayRecipient = statusFactoryTeam(whoseTurn: false, wizard: false)
+           
         }
-        newLifeStrength = ((arrayDispenser[recipient].lifeStrength) + (arrayDispenser[dispenser].shotStrength))
-        arrayDispenser[recipient].lifeStrength = newLifeStrength
+        newLifeStrength = ((arrayRecipient[recipient].lifeStrength) + (arrayDispenser[dispenser].shotStrength))
+        arrayRecipient[recipient].lifeStrength = newLifeStrength
         return newLifeStrength
     }
     
