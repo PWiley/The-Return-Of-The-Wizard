@@ -343,15 +343,21 @@ class Game {
         var turn: Bool = true
         
         if whoseTurn == true {
-            maxValueDispenser = game.statusTeam(whoseTurn: true,wizard: true) // so will start our possible choice by 1 for the dispensers(wizard Type only) possibility
+            maxValueDispenser = (game.statusTeam(whoseTurn: true, wizard: true)) // so will start our possible choice by 1 for the dispensers(all heroes) possibility
+            //print(maxValueRecipient)// so will start our possible choice by 1 for the dispensers(wizard Type only) possibility
+            //print(maxValueDispenser)
             maxValueRecipient = game.statusTeam(whoseTurn: true, wizard: false) // so will start our possible choice by 1 for the dispensers(all heroes) possibility
-            greetings = " 👉 First Team"
+            //print(maxValueRecipient)
+            greetings = " 👉 TEAM ONE "
             turn = true
         }
         if whoseTurn == false {
-            maxValueDispenser = (game.statusTeam(whoseTurn: false, wizard: true)) // so will start our possible choice by 1 for the dispensers(wizard Type only) possibility
+            maxValueDispenser = game.statusTeam(whoseTurn: false, wizard: true) // so will start our possible choice by 1 for the dispensers(all heroes) possibility
+            //print(maxValueRecipient) // so will start our possible choice by 1 for the dispensers(wizard Type only) possibility
+            //print(maxValueDispenser)
             maxValueRecipient = game.statusTeam(whoseTurn: false, wizard: false) // so will start our possible choice by 1 for the dispensers(all heroes) possibility
-            greetings = " 👉 Second Team"
+            //print(maxValueRecipient)
+            greetings = " 👉 TEAM TWO "
             turn = false
             
         }
@@ -377,7 +383,7 @@ class Game {
                 //recipientRow = (Int(playerAnswer!)!-1) // correcting the index for the array // index starts at 0
             }while playerAnswer == nil
             recipientRow = (Int(playerAnswer!)!-1) // correcting the index for the array // index starts at 0
-            game.healTeamMenu(whoseTurn: turn)
+            //game.healTeamMenu(whoseTurn: turn)
             game.teamHealingDisplay(dispenser: dispenserRow, recipient: recipientRow, whoseTurn: turn)
             //teamFactory.teamHealing(dispenser: dispenserRow, recipient: recipientRow, whoseTurn: true) // call the method teamHealing by passing all the information
             game.actionMenu(whoseTurn: !turn)
@@ -533,7 +539,7 @@ class Game {
         }
         if whoseTurn == false { // if team one has to play then we are accessing to the arraySecondTeam
             print(""
-                + "\n ▶️ TEAM TWO HEROES ◀️") // showing the correct communication sentences for team one
+                + "\n ▶️ TEAM TWO HEROES ◀️") // showing the correct communication sentences for team two
             array = teamFactory.statusFactoryTeam(whoseTurn: false,wizard: wizard)
             emojy = "🔱" // setting the emojy for team Two
         }
@@ -572,30 +578,30 @@ class Game {
         }
         return elementHeroe
     }
-    func statusTeamWizard(whoseTurn: Bool) -> Int { // giving information about the existence of wizard in the team on playRoll
-        
-        var elementHeroe: Int = 0 // number of heroes in the array for each teams
-        var getdispenserNoWizard: Bool = true // boolean set for reducing code and having the state of wizard or not wizard
-        var turn: Bool = true
-        
-        if whoseTurn == true {
-            getdispenserNoWizard = teamFactory.getDispensersTeamWithoutWizardSelected(whoseTurn: true)
-            turn = true
-        }
-        if whoseTurn == false {
-            getdispenserNoWizard = teamFactory.getDispensersTeamWithoutWizardSelected(whoseTurn: false)
-            turn = false
-            
-        }
-        if getdispenserNoWizard == true {
-            elementHeroe = game.statusTeamWizard(whoseTurn: turn)
-        }
-        if getdispenserNoWizard == false {
-            print(" 😢 You don't have any wizard in your team")
-            game.actionMenu(whoseTurn: turn) // return to the action Menu because no wizard
-        }
-        return elementHeroe
-    }
+//    func statusTeamWizard(whoseTurn: Bool) -> Int { // giving information about the existence of wizard in the team on playRoll
+//
+//        var elementHeroe: Int = 0 // number of heroes in the array for each teams
+//        var getdispenserNoWizard: Bool = true // boolean set for reducing code and having the state of wizard or not wizard
+//        var turn: Bool = true
+//
+//        if whoseTurn == true {
+//            getdispenserNoWizard = teamFactory.getDispensersTeamWithoutWizardSelected(whoseTurn: true)
+//            turn = true
+//        }
+//        if whoseTurn == false {
+//            getdispenserNoWizard = teamFactory.getDispensersTeamWithoutWizardSelected(whoseTurn: false)
+//            turn = false
+//
+//        }
+//        if getdispenserNoWizard == true {
+//            elementHeroe = game.statusTeamWizard(whoseTurn: turn)
+//        }
+//        if getdispenserNoWizard == false {
+//            print(" 😢 You don't have any wizard in your team")
+//            game.actionMenu(whoseTurn: turn) // return to the action Menu because no wizard
+//        }
+//        return elementHeroe
+    //}
     //========================
     //  MARK:  - PARAMETERS  =
     //========================
