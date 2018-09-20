@@ -474,7 +474,9 @@ class Game {
         print("\(emojyDispenser) Hit points : \(arrayDispenser[dispenser].shotStrength)")
         print("\(emojyRecipient) Protection of the shield of the attacked: \(arrayRecipient[recipient].armorStrength)") // end of the informations
         newLifeStrength = teamFactory.fight(dispenser: dispenser, recipient: recipient, whoseTurn: turn)
-        
+        if newLifeStrength < 0 {
+            print("⚡️ This hero is dead!!")
+        }
 //        let newLifeStrength: Int = arrayRecipient[recipient].lifeStrength - (arrayDispenser[dispenser].shotStrength-arrayRecipient[recipient].armorStrength) // lifeStrenght from attacked - ( shot strenght of the attackers - armor shield of the attacked)
 //        arrayRecipient[recipient].lifeStrength = newLifeStrength // setting in the array of the attacked team the new point of life at the index of the attacked
         print("⚡️ The hero you have just attacked now has these characters: \(newLifeStrength)")

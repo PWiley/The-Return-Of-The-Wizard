@@ -139,15 +139,16 @@ class TeamFactory {
         //        if whoseTurn == true { // if it is the turn for team One
         
         if wizard == false {
-            for element in 0..<arrayTeam.count { // Browse arrayTeamFirst(array of team One
-                
+            for element in 0..<arrayTeam.count { // Browse arrayTeamFirst(array of team One or team Two
+                if arrayTeam[element].alive == true { // if there are alive only
                 arrayStatusTeam.append(arrayTeam[element]) /* arrayStatusTeam will get the content of ArrayTeam either Team One
                  or TeamTwo */
+                }
             }
         }
         if wizard == true {
             for element in 0..<arrayTeam.count {
-                if arrayTeam[element].type == "Wizard" {
+                if arrayTeam[element].type == "Wizard" && arrayTeam[element].alive == true { // if there is at least one wizard alive will return the list of the alived wizards
                     arrayStatusTeam.append(arrayTeam[element]) // arrayStatusTeam will get the content of ArrayTeam
                     //print(arrayStatusTeam)
                     
@@ -217,6 +218,9 @@ class TeamFactory {
         let newLifeStrength: Int = arrayRecipient[recipient].lifeStrength - (arrayDispenser[dispenser].shotStrength-arrayRecipient[recipient].armorStrength)
             // lifeStrenght from attacked - ( shotstrenght of the attackers - armor shield of the attacked)
         arrayRecipient[recipient].lifeStrength = newLifeStrength // setting in the array of the attacked team the new point of life at the index of the attacked
+        if newLifeStrength < 0 {
+          arrayRecipient[recipient].alive = false // the hero is dead
+        }
         return newLifeStrength
     }
     func heal(dispenser: Int,recipient: Int,whoseTurn: Bool) -> Int {
