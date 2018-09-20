@@ -61,28 +61,28 @@ class Game {
     }
     
     func createTeamMenu() { /* the game will create with the two teams with that method
-                               We get the answer of the player // testing if the answer is acceptable */
+         We get the answer of the player // testing if the answer is acceptable */
         
         //playerTurn = "First" // property for the roll of the game
         
         var teamAlias = 0 // teamAlias will block the team creation at 2, set at begin at 0
         var teamNameAlias = "First" /* teamNameAlias is having two states -> First for the first Team
-                                                                          -> Second for the Second Team*/
+         -> Second for the Second Team*/
         print("\n             ▶️ Description of the game ◀️"
-           + "\n\n"
-           + "\n ⚠️ At the beginning of the game, each player will build his team by choosing from these types of possible characters."
-           + "\n Fighter: The classic attacker."
-           + "\n Wizard: The Savior."
-           + "\n Colossus: Imposing and very resistant."
-           + "\n Dwarf: His axe is powerful."
-           + "\n"
-           + "\n ⚠️ Each team must have 3 characters (no matter the type)."
-           + "\n"
-           + "\n Then the game will start. Each player will be able to fight against another chosen opponent, or he can heal someone of his team."
-           + "\n ⚠️ To heal, you must have at least one wizard in your team."
-           + "\n"
-           + "\n\n Fight well, but always with honor."
-           + "\n\n           ***************************** ")
+            + "\n\n"
+            + "\n ⚠️ At the beginning of the game, each player will build his team by choosing from these types of possible characters."
+            + "\n Fighter: The classic attacker."
+            + "\n Wizard: The Savior."
+            + "\n Colossus: Imposing and very resistant."
+            + "\n Dwarf: His axe is powerful."
+            + "\n"
+            + "\n ⚠️ Each team must have 3 characters (no matter the type)."
+            + "\n"
+            + "\n Then the game will start. Each player will be able to fight against another chosen opponent, or he can heal someone of his team."
+            + "\n ⚠️ To heal, you must have at least one wizard in your team."
+            + "\n"
+            + "\n\n Fight well, but always with honor."
+            + "\n\n           ***************************** ")
         
         repeat{ // will create two teams
             var playerAnswer: String? // that is the player answer
@@ -98,7 +98,7 @@ class Game {
                 repeat {
                     
                     game.heroesChoice() // printing the possible choice of heroes
-                  
+                    
                     playerAnswer = game.choicePlayer(maxValue: 4) // checking if the answer is in betwwen 1 and 4
                     
                 } while playerAnswer == nil
@@ -121,7 +121,7 @@ class Game {
                 
                 
             } while numberOfHeroes < maxHeroes // check that there are only 3 heroes by team
-
+            
             game.statusTeam(whoseTurn: true,wizard: false) // shows the status of Team two (all the heroes and not only the wizard)
             teamAlias += 1
             teamNameAlias = "Second"
@@ -143,14 +143,15 @@ class Game {
         // based on whoseTurn(boolean true Team First/ false team Second)
         self.whoseTurn = whoseTurn
         
-        print("           ***************************"
+        print(""
+            + "\n           ***************************"
             + "\n           ⚡️  THE GAME: ACTION MENU *"
             + "\n           ***************************")
         
         if whoseTurn == true { // if that is the roll of team First, then will go on actionFirstTeamMenu
             
             actionTeamMenu(whoseTurn: true)
-                    }
+        }
         if whoseTurn == false { // if that is the roll of team Second, then will go on actionSecondTeamMenu
             
             actionTeamMenu(whoseTurn: false)
@@ -165,131 +166,170 @@ class Game {
     func actionTeamMenu(whoseTurn: Bool) {  // managing either fight or heal action for the First Team
         var playerAnswer: String? // that is the player answer
         var choiceGiven: Int = 0
-        //var correctAnswer: Bool = true
-        
+        var turn: Bool = true
         if whoseTurn == true {
-            
             game.statusTeam(whoseTurn: true, wizard: false) // will shows status of team One (all the heroes and not only the wizard)
-            //game.statusTeam(whoseTurn: false,wizard: false) // will shows status of team Two (all the heroes and not only the wizard)
             
-            repeat {
-                print("\n"
-                    + "\n What Would you like to do:"   // the game should propose First team to play with an action to do
-                    + "\n 1. Would you like to fight?"
-                    + "\n 2. Would You like to heal someone?"
-                    + "\n"
-                    + "\n 👉 Your choice:❓")
-                
-                //if let choicePlayer = Int(readLine()!) { // control correct answer, here either 1 or 2 no letters accepted
-                    playerAnswer = (game.choicePlayer(maxValue: 2)) // control if answer is correct 1 or 2 and no letters
-                    //choiceGiven = choicePlayer
-                //}
-            }while playerAnswer == nil // not correct answer
-            choiceGiven = Int(playerAnswer!)!
-            if choiceGiven == 1 { // will show the Fight menu for First Team
-                fightTeamMenu(whoseTurn: true)
-            }
-            if choiceGiven == 2 { // will show the Heal menu for first Team
-                healTeamMenu(whoseTurn: true)
-            }
+            turn = true
         }
+        
         if whoseTurn == false {
+            game.statusTeam(whoseTurn: false, wizard: false) // will shows status of team One (all the heroes and not only the wizard)
             
-            game.statusTeam(whoseTurn: false, wizard: false) // will shows status of team Two (all the heroes and not only the wizard)
-            //game.statusTeam(whoseTurn: true, wizard: false) // will shows status of team One (all the heroes and not only the wizard)
+            turn = false
             
-            repeat {
-                print("\n"
-                    + "\n What Would you like to do:"   // the game should propose Second team to play with an action to do
-                    + "\n 1. Would you like to fight?"
-                    + "\n 2. Would You like to heal someone?"
-                    + "\n"
-                    + "\n 👉 Your choice:❓")
-                
-                //if let choicePlayer = Int(readLine()!) { // control correct answer, here either 1 or 2 no letters accepted
-                    playerAnswer = (game.choicePlayer(maxValue: 2)) // control if answer is correct 1 or 2 and no letters
-                    choiceGiven = Int(playerAnswer!)!
-              // }
-            }while playerAnswer == nil // not correct answer
-            
-            if choiceGiven == 1 { // will show the Fight menu for Second Team
-                fightTeamMenu(whoseTurn: false)
-                
-            }
-            if choiceGiven == 2 { // will show the Heal menu for Second Team
-                healTeamMenu(whoseTurn: false)
-            }
         }
+        
+        
+        //            game.statusTeam(whoseTurn: true, wizard: false) // will shows status of team One (all the heroes and not only the wizard)
+        //            //game.statusTeam(whoseTurn: false,wizard: false) // will shows status of team Two (all the heroes and not only the wizard)
+        
+        repeat {
+            print("\n"
+                + "\n What Would you like to do:"   // the game should propose First team to play with an action to do
+                + "\n 1. Would you like to fight?"
+                + "\n 2. Would You like to heal someone?"
+                + "\n"
+                + "\n 👉 Your choice:❓")
+            
+            playerAnswer = (game.choicePlayer(maxValue: 2)) // control if answer is correct 1 or 2 and no letters
+            
+        }while playerAnswer == nil // not correct answer
+        choiceGiven = Int(playerAnswer!)!
+        if choiceGiven == 1 { // will show the Fight menu for First Team
+            fightTeamMenu(whoseTurn: turn)
+            
+        }
+        if choiceGiven == 2 { // will show the Heal menu for first Team
+            healTeamMenu(whoseTurn: turn)
+        }
+        //        }
+        //        if whoseTurn == false {
+        //
+        //            game.statusTeam(whoseTurn: false, wizard: false) // will shows status of team Two (all the heroes and not only the wizard)
+        //            //game.statusTeam(whoseTurn: true, wizard: false) // will shows status of team One (all the heroes and not only the wizard)
+        //
+        //            repeat {
+        //                print("\n"
+        //                    + "\n What Would you like to do:"   // the game should propose Second team to play with an action to do
+        //                    + "\n 1. Would you like to fight?"
+        //                    + "\n 2. Would You like to heal someone?"
+        //                    + "\n"
+        //                    + "\n 👉 Your choice:❓")
+        //
+        //                //if let choicePlayer = Int(readLine()!) { // control correct answer, here either 1 or 2 no letters accepted
+        //                    playerAnswer = (game.choicePlayer(maxValue: 2)) // control if answer is correct 1 or 2 and no letters
+        //                    choiceGiven = Int(playerAnswer!)!
+        //              // }
+        //            }while playerAnswer == nil // not correct answer
+        //
+        //            if choiceGiven == 1 { // will show the Fight menu for Second Team
+        //                fightTeamMenu(whoseTurn: false)
+        //
+        //            }
+        //            if choiceGiven == 2 { // will show the Heal menu for Second Team
+        //                healTeamMenu(whoseTurn: false)
+        //            }
+        //        }
     }
     
     
     func fightTeamMenu(whoseTurn: Bool) {  /* menu for fight action for the Teams
-                                            this menu will give him the choice of which hero he ll like to use and the opportunity to choose which hero of the opposite
-                                            team, he ll like to attack.that menu will give him also before taking a decision the status of his team and the status of the
-                                            opposite team */
+         this menu will give him the choice of which hero he ll like to use and the opportunity to choose which hero of the opposite
+         team, he ll like to attack.that menu will give him also before taking a decision the status of his team and the status of the
+         opposite team */
         
         var playerAnswer: String? // the answer of the user
         var dispenserRow: Int = 0 // this is the dispenser heros row
         var recipientRow: Int = 0 // this is the recipient heros row
         var maxValueDispenser: Int = 0 // Value max for showing the heroes of dispenser team
         var maxValueRecipient: Int = 0 // Value max for showing the heroes of recipient team
-       
+        var emojyDispenser: String = "" // emojy is declare for the dispenser
+        var emojyRecipient: String = "" // emojy is declare for the recipient
+        var turn: Bool = true
+        var greetings: String = ""
+        
         if whoseTurn == true {
+            
             maxValueDispenser = game.statusTeam(whoseTurn: true, wizard: false) // so will start our possible choice by 1 for the dispensers possibility
-                                                                                // (all the heroes and not only the wizard)
+            // (all the heroes and not only the wizard)
             
             maxValueRecipient = game.statusTeam(whoseTurn: false, wizard: false) // so will start our possible choice by 1 for the recipients possibility
-                                                                                // (all the heroes and not only the wizard)
-            
-            
-            print(" ▶️ TEAM ONE ◀️"
-                + "\n 👉 Choose you hero: ❓")
-            repeat {
-                playerAnswer = ((game.choicePlayer(maxValue: maxValueDispenser)))
-                dispenserRow = (Int(playerAnswer!)! - 1) // correcting the index for the array // index starts at 0
-                print("dispenser row = \(dispenserRow)")
-            }while playerAnswer == nil
-            
-            print(" ▶️ TEAM ONE ◀️"
-                + "\n 👉 Choose your opponent: ❓")
-            
-            repeat {
-                playerAnswer = (game.choicePlayer(maxValue: maxValueRecipient))
-                recipientRow = (Int(playerAnswer!)! - 1) // correcting the index for the array // index starts at 0
-                print("recipient row = \(recipientRow)")
-            }while playerAnswer == nil
-            
-            teamFactory.teamAttacking(dispenser: dispenserRow, recipient: recipientRow, whoseTurn: whoseTurn)
-            game.actionTeamMenu(whoseTurn: false)
+            // (all the heroes and not only the wizard)
+            emojyDispenser = "🤺"
+            emojyRecipient = "🔱"
+            turn = true
+            greetings = "\n\n           ▶️ TEAM ONE ◀️"
         }
-        
         if whoseTurn == false {
-            maxValueDispenser = game.statusTeam(whoseTurn: false, wizard: false) // so will start our possible choice by 1 for the dispensers possibility
-                                                                                 // (all the heroes and not only the wizard)
-           
-            maxValueRecipient = game.statusTeam(whoseTurn: true, wizard: false) // so will start our possible choice by 1 for the recipients possibility
-                                                                                // (all the heroes and not only the wizard)
             
+            maxValueDispenser = game.statusTeam(whoseTurn: false, wizard: false) // so will start our possible choice by 1 for the dispensers possibility
+            // (all the heroes and not only the wizard)
+            
+            maxValueRecipient = game.statusTeam(whoseTurn: true, wizard: false) // so will start our possible choice by 1 for the recipients possibility
+            // (all the heroes and not only the wizard)
+            emojyDispenser = "🔱"
+            emojyRecipient = "🤺"
+            turn = false
+            greetings = "\n\n           ▶️ TEAM TWO ◀️"
         }
-        print(" ▶️ TEAM TWO ◀️"
-            + "\n 👉 choose you hero: ❓")
-        repeat {
-            playerAnswer = ((game.choicePlayer(maxValue: maxValueDispenser))) // checks answer rightness
-            dispenserRow = (Int(playerAnswer!)! - 1) // correcting the index for the array // index starts at 0
-        }while playerAnswer == nil
         
-        print(" ▶️ TEAM TWO ◀️"
-            + "\n 👉 Choose your opponent: ❓")
-        repeat {
-            playerAnswer = (game.choicePlayer(maxValue: maxValueRecipient)) // checks answer rightness
-            recipientRow = (Int(playerAnswer!)! - 1) // correcting the index for the array // index starts at 0
-        }while playerAnswer == nil
         
-        teamFactory.teamAttacking(dispenser: dispenserRow, recipient: recipientRow, whoseTurn: whoseTurn)
-        game.actionMenu(whoseTurn: true)
+        //            maxValueDispenser = game.statusTeam(whoseTurn: true, wizard: false) // so will start our possible choice by 1 for the dispensers possibility
+        //                                                                                // (all the heroes and not only the wizard)
+        //
+        //            maxValueRecipient = game.statusTeam(whoseTurn: false, wizard: false) // so will start our possible choice by 1 for the recipients possibility
+        //                                                                                // (all the heroes and not only the wizard)
+        
+        print("\(greetings)")
+        print("\n 👉 Choose you hero \(emojyDispenser): ❓")
+        repeat {
+            playerAnswer = ((game.choicePlayer(maxValue: maxValueDispenser)))
+            //                dispenserRow = (Int(playerAnswer!)! - 1) // correcting the index for the array // index starts at 0
+            //print("dispenser row = \(dispenserRow)")
+        }while playerAnswer == nil
+        dispenserRow = (Int(playerAnswer!)! - 1) // correcting the index for the array // index starts at 0
+        print("\(greetings)")
+        print("\n 👉 Choose your opponent \(emojyRecipient): ❓")
+        
+        repeat {
+            playerAnswer = (game.choicePlayer(maxValue: maxValueRecipient))
+            //recipientRow = (Int(playerAnswer!)! - 1) // correcting the index for the array // index starts at 0
+            //print("recipient row = \(recipientRow)")
+        }while playerAnswer == nil
+        recipientRow = (Int(playerAnswer!)! - 1) // correcting the index for the array // index starts at 0
+        game.fightTeamDisplay(dispenser: dispenserRow, recipient: recipientRow, whoseTurn: turn)
+        game.actionTeamMenu(whoseTurn: !turn)
+        
+        
+        //        if whoseTurn == false {
+        ////            maxValueDispenser = game.statusTeam(whoseTurn: false, wizard: false) // so will start our possible choice by 1 for the dispensers possibility
+        ////                                                                                 // (all the heroes and not only the wizard)
+        ////
+        ////            maxValueRecipient = game.statusTeam(whoseTurn: true, wizard: false) // so will start our possible choice by 1 for the recipients possibility
+        ////                                                                                // (all the heroes and not only the wizard)
+        //
+        //        }
+        //        print("\n"
+        //            + "\n           ▶️ TEAM TWO ◀️"
+        //            + "\n 👉 choose you hero: ❓")
+        //        repeat {
+        //            playerAnswer = ((game.choicePlayer(maxValue: maxValueDispenser))) // checks answer rightness
+        //            dispenserRow = (Int(playerAnswer!)! - 1) // correcting the index for the array // index starts at 0
+        //        }while playerAnswer == nil
+        //
+        //        print("\n"
+        //            + "\n           ▶️ TEAM TWO ◀️"
+        //            + "\n 👉 Choose your opponent: ❓")
+        //        repeat {
+        //            playerAnswer = (game.choicePlayer(maxValue: maxValueRecipient)) // checks answer rightness
+        //            recipientRow = (Int(playerAnswer!)! - 1) // correcting the index for the array // index starts at 0
+        //        }while playerAnswer == nil
+        //
+        //        game.fightTeamDisplay(dispenser: dispenserRow, recipient: recipientRow, whoseTurn: whoseTurn)
+        //        game.actionMenu(whoseTurn: true)
     }
-
-
+    
     func healTeamMenu(whoseTurn: Bool) {  /* menu for heal action for the First Team
          if the owner of team First is having one or multiple wizzards in his team. This menu will give him the choice of which wizard he ll
          like to use and the opportunity to choose which hero, he ll like to heal.*/
@@ -299,104 +339,208 @@ class Game {
         var recipientRow: Int = 0 // this is the recipient heros row
         var maxValueDispenser: Int = 0 // Value max for showing the wizard of dispenser team
         var maxValueRecipient: Int = 0 // Value max for showing all the heroes of dispenser team
+        var greetings: String = ""
+        var turn: Bool = true
         
         if whoseTurn == true {
-            
             maxValueDispenser = game.statusTeam(whoseTurn: true,wizard: true) // so will start our possible choice by 1 for the dispensers(wizard Type only) possibility
             maxValueRecipient = game.statusTeam(whoseTurn: true, wizard: false) // so will start our possible choice by 1 for the dispensers(all heroes) possibility
-            if maxValueDispenser == 0 {
-                print("\n"                                               // print communications for team One -> no wizard
-                    + "\n ⚠️ You don't have any wizard in you team")
-                game.actionMenu(whoseTurn: true)
-            }
-            else {
-                //maxValueRecipient = game.statusTeam(whoseTurn: true) // so will start our possible choice by 1 for the recipients possibility
-                
-                print(" 👉 First Team"
-                    + "\n choose you wizard: ❓")
-                repeat {
-                    playerAnswer = ((game.choicePlayer(maxValue: maxValueDispenser)))    // checks answer rightness
-                    dispenserRow = (Int(playerAnswer!)!-1) // correcting the index for the array // index starts at 0
-                }while playerAnswer == nil
-                maxValueRecipient = game.statusTeam(whoseTurn: true, wizard: false)// so will start our possible choice by 1 for the dispensers(all heroes as i decide they can heal theme self) possibility
-                
-                print(" 👉 First Team" // print communications for team One
-                    + "\n Choose the hero to heal: ❓")
-                
-                repeat {
-                    playerAnswer = (game.choicePlayer(maxValue: maxValueRecipient)) // checks answer rightness
-                    recipientRow = (Int(playerAnswer!)!-1) // correcting the index for the array // index starts at 0
-                }while playerAnswer == nil
-                
-                teamFactory.teamHealing(dispenser: dispenserRow, recipient: recipientRow, whoseTurn: true)
-                game.actionMenu(whoseTurn: false)
-            }
+            greetings = " 👉 First Team"
+            turn = true
         }
-        
         if whoseTurn == false {
-            
             maxValueDispenser = (game.statusTeam(whoseTurn: false, wizard: true)) // so will start our possible choice by 1 for the dispensers(wizard Type only) possibility
             maxValueRecipient = game.statusTeam(whoseTurn: false, wizard: false) // so will start our possible choice by 1 for the dispensers(all heroes) possibility
-            print(maxValueDispenser)
-            if maxValueDispenser == 0 {
-                print("\n"                                              // print communications for team Two -> no wizard
-                    + "\n ⚠️ You don't have any wizard in you team")
-                game.actionMenu(whoseTurn: false)
-            }
-               
-            else {
-                
-                print(" 👉 Second Team"
-                    + "\n choose you wizard: ❓")
-                repeat {
-                    playerAnswer = ((game.choicePlayer(maxValue: maxValueDispenser)))
-                    dispenserRow = (Int(playerAnswer!)! - 1) // correcting the index for the array // index starts at 0
-                }while playerAnswer == nil
-                //game.statusTeam(whoseTurn: false, wizard: false)
-                maxValueRecipient = game.statusTeam(whoseTurn: false, wizard: false) // so will start our possible choice by 1 for the dispensers(all heroes as i decide they can heal theme self) possibility
-                print(" 👉 Second Team"
-                    + "\n Choose the hero to heal: ❓")
-                repeat {
-                    playerAnswer = (game.choicePlayer(maxValue: maxValueDispenser))
-                    recipientRow = (Int(playerAnswer!)! - 1) // correcting the index for the array // index starts at 0
-                }while playerAnswer == nil
-                
-                teamFactory.teamHealing(dispenser: dispenserRow, recipient: recipientRow, whoseTurn: false)
-                game.actionMenu(whoseTurn: true)
-            }
+            greetings = " 👉 Second Team"
+            turn = false
+            
         }
+        
+        if maxValueDispenser == 0 {
+            print("\n"                                               // print communications for team One -> no wizard
+                + "\n ⚠️ You don't have any wizard in you team")
+            game.actionMenu(whoseTurn: turn)
+        }
+        else {
+            print("\(greetings)"
+                + "\n choose you wizard: ❓")
+            repeat {
+                playerAnswer = ((game.choicePlayer(maxValue: maxValueDispenser)))    // checks answer rightness
+                //dispenserRow = (Int(playerAnswer!)!-1) // correcting the index for the array // index starts at 0
+            }while playerAnswer == nil
+            dispenserRow = (Int(playerAnswer!)!-1) // correcting the index for the array // index starts at 0
+            print("\(greetings)" // print communications for team One
+                + "\n Choose the hero to heal: ❓")
+            
+            repeat {
+                playerAnswer = (game.choicePlayer(maxValue: maxValueRecipient)) // checks answer rightness
+                //recipientRow = (Int(playerAnswer!)!-1) // correcting the index for the array // index starts at 0
+            }while playerAnswer == nil
+            recipientRow = (Int(playerAnswer!)!-1) // correcting the index for the array // index starts at 0
+            game.healTeamMenu(whoseTurn: turn)
+            game.teamHealingDisplay(dispenser: dispenserRow, recipient: recipientRow, whoseTurn: turn)
+            //teamFactory.teamHealing(dispenser: dispenserRow, recipient: recipientRow, whoseTurn: true) // call the method teamHealing by passing all the information
+            game.actionMenu(whoseTurn: !turn)
+        }
+        
+        
+        //        if whoseTurn == false {
+        //
+        ////            maxValueDispenser = (game.statusTeam(whoseTurn: false, wizard: true)) // so will start our possible choice by 1 for the dispensers(wizard Type only) possibility
+        ////            maxValueRecipient = game.statusTeam(whoseTurn: false, wizard: false) // so will start our possible choice by 1 for the dispensers(all heroes) possibility
+        //
+        //            if maxValueDispenser == 0 {
+        //                print("\n"                                              // print communications for team Two -> no wizard
+        //                    + "\n ⚠️ You don't have any wizard in you team")
+        //                game.actionMenu(whoseTurn: turn)
+        //            }
+        //
+        //            else {
+        //
+        //                print(" 👉 Second Team"
+        //                    + "\n choose you wizard: ❓")
+        //                repeat {
+        //                    playerAnswer = ((game.choicePlayer(maxValue: maxValueDispenser)))
+        //                    dispenserRow = (Int(playerAnswer!)! - 1) // correcting the index for the array // index starts at 0
+        //                }while playerAnswer == nil
+        //                //game.statusTeam(whoseTurn: false, wizard: false)
+        //                maxValueRecipient = game.statusTeam(whoseTurn: false, wizard: false) // so will start our possible choice by 1 for the dispensers(all heroes as i decide they can heal theme self) possibility
+        //                print(" 👉 Second Team"
+        //                    + "\n Choose the hero to heal: ❓")
+        //                repeat {
+        //                    playerAnswer = (game.choicePlayer(maxValue: maxValueDispenser))
+        //                    recipientRow = (Int(playerAnswer!)! - 1) // correcting the index for the array // index starts at 0
+        //                }while playerAnswer == nil
+        //
+        //                teamFactory.teamHealing(dispenser: dispenserRow, recipient: recipientRow, whoseTurn: false)
+        //                game.actionMenu(whoseTurn: true)
+        //            }
+        //        }
         
     }
     
+    func heroesChoice() { // showing the choice of heroes
+        
+        print("\n Which hero would you like to choose?")
+        print("\n 1. Fighter"
+            + "\n 2. Wizard"
+            + "\n 3. Colossus"
+            + "\n 4. Dwarf"
+            + "\n"
+            + "\n 👉 Your choice: ❓")
+    }
+    //==============================
+    // MARK: - DISPLAY  TEAM  =
+    //==============================
+    
+    
+    func fightTeamDisplay(dispenser: Int, recipient: Int, whoseTurn: Bool) { // Display the result of the fight
+                                                                            // all fighters including wizard can fight sp wizard = false for teamFactory.statusFactoryTeam
+        
+        var arrayDispenser = [Heroes]() // array of the dispensers
+        var arrayRecipient = [Heroes]() // array of the recipients
+        var emojyDispenser: String = "" // emojy for the dispenser
+        var emojyRecipient: String = "" // emojy for the recipient
+        var turn: Bool = true // set the parameter for method teamFactory.fight
+        var newLifeStrength: Int = 0
+        
+        
+        if whoseTurn == true { // if team one has to play then we are accessing to the arrayFirstTeam
+            print(""
+                + "\n           ▶️ TEAM ONE HEROES ◀️") // showing the correct communication sentences for team one
+            arrayDispenser = teamFactory.statusFactoryTeam(whoseTurn: true,wizard: false) // setting the arrayDispenser to arrayFirstTeam
+            arrayRecipient = teamFactory.statusFactoryTeam(whoseTurn: false,wizard: false) // setting the arrayRecipient to arraySecondTeam
+            emojyDispenser = "🤺" // setting the emojy for the team attacking
+            emojyRecipient = "🔱" // setting the emojy for the team attacked
+            turn = true
+        }
+        if whoseTurn == false { // if team one has to play then we are accessing to the arraySecondTeam
+            print(""
+                + "\n           ▶️ TEAM TWO HEROES ◀️") // showing the correct communication sentences for team one
+            arrayDispenser = teamFactory.statusFactoryTeam(whoseTurn: false,wizard: false) // setting the arrayDispenser to arraySecondTeam
+            arrayRecipient = teamFactory.statusFactoryTeam(whoseTurn: true,wizard: false) //setting the arrayRecipient to arrayFirstTeam
+            emojyDispenser = "🔱" // setting the emojy for the team attacking
+            emojyRecipient = "🤺" // setting the emojy for the team attacked
+        }
+        
+        
+        print("\(emojyRecipient) Hit points of the attacked : \(arrayRecipient[recipient].lifeStrength)") // show differents informations
+        print("\(emojyDispenser) Hit points : \(arrayDispenser[dispenser].shotStrength)")
+        print("\(emojyRecipient) Protection of the shield of the attacked: \(arrayRecipient[recipient].armorStrength)") // end of the informations
+        newLifeStrength = teamFactory.fight(dispenser: dispenser, recipient: recipient, whoseTurn: turn)
+        
+//        let newLifeStrength: Int = arrayRecipient[recipient].lifeStrength - (arrayDispenser[dispenser].shotStrength-arrayRecipient[recipient].armorStrength) // lifeStrenght from attacked - ( shot strenght of the attackers - armor shield of the attacked)
+//        arrayRecipient[recipient].lifeStrength = newLifeStrength // setting in the array of the attacked team the new point of life at the index of the attacked
+        print("⚡️ The hero you have just attacked now has these characters: \(newLifeStrength)")
+        
+        
+    }
+    func teamHealingDisplay(dispenser: Int, recipient: Int, whoseTurn: Bool){ // team is healing someone
+        var newLifeStrength: Int
+        var arrayDispenser = [Heroes]()
+        let recipient: Int = 0
+        let dispenser: Int = 0
+        var emojyDispenser: String = "" // emojy for the dispenser
+        var turn: Bool = true
+        
+        
+        if whoseTurn == true {
+            
+            arrayDispenser = teamFactory.statusFactoryTeam(whoseTurn: true, wizard: false)
+            
+            emojyDispenser = "🤺" // emojy for the dispenser
+            turn = true
+            
+            
+            
+        }
+        if whoseTurn == false {
+            arrayDispenser = teamFactory.statusFactoryTeam(whoseTurn: false, wizard: false)
+            emojyDispenser = "🔱" // emojy for the dispense
+            turn = false
+        }
+        
+        
+        print("\(emojyDispenser) The life strenght of the recipients : \(arrayDispenser[recipient].lifeStrength)") // show differents informations
+        print("\(emojyDispenser) Savior capacity of heal points : \(arrayDispenser[dispenser].shotStrength)")
+        // end of the informations
+        newLifeStrength = teamFactory.heal(dispenser: dispenser, recipient: recipient, whoseTurn: turn)
+//        newLifeStrength = ((arrayDispenser[recipient].lifeStrength) + 5)
+//        arrayDispenser[recipient].lifeStrength = newLifeStrength
+        print(" 🤺 The hero you have just healed has now : \(newLifeStrength) points of life")
+        
+    }
+    //        if whoseTurn == false {
+    //
+    //            newLifeStrength = ((teamFactory.arrayTeamSecond[recipient].lifeStrength) + 5)
+    //            teamFactory.arrayTeamSecond[recipient].lifeStrength = newLifeStrength
+    //            print(" 🔱 The hero you have just healed has now : \(teamFactory.arrayTeamSecond[recipient].lifeStrength) points of life")
+    //        }
+    //        return newLifeStrength
+    
     func statusTeam(whoseTurn: Bool,wizard: Bool) -> Int {
+        
         var elementHeroe: Int = 0 // number of heroes in the array for each teams
-        var wizardExist: Bool = wizard
+        //let wizardExist: Bool = wizard
         var array = [Heroes]()
         var emojy: String = ""
-        if wizard == true {
-            wizardExist = true
-            
-        }
-        if wizard == false {
-            wizardExist = false
-            
-        }
+        
         if whoseTurn == true { // if team one has to play then we are accessing to the arrayFirstTeam
             print(""
                 + "\n ▶️ TEAM ONE HEROES ◀️") // showing the correct communication sentences for team one
-            array = teamFactory.statusFactoryTeam(whoseTurn: true)
+            array = teamFactory.statusFactoryTeam(whoseTurn: true,wizard: wizard)
             emojy = "🤺" // setting the emojy for team One
         }
         if whoseTurn == false { // if team one has to play then we are accessing to the arraySecondTeam
             print(""
                 + "\n ▶️ TEAM TWO HEROES ◀️") // showing the correct communication sentences for team one
-            array = teamFactory.statusFactoryTeam(whoseTurn: false)
+            array = teamFactory.statusFactoryTeam(whoseTurn: false,wizard: wizard)
             emojy = "🔱" // setting the emojy for team Two
         }
         
         for element in 0..<array.count {
             
-            if wizardExist == true {
+            if wizard == true {
                 
                 if array[element].type == "Wizard" {
                     if array[element].alive == true { // print the alived heroes only
@@ -412,103 +556,92 @@ class Game {
                     
                 }
             }
-            if wizardExist == false {
+            if wizard == false {
                 
-                    if array[element].alive == true { // print the alived heroes only
-                        
-                        print("\n\(emojy) Hero name : \(array[element].heroName)"
-                            + " \(emojy) Hero Type : \(array[element].type)"
-                            + "\n\(emojy) LifeStrenght : \(array[element].lifeStrength)"
-                            + " \(emojy) ShotStrenght : \(array[element].shotStrength)"
-                            + "\n\(emojy) ArmorStrength : \(array[element].armorStrength)"
-                            + " \(emojy) Equipement : \(array[element].equipment)")
-                        elementHeroe += 1
-                    }
+                if array[element].alive == true { // print the alived heroes only
+                    
+                    print("\n\(emojy) Hero name : \(array[element].heroName)"
+                        + " \(emojy) Hero Type : \(array[element].type)"
+                        + "\n\(emojy) LifeStrenght : \(array[element].lifeStrength)"
+                        + " \(emojy) ShotStrenght : \(array[element].shotStrength)"
+                        + "\n\(emojy) ArmorStrength : \(array[element].armorStrength)"
+                        + " \(emojy) Equipement : \(array[element].equipment)")
+                    elementHeroe += 1
                 }
+            }
         }
         return elementHeroe
     }
-    func statusTeamWizard(whoseTurn: Bool) -> Int {
+    func statusTeamWizard(whoseTurn: Bool) -> Int { // giving information about the existence of wizard in the team on playRoll
         
         var elementHeroe: Int = 0 // number of heroes in the array for each teams
+        var getdispenserNoWizard: Bool = true // boolean set for reducing code and having the state of wizard or not wizard
+        var turn: Bool = true
         
         if whoseTurn == true {
-           
-            if teamFactory.getDispensersTeamWithoutWizardSelected(whoseTurn: true) == true {
-                elementHeroe = game.statusTeamWizard(whoseTurn: true)
-            }
-            if teamFactory.getDispensersTeamWithoutWizardSelected(whoseTurn: true) == false {
-                print(" 😢 You don't have any wizard in your team")
-                game.actionMenu(whoseTurn: true) // return to the action Menu because no wizard
-            }
+            getdispenserNoWizard = teamFactory.getDispensersTeamWithoutWizardSelected(whoseTurn: true)
+            turn = true
         }
-        
         if whoseTurn == false {
-            if teamFactory.getDispensersTeamWithoutWizardSelected(whoseTurn: false) == true {
-                elementHeroe = game.statusTeamWizard(whoseTurn: false)
-            }
-            if teamFactory.getDispensersTeamWithoutWizardSelected(whoseTurn: false) == false {
-                print(" 😢 You don't have any wizard in your team")
-                game.actionMenu(whoseTurn: false) // return to the action Menu because no wizard
-            }
+            getdispenserNoWizard = teamFactory.getDispensersTeamWithoutWizardSelected(whoseTurn: false)
+            turn = false
+            
+        }
+        if getdispenserNoWizard == true {
+            elementHeroe = game.statusTeamWizard(whoseTurn: turn)
+        }
+        if getdispenserNoWizard == false {
+            print(" 😢 You don't have any wizard in your team")
+            game.actionMenu(whoseTurn: turn) // return to the action Menu because no wizard
         }
         return elementHeroe
     }
-//========================
-//  MARK:  - PARAMETERS  =
-//========================
-
-func controAnswerLetters(choicePlayer: String) -> Bool { // verify that the player type the possible answer // here Two
-    var correctTwo = true
-    let choiceGiven = choicePlayer
+    //========================
+    //  MARK:  - PARAMETERS  =
+    //========================
     
-    if choiceGiven != "y" && choiceGiven != "n" {
-        correctTwo = false
-    }
-    return correctTwo
-}
-
-func choicePlayer(maxValue: Int) -> String? {
-    
-    let choicePlayer = readLine()!
-    
-    guard (choicePlayer.isInt) else {  // test if the answer is only Int no letters
-        print("I don`t understand your answer")
-        return nil
+    func controAnswerLetters(choicePlayer: String) -> Bool { // verify that the player type the possible answer // here Two
+        var correctTwo = true
+        let choiceGiven = choicePlayer
         
-    }
-    
-    let control = controlAnswer(choicePlayer: Int(choicePlayer)!, maxValue: maxValue)
-    if control { // if the answer is in between the gap of possible answers
-        //print("all is perfect")
-        return choicePlayer}
-    else {
-        print("I don`t understand your answer")
-        return nil
-    }
-}
-
-func controlAnswer(choicePlayer: Int,maxValue: Int) -> Bool {
-    for num in 1...maxValue {
-        if choicePlayer == num { // Answer must be contained between 1 and max for 2 possible answers then 1 or 2
-            //print("Your value is in between the possible answers")
-            return true
+        if choiceGiven != "y" && choiceGiven != "n" {
+            correctTwo = false
         }
-        //return false
+        return correctTwo
     }
-    return false
-}
-  
-
-    func heroesChoice() {
+    
+    func choicePlayer(maxValue: Int) -> String? {
         
-        print("\n Which hero would you like to choose?")
-        print("\n 1. Fighter"
-            + "\n 2. Wizard"
-            + "\n 3. Colossus"
-            + "\n 4. Dwarf"
-            + "\n"
-            + "\n 👉 Your choice: ❓")
+        let choicePlayer = readLine()!
+        
+        guard (choicePlayer.isInt) else {  // test if the answer is only Int no letters
+            print("I don`t understand your answer")
+            return nil
+            
+        }
+        
+        let control = controlAnswer(choicePlayer: Int(choicePlayer)!, maxValue: maxValue)
+        if control { // if the answer is in between the gap of possible answers
+            //print("all is perfect")
+            return choicePlayer}
+        else {
+            print("I don`t understand your answer")
+            return nil
+        }
     }
+    
+    func controlAnswer(choicePlayer: Int,maxValue: Int) -> Bool {
+        for num in 1...maxValue {
+            if choicePlayer == num { // Answer must be contained between 1 and max for 2 possible answers then 1 or 2
+                //print("Your value is in between the possible answers")
+                return true
+            }
+            //return false
+        }
+        return false
+    }
+    
+
+  
 
 }
