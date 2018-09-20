@@ -486,6 +486,7 @@ class Game {
     func teamHealingDisplay(dispenser: Int, recipient: Int, whoseTurn: Bool){ // team is healing someone
         var newLifeStrength: Int
         var arrayDispenser = [Heroes]()
+        var arrayRecipient = [Heroes]()
         let recipient: Int = 0
         let dispenser: Int = 0
         var emojyDispenser: String = "" // emojy for the dispenser
@@ -494,8 +495,8 @@ class Game {
         
         if whoseTurn == true {
             
-            arrayDispenser = teamFactory.statusFactoryTeam(whoseTurn: true, wizard: false)
-            
+            arrayDispenser = teamFactory.statusFactoryTeam(whoseTurn: true, wizard: true)
+            arrayRecipient = teamFactory.statusFactoryTeam(whoseTurn: true, wizard: false)
             emojyDispenser = "🤺" // emojy for the dispenser
             turn = true
             
@@ -503,13 +504,15 @@ class Game {
             
         }
         if whoseTurn == false {
-            arrayDispenser = teamFactory.statusFactoryTeam(whoseTurn: false, wizard: false)
+            arrayDispenser = teamFactory.statusFactoryTeam(whoseTurn: false, wizard: true)
+            arrayRecipient = teamFactory.statusFactoryTeam(whoseTurn: false, wizard: false)
+            
             emojyDispenser = "🔱" // emojy for the dispense
             turn = false
         }
         
         
-        print("\(emojyDispenser) The life strenght of the recipients : \(arrayDispenser[recipient].lifeStrength)") // show differents informations
+        print("\(emojyDispenser) The life strenght of the recipients : \(arrayRecipient[recipient].lifeStrength)") // show differents informations
         print("\(emojyDispenser) Savior capacity of heal points : \(arrayDispenser[dispenser].shotStrength)")
         // end of the informations
         newLifeStrength = teamFactory.heal(dispenser: dispenser, recipient: recipient, whoseTurn: turn)
