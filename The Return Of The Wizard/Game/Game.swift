@@ -214,7 +214,7 @@ class Game {
         dispenserRow = (Int(playerAnswer!)! - 1) // correcting the index for the array // index starts at 0
         //            game.statusTeam(whoseTurn: true, wizard: false) // will shows status of team One (all the heroes and not only the wizard)
         //            //game.statusTeam(whoseTurn: false,wizard: false) // will shows status of team Two (all the heroes and not only the wizard)
-        heroType = teamFactory.statusFactoryTeam(whoseTurn: turn, wizard: false)[dispenserRow].type
+        heroType = teamFactory.status(whoseTurn: turn, wizard: false)[dispenserRow].type
         if heroType == "Wizard" {
             
             print("⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️I am a wizard")
@@ -337,7 +337,7 @@ class Game {
 //            //print("dispenser row = \(dispenserRow)")
 //        }while playerAnswer == nil
 //        dispenserRow = (Int(playerAnswer!)! - 1) // correcting the index for the array // index starts at 0
-        heroType = teamFactory.statusFactoryTeam(whoseTurn: turn, wizard: false)[dispenserRow].type
+        heroType = teamFactory.status(whoseTurn: turn, wizard: false)[dispenserRow].type
         if heroType == "Wizard" {
             
             print("⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️I am a wizard and i can do better than just striking, i can kill in one shot another hero!!!!")
@@ -500,7 +500,7 @@ class Game {
     
     
     func fightTeamDisplay(dispenser: Int, recipient: Int, whoseTurn: Bool, Spell: Bool) { // Display the result of the fight
-                                                                            // all fighters including wizard can fight sp wizard = false for teamFactory.statusFactoryTeam
+                                                                            // all fighters including wizard can fight sp wizard = false for teamFactory.status
                                                                             // Spell will manage the right of SpellDeath and uniqueSpell his uniqueness
         var arrayDispenser = [Heroes]() // array of the dispensers
         var arrayRecipient = [Heroes]() // array of the recipients
@@ -515,8 +515,8 @@ class Game {
         if whoseTurn == true { // if team one has to play then we are accessing to the arrayFirstTeam
             print(""
                 + "\n           ▶️ TEAM ONE HEROES ◀️") // showing the correct communication sentences for team one
-            arrayDispenser = teamFactory.statusFactoryTeam(whoseTurn: true,wizard: false) // setting the arrayDispenser to arrayFirstTeam
-            arrayRecipient = teamFactory.statusFactoryTeam(whoseTurn: false,wizard: false) // setting the arrayRecipient to arraySecondTeam
+            arrayDispenser = teamFactory.status(whoseTurn: true,wizard: false) // setting the arrayDispenser to arrayFirstTeam
+            arrayRecipient = teamFactory.status(whoseTurn: false,wizard: false) // setting the arrayRecipient to arraySecondTeam
             emojyDispenser = "🤺" // setting the emojy for the team attacking
             emojyRecipient = "🔱" // setting the emojy for the team attacked
             turn = true
@@ -524,8 +524,8 @@ class Game {
         if whoseTurn == false { // if team one has to play then we are accessing to the arraySecondTeam
             print(""
                 + "\n           ▶️ TEAM TWO HEROES ◀️") // showing the correct communication sentences for team one
-            arrayDispenser = teamFactory.statusFactoryTeam(whoseTurn: false,wizard: false) // setting the arrayDispenser to arraySecondTeam
-            arrayRecipient = teamFactory.statusFactoryTeam(whoseTurn: true,wizard: false) //setting the arrayRecipient to arrayFirstTeam
+            arrayDispenser = teamFactory.status(whoseTurn: false,wizard: false) // setting the arrayDispenser to arraySecondTeam
+            arrayRecipient = teamFactory.status(whoseTurn: true,wizard: false) //setting the arrayRecipient to arrayFirstTeam
             emojyDispenser = "🔱" // setting the emojy for the team attacking
             emojyRecipient = "🤺" // setting the emojy for the team attacked
         }
@@ -591,8 +591,8 @@ class Game {
         
         if whoseTurn == true {
             
-            arrayDispenser = teamFactory.statusFactoryTeam(whoseTurn: true, wizard: true)
-            arrayRecipient = teamFactory.statusFactoryTeam(whoseTurn: true, wizard: false)
+            arrayDispenser = teamFactory.status(whoseTurn: true, wizard: true)
+            arrayRecipient = teamFactory.status(whoseTurn: true, wizard: false)
             emojyDispenser = "🤺" // emojy for the dispenser
             turn = true
             
@@ -600,8 +600,8 @@ class Game {
             
         }
         if whoseTurn == false {
-            arrayDispenser = teamFactory.statusFactoryTeam(whoseTurn: false, wizard: true)
-            arrayRecipient = teamFactory.statusFactoryTeam(whoseTurn: false, wizard: false)
+            arrayDispenser = teamFactory.status(whoseTurn: false, wizard: true)
+            arrayRecipient = teamFactory.status(whoseTurn: false, wizard: false)
             
             emojyDispenser = "🔱" // emojy for the dispense
             turn = false
@@ -670,13 +670,13 @@ class Game {
         if whoseTurn == true { // if team one has to play then we are accessing to the arrayFirstTeam
             print(""
                 + "\n ▶️ TEAM ONE HEROES ◀️") // showing the correct communication sentences for team one
-            array = teamFactory.statusFactoryTeam(whoseTurn: true,wizard: wizard)
+            array = teamFactory.status(whoseTurn: true,wizard: wizard)
             emojy = "🤺" // setting the emojy for team One
         }
         if whoseTurn == false { // if team one has to play then we are accessing to the arraySecondTeam
             print(""
                 + "\n ▶️ TEAM TWO HEROES ◀️") // showing the correct communication sentences for team two
-            array = teamFactory.statusFactoryTeam(whoseTurn: false,wizard: wizard)
+            array = teamFactory.status(whoseTurn: false,wizard: wizard)
             emojy = "🔱" // setting the emojy for team Two
         }
         
