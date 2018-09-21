@@ -182,7 +182,7 @@ class TeamFactory {
 //        }
 //        return newLifeStrength
 //            }
-    func fight(dispenser: Int, recipient: Int, whoseTurn: Bool, specialSpell: Bool) -> Int {
+    func fight(dispenser: Int, recipient: Int, whoseTurn: Bool, specialSpell: Bool,oneSpell: Bool) -> Int {
         
         var arrayDispenser = [Heroes]() // declaration of arrayDispenser contening data for team one
         var arrayRecipient = [Heroes]() // declaration of arrayDispenser contening data for team two
@@ -201,7 +201,7 @@ class TeamFactory {
             arrayRecipient = statusFactoryTeam(whoseTurn: true,wizard: false) //setting the arrayRecipient to arrayFirstTeam
             
         }
-        if specialSpell == false {
+        if specialSpell == false || oneSpell == true { // if the spell of death was never uses and no asked the wizard is doing just a normal strike
             
             newLifeStrength = arrayRecipient[recipient].lifeStrength - (arrayDispenser[dispenser].shotStrength-arrayRecipient[recipient].armorStrength)
             // lifeStrenght from attacked - ( shotstrenght of the attackers - armor shield of the attacked)
@@ -212,7 +212,7 @@ class TeamFactory {
             }
         }
         
-        if specialSpell == true {
+        if specialSpell == true && oneSpell == false { // if the wizard do the special spell of death and it was never done before, the strike is a spell of death
             
             newLifeStrength = 0 // te wizard use his Spell of death
             arrayRecipient[recipient].lifeStrength = 0 // setting in the array of the attacked hero in the team at 0 and alive property at not alive
