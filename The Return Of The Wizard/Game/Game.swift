@@ -287,7 +287,8 @@ class Game {
         var heroType: String = "" // variable used for havinf´g the type of hero dispenser who would like to fight
         var turn: Bool = true
         var greetings: String = ""
-        var specialSpell: Bool = false
+        var specialSpell: Bool = false // property allowing to do a deathSpell for the wizard only
+        //var uniqueSpell: Bool = false // property blocking the deathSpell at one time per game
         
         if whoseTurn == true {
             
@@ -333,7 +334,8 @@ class Game {
         if heroType == "Wizard" {
             
             print("⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️I am a wizard and i can do better than just striking, i can kill in one shot another hero!!!!")
-            specialSpell = true
+            specialSpell = true // set the right to spell death
+            // will block the spellDeath if already used
             
         }
         print("\(greetings)")
@@ -345,9 +347,9 @@ class Game {
             //print("recipient row = \(recipientRow)")
         }while playerAnswer == nil
         recipientRow = (Int(playerAnswer!)! - 1) // correcting the index for the array // index starts at 0
-        
-        game.fightTeamDisplay(dispenser: dispenserRow, recipient: recipientRow, whoseTurn: turn, Spell: specialSpell)
-        
+       
+        game.fightTeamDisplay(dispenser: dispenserRow, recipient: recipientRow, whoseTurn: turn, Spell: specialSpell) // will block the spellDeath if already used
+       
         game.actionTeamMenu(whoseTurn: !turn)
         
         
@@ -384,7 +386,7 @@ class Game {
          like to use and the opportunity to choose which hero, he ll like to heal.*/
         
         var playerAnswer: String? // the answer of the user
-        var dispenserRow: Int = heroeChoice // this is the dispenser heros row
+        //var dispenserRow: Int = heroeChoice // this is the dispenser heros row
         var recipientRow: Int = 0 // this is the recipient heros row
         //var maxValueDispenser: Int = 0 // Value max for showing the wizard of dispenser team
         var maxValueRecipient: Int = 0 // Value max for showing all the heroes of dispenser team
@@ -434,7 +436,7 @@ class Game {
             }while playerAnswer == nil
             recipientRow = (Int(playerAnswer!)!-1) // correcting the index for the array // index starts at 0
             //game.healTeamMenu(whoseTurn: turn)
-            game.teamHealingDisplay(dispenser: dispenserRow, recipient: recipientRow, whoseTurn: turn)
+            game.teamHealingDisplay(dispenser: heroeChoice, recipient: recipientRow, whoseTurn: turn)
             //teamFactory.teamHealing(dispenser: dispenserRow, recipient: recipientRow, whoseTurn: true) // call the method teamHealing by passing all the information
             game.actionMenu(whoseTurn: !turn)
 //        }
@@ -492,14 +494,16 @@ class Game {
     
     func fightTeamDisplay(dispenser: Int, recipient: Int, whoseTurn: Bool, Spell: Bool) { // Display the result of the fight
                                                                             // all fighters including wizard can fight sp wizard = false for teamFactory.statusFactoryTeam
-        
+                                                                            // Spell will manage the right of SpellDeath and uniqueSpell his uniqueness
         var arrayDispenser = [Heroes]() // array of the dispensers
         var arrayRecipient = [Heroes]() // array of the recipients
         var emojyDispenser: String = "" // emojy for the dispenser
         var emojyRecipient: String = "" // emojy for the recipient
         var turn: Bool = true // set the parameter for method teamFactory.fight
         var newLifeStrength: Int = 0
-        
+        var answer: Int = 0 // answer from the player for his choice between normal spell and death spell
+        var playerAnswer: String? // Answer of the player will be checked by the method choicePlayer
+        var noDeathSpell: Bool = false
         
         if whoseTurn == true { // if team one has to play then we are accessing to the arrayFirstTeam
             print(""
@@ -518,12 +522,46 @@ class Game {
             emojyDispenser = "🔱" // setting the emojy for the team attacking
             emojyRecipient = "🤺" // setting the emojy for the team attacked
         }
-        
-        
+        if arrayDispenser[dispenser].type == "Wizard" {
+        print("\(emojyDispenser) Would you like to do a normal Spell, or using your Spell of death?")
+            
+            repeat {
+                
+                print("\n"
+                    + "\n What Would you like to do:"   // the game should propose First team to play with an action to do
+                    + "\n 1. Would you like to do normal Spell?"
+                    + "\n 2. Would You like to Spell of death?"
+                    + "\n"
+                    + "\n 👉 Your choice:❓")
+                
+                playerAnswer = (game.choicePlayer(maxValue: 2)) // checks answer rightness
+                
+            }while playerAnswer == nil
+            
+            answer = (Int(playerAnswer!)!)
+            if answer == 1 {
+                newLifeStrength = teamFactory.fight(dispenser: dispenser, recipient: recipient, whoseTurn: turn, specialSpell: false, oneSpell: false)
+            }
+            if answer == 2 {
+                if noDeathSpell == false {
+                newLifeStrength = teamFactory.fight(dispenser: dispenser, recipient: recipient, whoseTurn: turn, specialSpell: false, oneSpell: true)
+                noDeathSpell = true
+                }
+                if noDeathSpell == true {
+                    print(" \(emojyDispenser) You already did a spell of death."
+                        + "\n Sorry you will be able to do a normal spell this time 😔")
+                    newLifeStrength = teamFactory.fight(dispenser: dispenser, recipient: recipient, whoseTurn: turn, specialSpell: false, oneSpell: false)
+                }
+            }
+            
+            
+            
+            
+        }
         print("\(emojyRecipient) Hit points of the attacked : \(arrayRecipient[recipient].lifeStrength)") // show differents informations
         print("\(emojyDispenser) Hit points : \(arrayDispenser[dispenser].shotStrength)")
         print("\(emojyRecipient) Protection of the shield of the attacked: \(arrayRecipient[recipient].armorStrength)") // end of the informations
-        newLifeStrength = teamFactory.fight(dispenser: dispenser, recipient: recipient, whoseTurn: turn, specialSpell: Spell)
+        newLifeStrength = teamFactory.fight(dispenser: dispenser, recipient: recipient, whoseTurn: turn, specialSpell: Spell, oneSpell: noDeathSpell)
         if newLifeStrength == 0 {
             print("⚡️ This hero is dead!!")
         }
