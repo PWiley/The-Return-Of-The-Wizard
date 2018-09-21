@@ -66,60 +66,46 @@ class TeamFactory {
     // MARK: - METHODS EQUIPEMENT  =
     //==============================
     
-    func NewEquipement(heroeName : String, heroesInt: String, weaponChoice: String) { // method for giving the choice for a new weapon // First not possible
+    func NewEquipement(whoseTurn: Bool, heroeType: String, heroIndex: Int) { // method for randoming the new equipement
         
-        let choicePlayer = heroesInt
-        let name = heroeName
+        var arrayTeam = [Heroes]()
+        var equipementRoll: Int = 0
+        var emojy: String = ""
+        if whoseTurn == true {
+        arrayTeam = teamFirst.arrayTeam
+            emojy = "🤺"
+        }
+        if whoseTurn == false {
+        arrayTeam = teamSecond.arrayTeam
+            emojy = "🔱"
+        }
+        if heroeType == "Wizard" {
+            arrayTeam[heroIndex].equipment = Equipment.Scepter
+        }
+        if heroeType != "Wizard" {
+            equipementRoll = Int(arc4random_uniform(4) + 1)
+        }
         
-        let choiceWeaponPlayer = weaponChoice
-        switch choiceWeaponPlayer {
-        case "1" :
+        let NewWeaponPlayer = equipementRoll
+        switch NewWeaponPlayer {
+        case 1 :
             
-            let equipment = Equipment.Axe
-            let equipmentEffect = equipment.rawValue // Printing the value of Axe
-            print("The effect of your equipment is \(equipmentEffect)")
-
-            let heroe = heroesFactory.getHeroe(heroesInt: choicePlayer)!
-            heroe.heroName = name
-            heroe.equipment = equipment
+            arrayTeam[heroIndex].equipment = Equipment.Axe
+            print(" \(emojy) Your new equipment is an Axe")
             
+        case 2 :
             
-        case "2" :
+            arrayTeam[heroIndex].equipment = Equipment.Hammer
+            print(" \(emojy) Your new equipment is an Hammer")
             
-            let equipment = Equipment.Hammer
-            let equipmentEffect = equipment.rawValue // Printing the value of Hammer
-            print("The effect of your equipment is \(equipmentEffect)")
+        case 3 :
             
-            let heroe = heroesFactory.getHeroe(heroesInt: choicePlayer)!
-            heroe.heroName = name
-            heroe.equipment = equipment
+            arrayTeam[heroIndex].equipment = Equipment.Sword
+            print(" \(emojy) Your new equipment is an Sword")
             
-        case "3" :
+        
             
-            let equipment = Equipment.Sword
-            let equipmentEffect = equipment.rawValue // Printing the value of Sword
-            print("The effect of your equipment is \(equipmentEffect)")
-            
-            let heroe = heroesFactory.getHeroe(heroesInt: choicePlayer)!
-            heroe.heroName = name
-            heroe.equipment = equipment
-            
-        case "4" :
-            
-            let equipment = Equipment.Scepter
-            let equipmentEffect = equipment.rawValue // Printing the value of Scepter
-            print("The effect of your equipment is \(equipmentEffect)")
-
-            let heroe = heroesFactory.getHeroe(heroesInt: choicePlayer)!
-            heroe.heroName = name
-            heroe.equipment = equipment
-            
-        case "5" :
-            
-            let heroe = heroesFactory.getHeroe(heroesInt: choicePlayer)!
-            heroe.heroName = name
-            
-        default : print("You must choose a Weapon")
+        default : print("YouYou must choose a Weapon")
             
         }
         
@@ -196,10 +182,11 @@ class TeamFactory {
 //        }
 //        return newLifeStrength
 //            }
-    func fight(dispenser: Int, recipient: Int, whoseTurn: Bool) -> Int {
+    func fight(dispenser: Int, recipient: Int, whoseTurn: Bool, specialSpell: Bool) -> Int {
         
-        var arrayDispenser = [Heroes]()
-        var arrayRecipient = [Heroes]()
+        var arrayDispenser = [Heroes]() // declaration of arrayDispenser contening data for team one
+        var arrayRecipient = [Heroes]() // declaration of arrayDispenser contening data for team two
+        var newLifeStrength: Int = 0 // declare the newLifeStrength property
         
         
         if whoseTurn == true {
@@ -214,12 +201,22 @@ class TeamFactory {
             arrayRecipient = statusFactoryTeam(whoseTurn: true,wizard: false) //setting the arrayRecipient to arrayFirstTeam
             
         }
-        
-        let newLifeStrength: Int = arrayRecipient[recipient].lifeStrength - (arrayDispenser[dispenser].shotStrength-arrayRecipient[recipient].armorStrength)
+        if specialSpell == false {
+            
+            newLifeStrength = arrayRecipient[recipient].lifeStrength - (arrayDispenser[dispenser].shotStrength-arrayRecipient[recipient].armorStrength)
             // lifeStrenght from attacked - ( shotstrenght of the attackers - armor shield of the attacked)
-        arrayRecipient[recipient].lifeStrength = newLifeStrength // setting in the array of the attacked team the new point of life at the index of the attacked
-        if newLifeStrength < 0 {
-          arrayRecipient[recipient].alive = false // the hero is dead
+            arrayRecipient[recipient].lifeStrength = newLifeStrength // setting in the array of the attacked team the new point of life at the index of the attacked
+            
+            if newLifeStrength < 0 {
+                arrayRecipient[recipient].alive = false // the hero is dead
+            }
+        }
+        
+        if specialSpell == true {
+            
+            newLifeStrength = 0 // te wizard use his Spell of death
+            arrayRecipient[recipient].lifeStrength = 0 // setting in the array of the attacked hero in the team at 0 and alive property at not alive
+            arrayRecipient[recipient].alive = false // the hero is dead
         }
         return newLifeStrength
     }
