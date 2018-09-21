@@ -218,21 +218,28 @@ class Game {
         if heroType == "Wizard" {
             
             print("⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️⚡️I am a wizard")
-            
+            choiceGiven = wizardDisplay()
             
         }
-        repeat {
-            print("\n"
-                + "\n What Would you like to do:"   // the game should propose First team to play with an action to do
-                + "\n 1. Would you like to fight?"
-                + "\n 2. Would You like to heal someone?"
-                + "\n"
-                + "\n 👉 Your choice:❓")
-            
-            playerAnswer = (game.choicePlayer(maxValue: 2)) // control if answer is correct 1 or 2 and no letters
-            
-        }while playerAnswer == nil // not correct answer
-        choiceGiven = Int(playerAnswer!)!
+        if heroType != "Wizard" {
+            choiceGiven = normalHeroe()
+        }
+//        if heroType == "wizard" {
+//            print("\n"
+//                + "\n What Would you like to do:"   // the game should propose First team to play with an action to do
+//                + "\n 1. Would you like to fight?"
+//                + "\n 2. Would You like to heal someone?"
+//                + "\n"
+//                + "\n 👉 Your choice:❓")
+//        }
+//        repeat {
+//
+//
+//            playerAnswer = (game.choicePlayer(maxValue: 2)) // control if answer is correct 1 or 2 and no letters
+//
+//        }while playerAnswer == nil // not correct answer
+//        choiceGiven = Int(playerAnswer!)!
+        
         if choiceGiven == 1 { // will show the Fight menu for First Team
             fightTeamMenu(whoseTurn: turn, heroeChoice: dispenserRow)
             
@@ -617,7 +624,42 @@ class Game {
     //            print(" 🔱 The hero you have just healed has now : \(teamFactory.arrayTeamSecond[recipient].lifeStrength) points of life")
     //        }
     //        return newLifeStrength
+    func wizardDisplay() -> Int{
+        var playerAnswer: String?
+        var choiceGiven: Int
+            print("\n"
+                + "\n What Would you like to do:"   // the game should propose First team to play with an action to do
+                + "\n 1. Would you like to fight?"
+                + "\n 2. Would You like to heal someone?"
+                + "\n"
+                + "\n 👉 Your choice:❓")
+        repeat {
+            
+            
+                        playerAnswer = (game.choicePlayer(maxValue: 2)) // control if answer is correct 1 or 2 and no letters
+            
+                    }while playerAnswer == nil // not correct answer
+                    choiceGiven = Int(playerAnswer!)!
+        return choiceGiven
+        }
     
+    func normalHeroe() -> Int {
+        var playerAnswer: String?
+        var choiceGiven: Int
+        print("\n"
+            + "\n What Would you like to do:"   // the game should propose First team to play with an action to do
+            + "\n 1. Would you like to fight?"
+            + "\n 👉 Your choice:❓")
+        repeat {
+            
+            
+            playerAnswer = (game.choicePlayer(maxValue: 1)) // control if answer is correct 1 or 2 and no letters
+            
+        }while playerAnswer == nil // not correct answer
+        choiceGiven = Int(playerAnswer!)!
+        return choiceGiven
+    }
+        
     func statusTeam(whoseTurn: Bool,wizard: Bool) -> Int {
         
         var elementHeroe: Int = 0 // number of heroes in the array for each teams
