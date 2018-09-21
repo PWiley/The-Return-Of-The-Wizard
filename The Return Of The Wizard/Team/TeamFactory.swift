@@ -111,9 +111,9 @@ class TeamFactory {
         
     }
    
-    func statusFactoryTeam(whoseTurn: Bool,wizard: Bool) -> [Heroes] { /* getting the status of the team by returning either the content of arrayTeam for team One
+    func status(whoseTurn: Bool,wizard: Bool) -> [Heroes] { /* getting the status of the team by returning either the content of arrayTeam for team One
          or the content of arrayTeam for team Two */
-        //print("I am in statusFactoryTeam ")
+        //print("I am in status ")
         var arrayStatusTeam = [Heroes]() // declaration and initialisation of the arrayStatusTeam(return by that method)
         var arrayTeam = [Heroes]() // declaration and initialisation of the arrayTeam which will be append to arrayStatusTeam
         if whoseTurn == true {
@@ -191,14 +191,14 @@ class TeamFactory {
         
         if whoseTurn == true {
       
-            arrayDispenser = statusFactoryTeam(whoseTurn: true,wizard: false) // setting the arrayDispenser to arrayFirstTeam
-            arrayRecipient = statusFactoryTeam(whoseTurn: false,wizard: false) // setting the arrayRecipient to arraySecondTeam
+            arrayDispenser = status(whoseTurn: true,wizard: false) // setting the arrayDispenser to arrayFirstTeam
+            arrayRecipient = status(whoseTurn: false,wizard: false) // setting the arrayRecipient to arraySecondTeam
             
         }
         if whoseTurn == false {
             
-            arrayDispenser = statusFactoryTeam(whoseTurn: false,wizard: false) // setting the arrayDispenser to arraySecondTeam
-            arrayRecipient = statusFactoryTeam(whoseTurn: true,wizard: false) //setting the arrayRecipient to arrayFirstTeam
+            arrayDispenser = status(whoseTurn: false,wizard: false) // setting the arrayDispenser to arraySecondTeam
+            arrayRecipient = status(whoseTurn: true,wizard: false) //setting the arrayRecipient to arrayFirstTeam
             
         }
         if specialSpell == false || oneSpell == true { // if the spell of death was never uses and no asked the wizard is doing just a normal strike
@@ -231,15 +231,15 @@ class TeamFactory {
         
         if game.whoseTurn == true {
             
-            arrayDispenser = statusFactoryTeam(whoseTurn: true, wizard: true)
-            arrayRecipient = statusFactoryTeam(whoseTurn: true, wizard: false)
+            arrayDispenser = status(whoseTurn: true, wizard: true)
+            arrayRecipient = status(whoseTurn: true, wizard: false)
             
             
         }
         if game.whoseTurn == false {
             
-            arrayDispenser = statusFactoryTeam(whoseTurn: false, wizard: true)
-            arrayRecipient = statusFactoryTeam(whoseTurn: false, wizard: false)
+            arrayDispenser = status(whoseTurn: false, wizard: true)
+            arrayRecipient = status(whoseTurn: false, wizard: false)
            
         }
         newLifeStrength = ((arrayRecipient[recipient].lifeStrength) + (arrayDispenser[dispenser].shotStrength))
