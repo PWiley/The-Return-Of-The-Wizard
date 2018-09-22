@@ -20,3 +20,9 @@ extension Bool {       // will toggle the player turn either player One or playe
         self = !self
     }
 }
+extension Int {
+    static func random(max: Int) -> Int {
+        let rnd = Int(arc4random_uniform(UInt32(max) + 1))
+        return rnd
+    }
+}
