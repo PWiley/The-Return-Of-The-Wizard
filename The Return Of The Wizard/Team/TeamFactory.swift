@@ -11,7 +11,7 @@ import Foundation
 
 class TeamFactory {
     
-    //let teamFactory = Team()
+    
     let heroesFactory = HeroesFactory()
     let teamFirst = Team()
     let teamSecond = Team()
@@ -33,7 +33,7 @@ class TeamFactory {
             
             
         }while nameUnique == false
-        heroeName = choiceNameHeroe.uppercased()
+        heroeName = choiceNameHeroe
         return heroeName
         
     }
@@ -47,25 +47,21 @@ class TeamFactory {
         let choicePlayer = heroesInt
         let heroe = heroesFactory.getHeroe(heroesInt: choicePlayer)!
         heroe.heroName = heroeName
-        //heroe.teamNameAlias = teamNameAlias
+        
         
         if teamNameAlias == "First" {
-            
-            teamFirst.arrayTeam.append(heroe)
-            //print("We have: \(teamFirst.arrayTeam.count) Heroes in the array of teams")
+            teamFirst.arrayTeam.append(heroe) // add heroes in array for first team
         }
         if teamNameAlias == "Second" {
-            teamSecond.arrayTeam.append(heroe)
-            //print("We have: \(teamSecond.arrayTeam.count) Heroes in the array of teams")
+            teamSecond.arrayTeam.append(heroe) // add heroes in array for second team
         }
-        
         
     }
  
     //==============================
     // MARK: - METHODS EQUIPEMENT  =
     //==============================
-    
+//    
     func NewEquipement(whoseTurn: Bool, heroeType: String, heroIndex: Int) { // method for randoming the new equipement
         
         var arrayTeam = [Heroes]()
@@ -105,15 +101,15 @@ class TeamFactory {
             
         
             
-        default : print("YouYou must choose a Weapon")
+        default : print("You must choose a Weapon")
             
         }
         
     }
    
     func status(whoseTurn: Bool,wizard: Bool) -> [Heroes] { /* getting the status of the team by returning either the content of arrayTeam for team One
-         or the content of arrayTeam for team Two */
-        //print("I am in status ")
+                                                                or the content of arrayTeam for team Two */
+        
         var arrayStatusTeam = [Heroes]() // declaration and initialisation of the arrayStatusTeam(return by that method)
         var arrayTeam = [Heroes]() // declaration and initialisation of the arrayTeam which will be append to arrayStatusTeam
         if whoseTurn == true {
@@ -122,13 +118,12 @@ class TeamFactory {
         if whoseTurn == false {
             arrayTeam = teamSecond.arrayTeam // arrayTeam set at teamSecond.arrayTeam
         }
-        //        if whoseTurn == true { // if it is the turn for team One
-        
+       
         if wizard == false {
             for element in 0..<arrayTeam.count { // Browse arrayTeamFirst(array of team One or team Two
                 if arrayTeam[element].alive == true { // if there are alive only
                 arrayStatusTeam.append(arrayTeam[element]) /* arrayStatusTeam will get the content of ArrayTeam either Team One
-                 or TeamTwo */
+                                                                                                                    or TeamTwo */
                 }
             }
         }
@@ -136,58 +131,18 @@ class TeamFactory {
             for element in 0..<arrayTeam.count {
                 if arrayTeam[element].type == "Wizard" && arrayTeam[element].alive == true { // if there is at least one wizard alive will return the list of the alived wizards
                     arrayStatusTeam.append(arrayTeam[element]) // arrayStatusTeam will get the content of ArrayTeam
-                    //print(arrayStatusTeam)
-                    
                 }
             }
         }
         return arrayStatusTeam // returning arrayStatusTeam by calling the method above
     }
-    // if whoseTurn == false { // if it is the turn for team Two
-    
-    //            if wizard == false {
-    //                for element in 0..<teamSecond.arrayTeam.count { // Browse arrayTeamFirst(array of team One
-    //
-    //                    arrayStatusTeam.append(teamSecond.arrayTeam[element]) // arrayStatusTeam will get the content of ArrayTeamFirst
-    //                }
-    //            }
-    //            if wizard == true {
-    //                for element in 0..<teamSecond.arrayTeam.count {
-    //                    if teamSecond.arrayTeam[element].type == "wizard" {
-    //                        arrayStatusTeam.append(teamSecond.arrayTeam[element]) // arrayStatusTeam will get the content of ArrayTeamFirst
-    //
-    //                    }
-    //                }
-    //            }
-    
-
-        
-       // return arrayStatusTeam // returning arrayStatusTeam by calling the method above
-
-  
-//    func teamHealing(dispenser: Int, recipient: Int, whoseTurn: Bool) -> Int{ // team is healing someone
-//        var newLifeStrength: Int
-//        if whoseTurn == true {
-//            
-//            newLifeStrength = ((teamFirst.arrayTeam[recipient].lifeStrength) + 5)
-//            teamFirst.arrayTeam[recipient].lifeStrength = newLifeStrength
-//            print(" 🤺 The hero you have just healed has now : \(teamFirst.arrayTeam[recipient].lifeStrength) points of life")
-//            
-//        }
-//        if whoseTurn == false {
-//            
-//            newLifeStrength = ((teamSecond.arrayTeam[recipient].lifeStrength) + 5)
-//            teamSecond.arrayTeam[recipient].lifeStrength = newLifeStrength
-//            print(" 🔱 The hero you have just healed has now : \(teamSecond.arrayTeam[recipient].lifeStrength) points of life")
-//        }
-//        return newLifeStrength
-//            }
-    func fight(dispenser: Int, recipient: Int, whoseTurn: Bool, specialSpell: Bool,oneSpell: Bool) -> Int {
+   
+    func fight(dispenser: Int, recipient: Int, whoseTurn: Bool, specialSpell: Bool) -> Int {
         
         var arrayDispenser = [Heroes]() // declaration of arrayDispenser contening data for team one
         var arrayRecipient = [Heroes]() // declaration of arrayDispenser contening data for team two
         var newLifeStrength: Int = 0 // declare the newLifeStrength property
-        
+        var newLifeStrengthWizard: Int = 0 // declare the newLifeStrengthWizard property
         
         if whoseTurn == true {
       
@@ -200,26 +155,33 @@ class TeamFactory {
             arrayDispenser = status(whoseTurn: false,wizard: false) // setting the arrayDispenser to arraySecondTeam
             arrayRecipient = status(whoseTurn: true,wizard: false) //setting the arrayRecipient to arrayFirstTeam
             
-        }
-        if specialSpell == false || oneSpell == true { // if the spell of death was never uses and no asked the wizard is doing just a normal strike
             
-            newLifeStrength = arrayRecipient[recipient].lifeStrength - (arrayDispenser[dispenser].shotStrength-arrayRecipient[recipient].armorStrength)
-            // lifeStrenght from attacked - ( shotstrenght of the attackers - armor shield of the attacked)
+        }
+        if specialSpell == false { // if the spell of death was never uses and no asked the wizard is doing just a normal strike
+            print(arrayDispenser[dispenser].heroName)
+            
+            print(arrayRecipient[recipient].lifeStrength)
+            print(arrayDispenser[dispenser].shotStrength)
+            print(arrayRecipient[recipient].armorStrength)
+            newLifeStrength = arrayRecipient[recipient].lifeStrength - (arrayDispenser[dispenser].shotStrength - arrayRecipient[recipient].armorStrength)
+            print(newLifeStrength)
             arrayRecipient[recipient].lifeStrength = newLifeStrength // setting in the array of the attacked team the new point of life at the index of the attacked
-            
-            if newLifeStrength < 0 {
-                arrayRecipient[recipient].alive = false // the hero is dead
+                
+                if newLifeStrength <= 0 {
+                    arrayRecipient[recipient].alive = false // the hero is dead
+                }
             }
-        }
-        
-        if specialSpell == true && oneSpell == false { // if the wizard do the special spell of death and it was never done before, the strike is a spell of death
+        if specialSpell == true { // if the wizard do the special spell of death and it was never done before, the strike is a spell of death
             
-            newLifeStrength = 0 // te wizard use his Spell of death
+            //newLifeStrength = 0 // the wizard use his Spell of death
             arrayRecipient[recipient].lifeStrength = 0 // setting in the array of the attacked hero in the team at 0 and alive property at not alive
+            newLifeStrengthWizard = arrayDispenser[dispenser].lifeStrength - 10 // the wizard is having effect of the death spell calling
+            arrayDispenser[dispenser].lifeStrength = newLifeStrengthWizard // the wizard has new lifeStrenght
             arrayRecipient[recipient].alive = false // the hero is dead
         }
         return newLifeStrength
-    }
+        }
+    
     func heal(dispenser: Int,recipient: Int,whoseTurn: Bool) -> Int {
         
         var arrayDispenser = [Heroes]()
@@ -233,10 +195,9 @@ class TeamFactory {
             
             arrayDispenser = status(whoseTurn: true, wizard: true)
             arrayRecipient = status(whoseTurn: true, wizard: false)
-            
-            
+        
         }
-        if game.whoseTurn == false {
+        else {
             
             arrayDispenser = status(whoseTurn: false, wizard: true)
             arrayRecipient = status(whoseTurn: false, wizard: false)
@@ -249,9 +210,9 @@ class TeamFactory {
     
     
     func checkNameHeroe(choiceNameHeroe : String) -> Bool {
+        
         var unique: Bool = true
         let heroeNameEnter = choiceNameHeroe
-        
         
         for element in 0..<teamFirst.arrayTeam.count {
             if heroeNameEnter == teamFirst.arrayTeam[element].heroName {
@@ -270,39 +231,5 @@ class TeamFactory {
         
         return unique
     }
-    
-
-    
-//    func getDispensersTeamWithoutWizardSelected(whoseTurn: Bool) -> Bool{ // getDispensersTeam
-//        
-//        var wizardExist: Bool = true // boolean set at true managing if there is a wizard in the team
-//        
-//        if whoseTurn == true { // will give to the player First in roll his possible Heroes
-//            
-//            for element in 0..<teamFirst.arrayTeam.count {
-//                if teamFirst.arrayTeam[element].type == "Wizard" {
-//                    wizardExist = true
-//                }
-//                else {
-//                    wizardExist = false
-//                }
-//            }
-//            
-//        }
-//        if whoseTurn == false { // will give to the player First in roll his possible Heroes
-//            for element in 0..<teamSecond.arrayTeam.count {
-//                if teamSecond.arrayTeam[element].type == "Wizard" {
-//                    wizardExist = true
-//                }
-//                else {
-//                    wizardExist = false
-//                }
-//            }
-//            
-//        }
-//        return wizardExist
-//    }
-
-    
     
 }
