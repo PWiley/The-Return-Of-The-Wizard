@@ -13,7 +13,7 @@ class Wizard: Heroes { // setting proporties for Wizard
     
     init() {     // initialization of the proporties
         
-        super.init(lifeStrength: 80, shotStrength: 30, armorStrength: 0, typeHero: "Wizard", heroName: "", alive: true, equipment : Equipment.Scepter)
+        super.init(lifeStrength: 80, shotStrength: 10, armorStrength: 0, typeHero: "Wizard", heroName: "", alive: true, equipment : Equipment.Scepter)
     }
     
 }
