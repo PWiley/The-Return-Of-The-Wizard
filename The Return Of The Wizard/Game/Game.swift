@@ -205,11 +205,13 @@ class Game {
         if heroType == "Wizard" {
             
             choiceGiven = wizardDisplay()
+            
         }
         if heroType != "Wizard" {
             choiceGiven = normalHeroe()
         }
         if choiceGiven == 1 { // will show the Fight menu for First Team
+            game.NewEquipementDisplay(whoseTurn: turn, heroeType: heroType, heroIndex: dispenserRow)
             fightTeamMenu(whoseTurn: turn, heroeChoice: dispenserRow)
         }
         if choiceGiven == 2 { // will show the Heal menu for first Team
@@ -271,6 +273,7 @@ class Game {
         if heroType != "Wizard" {
             print("you are a normal hero")
         }
+        
         print("\(greetings)")
         print("\n 👉 Choose your opponent \(emojyRecipient): ❓")
         
@@ -471,32 +474,55 @@ class Game {
         }
         if heroeType == "Wizard" {
             arrayTeam[heroIndex].equipment = Equipment.Scepter
+            print(" \(emojy) Your have a brand new Scepter")
         }
         if heroeType != "Wizard" {
-            equipementRoll = Int.random(max: 4)
+            equipementRoll = Int.random(max: 3)
+            print(equipementRoll)
+            
+            let NewWeaponPlayer = equipementRoll
+            switch NewWeaponPlayer {
+            case 1 :
+                
+                arrayTeam[heroIndex].equipment = Equipment.Axe
+                print(" \(emojy) Your new equipment is an Axe")
+                
+            case 2 :
+                
+                arrayTeam[heroIndex].equipment = Equipment.Hammer
+                print(" \(emojy) Your new equipment is an Hammer")
+                
+            case 3 :
+                
+                arrayTeam[heroIndex].equipment = Equipment.Sword
+                print(" \(emojy) Your new equipment is an Sword")
+                
+                
+                
+            default : print("You must choose a Weapon")
         }
         
-        let NewWeaponPlayer = equipementRoll
-        switch NewWeaponPlayer {
-        case 1 :
-            
-            arrayTeam[heroIndex].equipment = Equipment.Axe
-            print(" \(emojy) Your new equipment is an Axe")
-            
-        case 2 :
-            
-            arrayTeam[heroIndex].equipment = Equipment.Hammer
-            print(" \(emojy) Your new equipment is an Hammer")
-            
-        case 3 :
-            
-            arrayTeam[heroIndex].equipment = Equipment.Sword
-            print(" \(emojy) Your new equipment is an Sword")
-            
-            
-            
-        default : print("You must choose a Weapon")
-            
+//        let NewWeaponPlayer = equipementRoll
+//        switch NewWeaponPlayer {
+//        case 1 :
+//
+//            arrayTeam[heroIndex].equipment = Equipment.Axe
+//            print(" \(emojy) Your new equipment is an Axe")
+//
+//        case 2 :
+//
+//            arrayTeam[heroIndex].equipment = Equipment.Hammer
+//            print(" \(emojy) Your new equipment is an Hammer")
+//
+//        case 3 :
+//
+//            arrayTeam[heroIndex].equipment = Equipment.Sword
+//            print(" \(emojy) Your new equipment is an Sword")
+//
+//
+//
+//        default : print("You must choose a Weapon")
+        
         }
         
     }
