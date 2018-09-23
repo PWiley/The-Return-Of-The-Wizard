@@ -211,7 +211,7 @@ class Game {
             choiceGiven = normalHeroe()
         }
         if choiceGiven == 1 { // will show the Fight menu for First Team
-            game.NewEquipementDisplay(whoseTurn: turn, heroeType: heroType, heroIndex: dispenserRow)
+            game.newEquipementDisplay(whoseTurn: turn, heroeType: heroType, heroIndex: dispenserRow)
             fightTeamMenu(whoseTurn: turn, heroeChoice: dispenserRow)
         }
         if choiceGiven == 2 { // will show the Heal menu for first Team
@@ -459,7 +459,7 @@ class Game {
         
     }
     
-    func NewEquipementDisplay(whoseTurn: Bool, heroeType: String, heroIndex: Int) { // method for randoming the new equipement
+    func newEquipementDisplay(whoseTurn: Bool, heroeType: String, heroIndex: Int) { // method for randoming the new equipement
         
         var arrayTeam = [Heroes]()
         var equipementRoll: Int = 0
