@@ -12,7 +12,7 @@ import Foundation
 class TeamFactory {
     
     
-    let heroesFactory = HeroesFactory()
+    private let heroesFactory = HeroesFactory()
     let teamFirst = Team()
     let teamSecond = Team()
     
@@ -34,7 +34,7 @@ class TeamFactory {
             
         }while nameUnique == false
         heroeName = choiceNameHeroe
-        return heroeName
+        return heroeName.uppercased()
         
     }
     
@@ -68,17 +68,18 @@ class TeamFactory {
         var equipementRoll: Int = 0
         var emojy: String = ""
         if whoseTurn == true {
-        arrayTeam = teamFirst.arrayTeam
+            arrayTeam = teamFirst.arrayTeam
             emojy = "🤺"
         }
-        if whoseTurn == false {
-        arrayTeam = teamSecond.arrayTeam
+        else {
+            arrayTeam = teamSecond.arrayTeam
             emojy = "🔱"
         }
+        
         if heroeType == "Wizard" {
             arrayTeam[heroIndex].equipment = Equipment.Scepter
         }
-        if heroeType != "Wizard" {
+        else {
             equipementRoll = Int(arc4random_uniform(4) + 1)
         }
         
@@ -107,16 +108,20 @@ class TeamFactory {
         
     }
    
-    func status(whoseTurn: Bool,wizard: Bool) -> [Heroes] { /* getting the status of the team by returning either the content of arrayTeam for team One
+    func status(whoseTurn: Bool, wizard: Bool) -> [Heroes] { /* getting the status of the team by returning either the content of arrayTeam for team One
                                                                 or the content of arrayTeam for team Two */
         
         var arrayStatusTeam = [Heroes]() // declaration and initialisation of the arrayStatusTeam(return by that method)
         var arrayTeam = [Heroes]() // declaration and initialisation of the arrayTeam which will be append to arrayStatusTeam
         if whoseTurn == true {
             arrayTeam = teamFirst.arrayTeam // arrayTeam set at teamFirst.arrayTeam
+            print("tableau  arrayTeam pour team 1")
+            print(arrayTeam)
         }
-        if whoseTurn == false {
+        else {
             arrayTeam = teamSecond.arrayTeam // arrayTeam set at teamSecond.arrayTeam
+            print("tableau arrayTeam pour team 2")
+            print(arrayTeam)
         }
        
         if wizard == false {
@@ -144,38 +149,24 @@ class TeamFactory {
         var newLifeStrength: Int = 0 // declare the newLifeStrength property
         var newLifeStrengthWizard: Int = 0 // declare the newLifeStrengthWizard property
         
-        if whoseTurn == true {
-      
-            arrayDispenser = status(whoseTurn: true,wizard: false) // setting the arrayDispenser to arrayFirstTeam
-            arrayRecipient = status(whoseTurn: false,wizard: false) // setting the arrayRecipient to arraySecondTeam
-            
-        }
-        if whoseTurn == false {
-            
-            arrayDispenser = status(whoseTurn: false,wizard: false) // setting the arrayDispenser to arraySecondTeam
-            arrayRecipient = status(whoseTurn: true,wizard: false) //setting the arrayRecipient to arrayFirstTeam
-            
-            
-        }
+        arrayDispenser = status(whoseTurn: whoseTurn,wizard: false) // setting the arrayDispenser to arrayFirstTeam
+        arrayRecipient = status(whoseTurn: !whoseTurn,wizard: false) // setting the arrayRecipient to arraySecondTeam
+        
+        
         if specialSpell == false { // if the spell of death was never uses and no asked the wizard is doing just a normal strike
             print(arrayDispenser[dispenser].heroName)
-            
-            print(arrayRecipient[recipient].lifeStrength)
-            print(arrayDispenser[dispenser].shotStrength)
-            print(arrayRecipient[recipient].armorStrength)
             newLifeStrength = arrayRecipient[recipient].lifeStrength - (arrayDispenser[dispenser].shotStrength - arrayRecipient[recipient].armorStrength)
-            print(newLifeStrength)
             arrayRecipient[recipient].lifeStrength = newLifeStrength // setting in the array of the attacked team the new point of life at the index of the attacked
                 
                 if newLifeStrength <= 0 {
                     arrayRecipient[recipient].alive = false // the hero is dead
                 }
             }
-        if specialSpell == true { // if the wizard do the special spell of death and it was never done before, the strike is a spell of death
+        else { // if the wizard do the special spell of death and it was never done before, the strike is a spell of death
             
             //newLifeStrength = 0 // the wizard use his Spell of death
             arrayRecipient[recipient].lifeStrength = 0 // setting in the array of the attacked hero in the team at 0 and alive property at not alive
-            newLifeStrengthWizard = arrayDispenser[dispenser].lifeStrength - 10 // the wizard is having effect of the death spell calling
+            newLifeStrengthWizard = arrayDispenser[dispenser].lifeStrength - 20 // the wizard is having effect of the death spell calling
             arrayDispenser[dispenser].lifeStrength = newLifeStrengthWizard // the wizard has new lifeStrenght
             arrayRecipient[recipient].alive = false // the hero is dead
         }
@@ -190,19 +181,9 @@ class TeamFactory {
         let dispenser: Int = 0
         var newLifeStrength: Int
         
-        
-        if game.whoseTurn == true {
-            
-            arrayDispenser = status(whoseTurn: true, wizard: true)
-            arrayRecipient = status(whoseTurn: true, wizard: false)
-        
-        }
-        else {
-            
-            arrayDispenser = status(whoseTurn: false, wizard: true)
-            arrayRecipient = status(whoseTurn: false, wizard: false)
-           
-        }
+        arrayDispenser = status(whoseTurn: whoseTurn, wizard: true)
+        arrayRecipient = status(whoseTurn: whoseTurn, wizard: false)
+
         newLifeStrength = ((arrayRecipient[recipient].lifeStrength) + (arrayDispenser[dispenser].shotStrength))
         arrayRecipient[recipient].lifeStrength = newLifeStrength
         return newLifeStrength
