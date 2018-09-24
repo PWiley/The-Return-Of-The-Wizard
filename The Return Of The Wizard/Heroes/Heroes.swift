@@ -24,7 +24,7 @@ class Heroes {
     var equipment: Equipment // type of equipement
     
     
-    init(lifeStrength: Int, shotStrength: Int, armorStrength: Int, typeHero: String, heroName: String, alive: Bool, equipment: Equipment) {
+    init(lifeStrength: Int, shotStrength: Int, armorStrength: Int, typeHero: String, heroName: String = "", alive: Bool = true, equipment: Equipment) {
         
         self.lifeStrength = lifeStrength
         self.shotStrength = shotStrength
