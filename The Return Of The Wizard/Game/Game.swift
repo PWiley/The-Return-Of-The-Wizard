@@ -177,7 +177,7 @@ class Game {
             emojyDispenser = "🤺"
             greetings = "\n\n           ▶️ TEAM ONE ◀️"
             maxValueDispenser = calculateHeroes(whoseTurn: true, wizard: false) // so will start our possible choice by 1 for the dispensers possibility
-            print("la valeur de  elementHeroe = \(calculateHeroes(whoseTurn: true, wizard: false)) pour equipe 1")
+            print("la valeur de  elementHeroe = \(maxValueDispenser) pour equipe 1")
             print(maxValueDispenser)
             elementHeroe = 0                                                                 // wizard = true (only wizard reasearch) wizard = false (all the heroes and not only the wizard)
         }
@@ -188,7 +188,7 @@ class Game {
             emojyDispenser = "🔱"
             greetings = "\n\n           ▶️ TEAM TWO ◀️"
             maxValueDispenser = calculateHeroes(whoseTurn: false, wizard: false) /// so will start our possible choice by 1 for the dispensers possibility
-            print("la valeur de  elementHeroe = \(calculateHeroes(whoseTurn: true, wizard: false)) pour equipe 2")
+            print("la valeur de  elementHeroe = \(maxValueDispenser) pour equipe 2")
             print(maxValueDispenser)
             elementHeroe = 0                                                                 // wizard = true (only wizard reasearch) wizard = false (all the heroes and not only the wizard)
         }
@@ -556,54 +556,54 @@ class Game {
         return choiceGiven
     }
     
-    func statusTeam(whoseTurn: Bool,wizard: Bool) {
-        
-        var array = [Heroes]()
-        var emojy: String = ""
-        
-        if whoseTurn == true { // if team one has to play then we are accessing to the arrayFirstTeam
-            print(""
-                + "\n           ▶️ TEAM ONE HEROES ◀️") // showing the correct communication sentences for team one
-            array = teamFactory.status(whoseTurn: true,wizard: wizard)
-            emojy = "🤺" // setting the emojy for team One
-        }
-        else { // if team one has to play then we are accessing to the arraySecondTeam
-            print(""
-                + "\n           ▶️ TEAM TWO HEROES ◀️") // showing the correct communication sentences for team two
-            array = teamFactory.status(whoseTurn: false,wizard: wizard)
-            emojy = "🔱" // setting the emojy for team Two
-        }
-        for element in 0..<array.count {
-            
-            if wizard == true {
-                
-                if array[element].type == "Wizard" {
-                    if array[element].alive == true { // print the alived heroes only
-                        
-                        print("\n\(emojy) Hero name : \(array[element].heroName)"
-                            + " \(emojy) Hero Type : \(array[element].type)"
-                            + "\n\(emojy) LifeStrenght : \(array[element].lifeStrength)"
-                            + " \(emojy) ShotStrenght : \(array[element].shotStrength)"
-                            + "\n\(emojy) ArmorStrength : \(array[element].armorStrength)"
-                            + " \(emojy) Equipement : \(array[element].equipment)")
-                    }
-                }
-            }
-            if wizard == false {
-                
-                if array[element].alive == true { // print the alived heroes only
-                    
-                    print("\n\(emojy) Hero name : \(array[element].heroName)"
-                        + " \(emojy) Hero Type : \(array[element].type)"
-                        + "\n\(emojy) LifeStrenght : \(array[element].lifeStrength)"
-                        + " \(emojy) ShotStrenght : \(array[element].shotStrength)"
-                        + "\n\(emojy) ArmorStrength : \(array[element].armorStrength)"
-                        + " \(emojy) Equipement : \(array[element].equipment)")
-                }
-            }
-            elementHeroe += 1
-        }
-    }
+//    func statusTeam(whoseTurn: Bool, wizard: Bool) {
+//
+//        var array = [Heroes]()
+//        var emojy: String = ""
+//        var wizard: Bool = wizard
+//        if whoseTurn == true { // if team one has to play then we are accessing to the arrayFirstTeam
+//            print(""
+//                + "\n           ▶️ TEAM ONE HEROES ◀️") // showing the correct communication sentences for team one
+//            array = teamFactory.status(whoseTurn: true, wizard: wizard)
+//            emojy = "🤺" // setting the emojy for team One
+//        }
+//        else { // if team one has to play then we are accessing to the arraySecondTeam
+//            print(""
+//                + "\n           ▶️ TEAM TWO HEROES ◀️") // showing the correct communication sentences for team two
+//            array = teamFactory.status(whoseTurn: false, wizard: wizard)
+//            emojy = "🔱" // setting the emojy for team Two
+//        }
+//        for element in 0..<array.count {
+//
+//            if wizard == true {
+//
+//                if array[element].type == "Wizard" {
+//                    if array[element].alive == true { // print the alived heroes only
+//
+//                        print("\n\(emojy) Hero name : \(array[element].heroName)"
+//                            + " \(emojy) Hero Type : \(array[element].type)"
+//                            + "\n\(emojy) LifeStrenght : \(array[element].lifeStrength)"
+//                            + " \(emojy) ShotStrenght : \(array[element].shotStrength)"
+//                            + "\n\(emojy) ArmorStrength : \(array[element].armorStrength)"
+//                            + " \(emojy) Equipement : \(array[element].equipment)")
+//                    }
+//                }
+//            }
+//            if wizard == false {
+//
+//                if array[element].alive == true { // print the alived heroes only
+//
+//                    print("\n\(emojy) Hero name : \(array[element].heroName)"
+//                        + " \(emojy) Hero Type : \(array[element].type)"
+//                        + "\n\(emojy) LifeStrenght : \(array[element].lifeStrength)"
+//                        + " \(emojy) ShotStrenght : \(array[element].shotStrength)"
+//                        + "\n\(emojy) ArmorStrength : \(array[element].armorStrength)"
+//                        + " \(emojy) Equipement : \(array[element].equipment)")
+//                }
+//            }
+//            elementHeroe += 1
+//        }
+//    }
     
     //========================
     //  MARK:  - PARAMETERS  =
