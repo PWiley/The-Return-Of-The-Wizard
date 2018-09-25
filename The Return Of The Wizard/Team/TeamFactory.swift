@@ -115,13 +115,11 @@ class TeamFactory {
         var arrayTeam = [Heroes]() // declaration and initialisation of the arrayTeam which will be append to arrayStatusTeam
         if whoseTurn == true {
             arrayTeam = teamFirst.arrayTeam // arrayTeam set at teamFirst.arrayTeam
-            print("tableau  arrayTeam pour team 1")
-            print(arrayTeam)
+            
         }
         else {
             arrayTeam = teamSecond.arrayTeam // arrayTeam set at teamSecond.arrayTeam
-            print("tableau arrayTeam pour team 2")
-            print(arrayTeam)
+            
         }
        
         if wizard == false {
@@ -129,6 +127,7 @@ class TeamFactory {
                 if arrayTeam[element].alive == true { // if there are alive only
                 arrayStatusTeam.append(arrayTeam[element]) /* arrayStatusTeam will get the content of ArrayTeam either Team One
                                                                                                                     or TeamTwo */
+                    print(arrayStatusTeam)
                 }
             }
         }
@@ -136,6 +135,7 @@ class TeamFactory {
             for element in 0..<arrayTeam.count {
                 if arrayTeam[element].type == "Wizard" && arrayTeam[element].alive == true { // if there is at least one wizard alive will return the list of the alived wizards
                     arrayStatusTeam.append(arrayTeam[element]) // arrayStatusTeam will get the content of ArrayTeam
+                    print(arrayStatusTeam)
                 }
             }
         }
@@ -164,7 +164,7 @@ class TeamFactory {
             }
         else { // if the wizard do the special spell of death and it was never done before, the strike is a spell of death
             
-            //newLifeStrength = 0 // the wizard use his Spell of death
+            
             arrayRecipient[recipient].lifeStrength = 0 // setting in the array of the attacked hero in the team at 0 and alive property at not alive
             newLifeStrengthWizard = arrayDispenser[dispenser].lifeStrength - 20 // the wizard is having effect of the death spell calling
             arrayDispenser[dispenser].lifeStrength = newLifeStrengthWizard // the wizard has new lifeStrenght
@@ -177,12 +177,14 @@ class TeamFactory {
         
         var arrayDispenser = [Heroes]()
         var arrayRecipient = [Heroes]()
-        let recipient: Int = 0
-        let dispenser: Int = 0
+        //let recipient: Int = 0
+        //let dispenser: Int = dispenser
         var newLifeStrength: Int
         
         arrayDispenser = status(whoseTurn: whoseTurn, wizard: true)
+        //print(arrayDispenser[dispenser])
         arrayRecipient = status(whoseTurn: whoseTurn, wizard: false)
+        //print(arrayRecipient[recipient])
 
         newLifeStrength = ((arrayRecipient[recipient].lifeStrength) + (arrayDispenser[dispenser].shotStrength))
         arrayRecipient[recipient].lifeStrength = newLifeStrength

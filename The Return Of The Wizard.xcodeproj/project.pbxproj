@@ -10,7 +10,7 @@
 		DAA4B01D2148D2C100060B4E /* isInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA4B01C2148D2C100060B4E /* isInt.swift */; };
 		DAC48A232137FBB400B272A0 /* HeroesFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC48A222137FBB400B272A0 /* HeroesFactory.swift */; };
 		DAC48A252137FD3600B272A0 /* TeamFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC48A242137FD3600B272A0 /* TeamFactory.swift */; };
-		DACE8DDA2157A7B500571728 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACE8DD92157A7B500571728 /* Game.swift */; };
+		DACE8DDE2157A88500571728 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACE8DDD2157A88500571728 /* Game.swift */; };
 		DADC28052142D837008E91A7 /* TheReturn_test.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADC28042142D837008E91A7 /* TheReturn_test.swift */; };
 		DAE1BA90212DBF58008FEE18 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE1BA8F212DBF58008FEE18 /* main.swift */; };
 		DAE1BA9F212DC2CB008FEE18 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE1BA9E212DC2CB008FEE18 /* Team.swift */; };
@@ -38,7 +38,7 @@
 		DAA4B01C2148D2C100060B4E /* isInt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = isInt.swift; sourceTree = "<group>"; };
 		DAC48A222137FBB400B272A0 /* HeroesFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroesFactory.swift; sourceTree = "<group>"; };
 		DAC48A242137FD3600B272A0 /* TeamFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamFactory.swift; sourceTree = "<group>"; };
-		DACE8DD92157A7B500571728 /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		DACE8DDD2157A88500571728 /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Game.swift; path = ../../../../Game.swift; sourceTree = "<group>"; };
 		DADC28022142D837008E91A7 /* TheReturn_test.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheReturn_test.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DADC28042142D837008E91A7 /* TheReturn_test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheReturn_test.swift; sourceTree = "<group>"; };
 		DADC28062142D837008E91A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -141,7 +141,7 @@
 		DAE1BA98212DC145008FEE18 /* Game */ = {
 			isa = PBXGroup;
 			children = (
-				DACE8DD92157A7B500571728 /* Game.swift */,
+				DACE8DDD2157A88500571728 /* Game.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -264,11 +264,11 @@
 				DAE1BAA9212DC345008FEE18 /* Wizard.swift in Sources */,
 				DAE1BA9F212DC2CB008FEE18 /* Team.swift in Sources */,
 				DAE1BAA3212DC300008FEE18 /* Fighter.swift in Sources */,
+				DACE8DDE2157A88500571728 /* Game.swift in Sources */,
 				DAE1BAA5212DC315008FEE18 /* Dwarf.swift in Sources */,
 				DAC48A252137FD3600B272A0 /* TeamFactory.swift in Sources */,
 				DAE1BAA7212DC333008FEE18 /* Colossus.swift in Sources */,
 				DAA4B01D2148D2C100060B4E /* isInt.swift in Sources */,
-				DACE8DDA2157A7B500571728 /* Game.swift in Sources */,
 				DAE1BAA1212DC2E2008FEE18 /* Heroes.swift in Sources */,
 				DAE1BAAB212DC366008FEE18 /* Equipment.swift in Sources */,
 				DAE1BA90212DBF58008FEE18 /* main.swift in Sources */,
