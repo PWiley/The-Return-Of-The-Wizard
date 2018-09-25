@@ -107,8 +107,8 @@ class TeamFactory {
         }
         
     }
-   
-    func status(whoseTurn: Bool, wizard: Bool) -> [Heroes] { /* getting the status of the team by returning either the content of arrayTeam for team One
+    func status(whoseTurn: Bool) -> [Heroes] {
+    /*func status(whoseTurn: Bool, wizard: Bool) -> [Heroes] {  getting the status of the team by returning either the content of arrayTeam for team One
                                                                 or the content of arrayTeam for team Two */
         
         var arrayStatusTeam = [Heroes]() // declaration and initialisation of the arrayStatusTeam(return by that method)
@@ -122,23 +122,26 @@ class TeamFactory {
             
         }
        
-        if wizard == false {
+        //if wizard == false {
             for element in 0..<arrayTeam.count { // Browse arrayTeamFirst(array of team One or team Two
                 if arrayTeam[element].alive == true { // if there are alive only
                 arrayStatusTeam.append(arrayTeam[element]) /* arrayStatusTeam will get the content of ArrayTeam either Team One
                                                                                                                     or TeamTwo */
-                    print(arrayStatusTeam)
+//                    print("We are having no wizard selected")
+//                    print(arrayStatusTeam)
                 }
             }
-        }
-        if wizard == true {
-            for element in 0..<arrayTeam.count {
-                if arrayTeam[element].type == "Wizard" && arrayTeam[element].alive == true { // if there is at least one wizard alive will return the list of the alived wizards
-                    arrayStatusTeam.append(arrayTeam[element]) // arrayStatusTeam will get the content of ArrayTeam
-                    print(arrayStatusTeam)
-                }
-            }
-        }
+//        }
+//        if wizard == true {
+//            for element in 0..<arrayTeam.count {
+//                if arrayTeam[element].type == "Wizard" && arrayTeam[element].alive == true { // if there is at least one wizard alive will return the list of the alived wizards
+//                    arrayStatusTeam.append(arrayTeam[element]) // arrayStatusTeam will get the content of ArrayTeam
+//
+//                     print("We are having a wizard selected")
+//                    print(arrayStatusTeam)
+//                }
+//            }
+//        }
         return arrayStatusTeam // returning arrayStatusTeam by calling the method above
     }
    
@@ -149,12 +152,14 @@ class TeamFactory {
         var newLifeStrength: Int = 0 // declare the newLifeStrength property
         var newLifeStrengthWizard: Int = 0 // declare the newLifeStrengthWizard property
         
-        arrayDispenser = status(whoseTurn: whoseTurn,wizard: false) // setting the arrayDispenser to arrayFirstTeam
-        arrayRecipient = status(whoseTurn: !whoseTurn,wizard: false) // setting the arrayRecipient to arraySecondTeam
+        arrayDispenser = status(whoseTurn: whoseTurn) // setting the arrayDispenser to arrayFirstTeam
+        arrayRecipient = status(whoseTurn: !whoseTurn) // setting the arrayRecipient to arraySecondTeam
+//        arrayDispenser = status(whoseTurn: whoseTurn,wizard: false) // setting the arrayDispenser to arrayFirstTeam
+//        arrayRecipient = status(whoseTurn: !whoseTurn,wizard: false) // setting the arrayRecipient to arraySecondTeam
         
         
         if specialSpell == false { // if the spell of death was never uses and no asked the wizard is doing just a normal strike
-            print(arrayDispenser[dispenser].heroName)
+            //print(arrayDispenser[dispenser].heroName)
             newLifeStrength = arrayRecipient[recipient].lifeStrength - (arrayDispenser[dispenser].shotStrength - arrayRecipient[recipient].armorStrength)
             arrayRecipient[recipient].lifeStrength = newLifeStrength // setting in the array of the attacked team the new point of life at the index of the attacked
                 
@@ -181,9 +186,11 @@ class TeamFactory {
         //let dispenser: Int = dispenser
         var newLifeStrength: Int
         
-        arrayDispenser = status(whoseTurn: whoseTurn, wizard: true)
+        arrayDispenser = status(whoseTurn: whoseTurn)
+//        arrayDispenser = status(whoseTurn: whoseTurn, wizard: false)
         //print(arrayDispenser[dispenser])
-        arrayRecipient = status(whoseTurn: whoseTurn, wizard: false)
+        arrayRecipient = status(whoseTurn: whoseTurn)
+//        arrayRecipient = status(whoseTurn: whoseTurn, wizard: false)
         //print(arrayRecipient[recipient])
 
         newLifeStrength = ((arrayRecipient[recipient].lifeStrength) + (arrayDispenser[dispenser].shotStrength))
