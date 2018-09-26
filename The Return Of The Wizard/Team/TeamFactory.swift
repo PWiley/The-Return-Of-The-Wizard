@@ -21,7 +21,7 @@ class TeamFactory {
     //==============================
     
     
-    func getHeroeName() -> String{ // create the heroeName
+    func getHeroeName() -> String { // create the heroeName
         
         var nameUnique: Bool = true
         var heroeName: String
@@ -59,7 +59,7 @@ class TeamFactory {
     //==============================
     // MARK: - METHODS EQUIPEMENT  =
     //==============================
-//    
+   
     func NewEquipement(whoseTurn: Bool, heroeType: TypeHero, heroIndex: Int) { // method for randoming the new equipement
         
         var arrayTeam = [Heroes]()
@@ -105,7 +105,8 @@ class TeamFactory {
         }
         
     }
-    func status(whoseTurn: Bool) -> [Heroes] {
+   
+    func status(whoseTurn: Bool, noHeroes: Bool) -> [Heroes] {
     /*func status(whoseTurn: Bool, wizard: Bool) -> [Heroes] {  getting the status of the team by returning either the content of arrayTeam for team One
                                                                 or the content of arrayTeam for team Two */
         
@@ -119,14 +120,22 @@ class TeamFactory {
             arrayTeam = teamSecond.arrayTeam // arrayTeam set at teamSecond.arrayTeam
             
         }
-       
+        if noHeroes == false {
             for element in 0..<arrayTeam.count { // Browse arrayTeamFirst(array of team One or team Two
                 if arrayTeam[element].alive == true { // if there are alive only
                 arrayStatusTeam.append(arrayTeam[element]) /* arrayStatusTeam will get the content of ArrayTeam either Team One
                                                                                                                     or TeamTwo */
                 }
             }
-
+        }
+        else {
+            for element in 0..<arrayTeam.count { // Browse arrayTeamFirst(array of team One or team Two
+                if arrayTeam[element].alive == true { // if there are alive only
+                    arrayStatusTeam.append(arrayTeam[element]) /* arrayStatusTeam will get the content of ArrayTeam either Team One
+                     or TeamTwo */
+                }
+            }
+        }
         return arrayStatusTeam // returning arrayStatusTeam by calling the method above
     }
    
@@ -137,8 +146,8 @@ class TeamFactory {
         var newLifeStrength: Int = 0 // declare the newLifeStrength property
         var newLifeStrengthWizard: Int = 0 // declare the newLifeStrengthWizard property
         
-        arrayDispenser = status(whoseTurn: whoseTurn) // setting the arrayDispenser to arrayFirstTeam
-        arrayRecipient = status(whoseTurn: !whoseTurn) // setting the arrayRecipient to arraySecondTeam
+        arrayDispenser = status(whoseTurn: whoseTurn,noHeroes: false) // setting the arrayDispenser to arrayFirstTeam
+        arrayRecipient = status(whoseTurn: !whoseTurn,noHeroes: false) // setting the arrayRecipient to arraySecondTeam
 
         
         
@@ -176,10 +185,10 @@ class TeamFactory {
         //let dispenser: Int = dispenser
         var newLifeStrength: Int
         
-        arrayDispenser = status(whoseTurn: whoseTurn)
+        arrayDispenser = status(whoseTurn: whoseTurn,noHeroes: false)
 //        arrayDispenser = status(whoseTurn: whoseTurn, wizard: false)
         //print(arrayDispenser[dispenser])
-        arrayRecipient = status(whoseTurn: whoseTurn)
+        arrayRecipient = status(whoseTurn: whoseTurn,noHeroes: false)
 //        arrayRecipient = status(whoseTurn: whoseTurn, wizard: false)
         //print(arrayRecipient[recipient])
 
@@ -209,4 +218,9 @@ class TeamFactory {
         return true
     }
     
+//    func checkNoheroes() -> [Heroes] {
+//        var array = [Heroes]()
+//        for
+//        return array
+//    }
 }
