@@ -13,6 +13,8 @@ class Dwarf: Heroes { // setting proporties for Dwarf
 
     init() {    // initialization of the proporties
         
-        super.init(lifeStrength: 50, shotStrength: 20, armorStrength: 4, typeHero: "Dwarf", equipment : Equipment.Axe)
+        super.init(lifeStrength: 50, shotStrength: 20, armorStrength: 4, typeHero: .Dwarf, equipment : Equipment.Axe)
     }
 }
+
+
