@@ -15,7 +15,11 @@ class Team { // class Team
     init() {}
     
 }
-  
+
+enum TeamType: String {
+    case firstTeam = "First"
+    case secondTeam = "Second"
+}
     
     
     
