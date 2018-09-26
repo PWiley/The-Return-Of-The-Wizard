@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DA3D4294215BE338005BA8E9 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3D4293215BE337005BA8E9 /* Game.swift */; };
+		DA9F1AD5215C08F80037E287 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9F1AD4215C08F80037E287 /* Game.swift */; };
 		DAA4B01D2148D2C100060B4E /* extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA4B01C2148D2C100060B4E /* extension.swift */; };
 		DAC48A232137FBB400B272A0 /* HeroesFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC48A222137FBB400B272A0 /* HeroesFactory.swift */; };
 		DAC48A252137FD3600B272A0 /* TeamFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC48A242137FD3600B272A0 /* TeamFactory.swift */; };
@@ -35,7 +35,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		DA3D4293215BE337005BA8E9 /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Game.swift; path = "../../../Save Projet 3/The Return Of The Wizard/The Return Of The Wizard/Game/Game.swift"; sourceTree = "<group>"; };
+		DA9F1AD4215C08F80037E287 /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		DAA4B01C2148D2C100060B4E /* extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extension.swift; sourceTree = "<group>"; };
 		DAC48A222137FBB400B272A0 /* HeroesFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroesFactory.swift; sourceTree = "<group>"; };
 		DAC48A242137FD3600B272A0 /* TeamFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamFactory.swift; sourceTree = "<group>"; };
@@ -141,7 +141,7 @@
 		DAE1BA98212DC145008FEE18 /* Game */ = {
 			isa = PBXGroup;
 			children = (
-				DA3D4293215BE337005BA8E9 /* Game.swift */,
+				DA9F1AD4215C08F80037E287 /* Game.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -264,7 +264,7 @@
 				DAE1BAA9212DC345008FEE18 /* Wizard.swift in Sources */,
 				DAE1BA9F212DC2CB008FEE18 /* Team.swift in Sources */,
 				DAE1BAA3212DC300008FEE18 /* Fighter.swift in Sources */,
-				DA3D4294215BE338005BA8E9 /* Game.swift in Sources */,
+				DA9F1AD5215C08F80037E287 /* Game.swift in Sources */,
 				DAE1BAA5212DC315008FEE18 /* Dwarf.swift in Sources */,
 				DAC48A252137FD3600B272A0 /* TeamFactory.swift in Sources */,
 				DAE1BAA7212DC333008FEE18 /* Colossus.swift in Sources */,
