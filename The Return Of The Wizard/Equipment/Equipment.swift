@@ -11,10 +11,10 @@ import Foundation
 
 enum Equipment: Int {
     
-    case Axe = 8 // Axe effect at 8 points
-    case Hammer = 10 // Hammer effect at 10 points
-    case Sword = 6 // Sword effect at 6 points
-    case Scepter = 5 // Scepter effect at 5 points
+    case Axe // Axe effect at 8 points
+    case Hammer // Hammer effect at 10 points
+    case Sword // Sword effect at 6 points
+    case Scepter // Scepter effect at 5 points
 }
 
 
