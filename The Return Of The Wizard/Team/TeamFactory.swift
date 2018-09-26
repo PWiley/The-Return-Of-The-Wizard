@@ -139,8 +139,7 @@ class TeamFactory {
         
         arrayDispenser = status(whoseTurn: whoseTurn) // setting the arrayDispenser to arrayFirstTeam
         arrayRecipient = status(whoseTurn: !whoseTurn) // setting the arrayRecipient to arraySecondTeam
-//        arrayDispenser = status(whoseTurn: whoseTurn,wizard: false) // setting the arrayDispenser to arrayFirstTeam
-//        arrayRecipient = status(whoseTurn: !whoseTurn,wizard: false) // setting the arrayRecipient to arraySecondTeam
+
         
         
         if specialSpell == false { // if the spell of death was never uses and no asked the wizard is doing just a normal strike
@@ -157,7 +156,6 @@ class TeamFactory {
             }
         }
         else { // if the wizard do the special spell of death and it was never done before, the strike is a spell of death
-            
             
             arrayRecipient[recipient].lifeStrength = 0 // setting in the array of the attacked hero in the team at 0 and alive property at not alive
             newLifeStrengthWizard = arrayDispenser[dispenser].lifeStrength - 30 // the wizard is having effect of the death spell calling
