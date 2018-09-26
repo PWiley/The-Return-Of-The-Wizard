@@ -29,8 +29,7 @@ class TeamFactory {
         repeat {
             
             choiceNameHeroe = readLine()!
-            nameUnique = checkNameHeroe(choiceNameHeroe : choiceNameHeroe.uppercased())
-            
+            nameUnique = checkNameHeroe(choiceNameHeroe : choiceNameHeroe.uppercased().trimmingCharacters(in: .whitespaces))
             
         }while nameUnique == false
         heroeName = choiceNameHeroe
@@ -42,17 +41,16 @@ class TeamFactory {
     // MARK: - METHODS  TEAM  =
     //==============================
     
-    func composeTeam(heroeName : String, heroesInt: String, teamNameAlias: String) { // method createTeam
+    func composeTeam(heroeName : String, heroesInt: String, teamType: TeamType) { // method createTeam
         
-        let choicePlayer = heroesInt
-        let heroe = heroesFactory.getHeroe(heroesInt: choicePlayer)!
+        let heroe = heroesFactory.getHeroe(heroesInt: heroesInt)!
         heroe.heroName = heroeName
         
         
-        if teamNameAlias == "First" {
+        if teamType == .firstTeam {
             teamFirst.arrayTeam.append(heroe) // add heroes in array for first team
         }
-        if teamNameAlias == "Second" {
+        else {
             teamSecond.arrayTeam.append(heroe) // add heroes in array for second team
         }
         
@@ -62,7 +60,7 @@ class TeamFactory {
     // MARK: - METHODS EQUIPEMENT  =
     //==============================
 //    
-    func NewEquipement(whoseTurn: Bool, heroeType: String, heroIndex: Int) { // method for randoming the new equipement
+    func NewEquipement(whoseTurn: Bool, heroeType: HeroType, heroIndex: Int) { // method for randoming the new equipement
         
         var arrayTeam = [Heroes]()
         var equipementRoll: Int = 0
@@ -76,7 +74,7 @@ class TeamFactory {
             emojy = "🔱"
         }
         
-        if heroeType == "Wizard" {
+        if heroeType == .Wizard {
             arrayTeam[heroIndex].equipment = Equipment.Scepter
         }
         else {
@@ -188,25 +186,22 @@ class TeamFactory {
     
     func checkNameHeroe(choiceNameHeroe : String) -> Bool {
         
-        var unique: Bool = true
-        let heroeNameEnter = choiceNameHeroe
-        
         for element in 0..<teamFirst.arrayTeam.count {
-            if heroeNameEnter == teamFirst.arrayTeam[element].heroName {
+            if choiceNameHeroe == teamFirst.arrayTeam[element].heroName.uppercased() {
                 print("There is already an Heroe with that name")
                 print("Give another name to your Heroe")
-                unique = false
+                return false
             }
         }
         for element in 0..<teamSecond.arrayTeam.count {
-            if heroeNameEnter == teamSecond.arrayTeam[element].heroName {
+            if choiceNameHeroe == teamSecond.arrayTeam[element].heroName.uppercased() {
                 print("There is already an Heroe with that name")
                 print("Give another name to your Heroe")
-                unique = false
+                return false
             }
         }
         
-        return unique
+        return true
     }
     
 }
