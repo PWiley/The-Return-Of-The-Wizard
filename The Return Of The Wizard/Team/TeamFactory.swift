@@ -122,26 +122,13 @@ class TeamFactory {
             
         }
        
-        //if wizard == false {
             for element in 0..<arrayTeam.count { // Browse arrayTeamFirst(array of team One or team Two
                 if arrayTeam[element].alive == true { // if there are alive only
                 arrayStatusTeam.append(arrayTeam[element]) /* arrayStatusTeam will get the content of ArrayTeam either Team One
                                                                                                                     or TeamTwo */
-//                    print("We are having no wizard selected")
-//                    print(arrayStatusTeam)
                 }
             }
-//        }
-//        if wizard == true {
-//            for element in 0..<arrayTeam.count {
-//                if arrayTeam[element].type == "Wizard" && arrayTeam[element].alive == true { // if there is at least one wizard alive will return the list of the alived wizards
-//                    arrayStatusTeam.append(arrayTeam[element]) // arrayStatusTeam will get the content of ArrayTeam
-//
-//                     print("We are having a wizard selected")
-//                    print(arrayStatusTeam)
-//                }
-//            }
-//        }
+
         return arrayStatusTeam // returning arrayStatusTeam by calling the method above
     }
    
