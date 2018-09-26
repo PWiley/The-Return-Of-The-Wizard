@@ -60,7 +60,7 @@ class TeamFactory {
     // MARK: - METHODS EQUIPEMENT  =
     //==============================
 //    
-    func NewEquipement(whoseTurn: Bool, heroeType: HeroType, heroIndex: Int) { // method for randoming the new equipement
+    func NewEquipement(whoseTurn: Bool, heroeType: TypeHero, heroIndex: Int) { // method for randoming the new equipement
         
         var arrayTeam = [Heroes]()
         var equipementRoll: Int = 0
@@ -144,24 +144,31 @@ class TeamFactory {
         
         
         if specialSpell == false { // if the spell of death was never uses and no asked the wizard is doing just a normal strike
-            //print(arrayDispenser[dispenser].heroName)
+            
             newLifeStrength = arrayRecipient[recipient].lifeStrength - (arrayDispenser[dispenser].shotStrength - arrayRecipient[recipient].armorStrength)
             arrayRecipient[recipient].lifeStrength = newLifeStrength // setting in the array of the attacked team the new point of life at the index of the attacked
-                
-                if newLifeStrength <= 0 {
-                    arrayRecipient[recipient].alive = false // the hero is dead
-                }
+            newLifeStrengthWizard = arrayDispenser[dispenser].lifeStrength - 10 // the wizard is having effect of the normal spell calling
+            arrayDispenser[dispenser].lifeStrength = newLifeStrengthWizard // the wizard has new lifeStrenght
+            if newLifeStrength <= 0 {
+                arrayRecipient[recipient].alive = false // the hero is dead
             }
+            if newLifeStrengthWizard < 0 {
+                arrayDispenser[dispenser].alive = false // the wizard is dead
+            }
+        }
         else { // if the wizard do the special spell of death and it was never done before, the strike is a spell of death
             
             
             arrayRecipient[recipient].lifeStrength = 0 // setting in the array of the attacked hero in the team at 0 and alive property at not alive
-            newLifeStrengthWizard = arrayDispenser[dispenser].lifeStrength - 20 // the wizard is having effect of the death spell calling
+            newLifeStrengthWizard = arrayDispenser[dispenser].lifeStrength - 30 // the wizard is having effect of the death spell calling
             arrayDispenser[dispenser].lifeStrength = newLifeStrengthWizard // the wizard has new lifeStrenght
             arrayRecipient[recipient].alive = false // the hero is dead
+            if newLifeStrengthWizard < 0 {
+                arrayDispenser[dispenser].alive = false // the wizard is dead
+            }
         }
         return newLifeStrength
-        }
+    }
     
     func heal(dispenser: Int,recipient: Int,whoseTurn: Bool) -> Int {
         
