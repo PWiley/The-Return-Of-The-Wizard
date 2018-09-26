@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DAA4B01D2148D2C100060B4E /* isInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA4B01C2148D2C100060B4E /* isInt.swift */; };
+		DAA4B01D2148D2C100060B4E /* extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA4B01C2148D2C100060B4E /* extension.swift */; };
 		DAC48A232137FBB400B272A0 /* HeroesFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC48A222137FBB400B272A0 /* HeroesFactory.swift */; };
 		DAC48A252137FD3600B272A0 /* TeamFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC48A242137FD3600B272A0 /* TeamFactory.swift */; };
 		DACE8DDE2157A88500571728 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACE8DDD2157A88500571728 /* Game.swift */; };
@@ -35,7 +35,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		DAA4B01C2148D2C100060B4E /* isInt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = isInt.swift; sourceTree = "<group>"; };
+		DAA4B01C2148D2C100060B4E /* extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extension.swift; sourceTree = "<group>"; };
 		DAC48A222137FBB400B272A0 /* HeroesFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroesFactory.swift; sourceTree = "<group>"; };
 		DAC48A242137FD3600B272A0 /* TeamFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamFactory.swift; sourceTree = "<group>"; };
 		DACE8DDD2157A88500571728 /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Game.swift; path = ../../../../Game.swift; sourceTree = "<group>"; };
@@ -74,7 +74,7 @@
 		DAA4B01E2148D35800060B4E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				DAA4B01C2148D2C100060B4E /* isInt.swift */,
+				DAA4B01C2148D2C100060B4E /* extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -268,7 +268,7 @@
 				DAE1BAA5212DC315008FEE18 /* Dwarf.swift in Sources */,
 				DAC48A252137FD3600B272A0 /* TeamFactory.swift in Sources */,
 				DAE1BAA7212DC333008FEE18 /* Colossus.swift in Sources */,
-				DAA4B01D2148D2C100060B4E /* isInt.swift in Sources */,
+				DAA4B01D2148D2C100060B4E /* extension.swift in Sources */,
 				DAE1BAA1212DC2E2008FEE18 /* Heroes.swift in Sources */,
 				DAE1BAAB212DC366008FEE18 /* Equipment.swift in Sources */,
 				DAE1BA90212DBF58008FEE18 /* main.swift in Sources */,
