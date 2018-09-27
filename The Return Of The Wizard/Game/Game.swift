@@ -330,7 +330,10 @@ class Game {
         
         actionTeamMenu(whoseTurn: whoseTurn) // continues by going to the method actionTeamMenu
     }
-    
+    /***
+     Displays the status of the team in play roll before an action
+     based on whoseTurn(boolean true Team First/ false team Second)
+     ***/
     func statusTeamDisplay(whoseTurn: Bool) {
         
         var array = [Heroes]()
@@ -387,16 +390,16 @@ class Game {
         else {
             
             print("\n 👉 You were attacked by:")
-            game.printHeroStatus(emojy: emojyDispenser, hero: (arrayDispenser[dispenser]))
+            game.printHeroStatus(emojy: emojyDispenser, hero: (arrayDispenser[dispenser])) // displays the hero dispenser
             print("\n 👉 Before the attack no wizard")
-            game.printHeroStatus(emojy: emojyRecipient, hero: (arrayRecipient[recipient]))
-            newLifeStrength = teamFactory.fight(dispenser: dispenser, recipient: recipient, whoseTurn: whoseTurn, specialSpell: !(arrayDispenser[dispenser].type != .Wizard))
+            game.printHeroStatus(emojy: emojyRecipient, hero: (arrayRecipient[recipient])) // displays the hero recipient
+            newLifeStrength = teamFactory.fight(dispenser: dispenser, recipient: recipient, whoseTurn: whoseTurn, specialSpell: !(arrayDispenser[dispenser].type != .Wizard)) // gets the attack result
             print("\n 👉After the attack:")
-            game.printHeroStatus(emojy: emojyRecipient, hero: (arrayRecipient[recipient]))
+            game.printHeroStatus(emojy: emojyRecipient, hero: (arrayRecipient[recipient])) // displays the hero recipient
             
             
             if newLifeStrength == 0 {
-                print("\n 👉 😢 This hero is dead!!")
+                print("\n 👉 😢 This hero is dead!!") // displays the hero recipient is dead
             }
         }
         
@@ -430,8 +433,6 @@ class Game {
             emojyRecipient = "🤺" // setting the emojy for the team attacked
         }
         
-        //print("\n 👉 (emojyDispenser) Would you like to do a normal Spell, or using your Spell of death?")
-        
         repeat {
             
             print("\n"
@@ -443,9 +444,9 @@ class Game {
             
             playerAnswer = (game.choicePlayer(maxValue: 2)) // checks answer rightness
             
-        }while playerAnswer == nil
+        }while playerAnswer == nil // until the answer is correct
         
-        answer = (Int(playerAnswer!)!)
+        answer = (Int(playerAnswer!)!) // imput is casted
         
         
         if answer == 1  { // if answer is normal spell
@@ -470,18 +471,20 @@ class Game {
         }
         
     }
-    
-    func teamHealingDisplay(dispenser: Int, recipient: Int, whoseTurn: Bool) { // displays team is healing someone
+    /***
+    Displays team is healing someone
+     ***/
+    func teamHealingDisplay(dispenser: Int, recipient: Int, whoseTurn: Bool) {
         
-        var newLifeStrength: Int
-        var arrayDispenser = [Heroes]()
-        var arrayRecipient = [Heroes]()
-        let recipient: Int = recipient
-        let dispenser: Int = dispenser
+        var newLifeStrength: Int // new life strenght value declaration
+        var arrayDispenser = [Heroes]() // array of the dispenser team
+        var arrayRecipient = [Heroes]() // array of the recipient team
+        let recipient: Int = recipient // declaration of the recipient value
+        let dispenser: Int = dispenser // declaration of the dispenser value
         var emojyDispenser: String = "" // emojy for the dispenser
         
-        arrayDispenser = teamFactory.status(whoseTurn: whoseTurn, noHeroes: false)
-        arrayRecipient = teamFactory.status(whoseTurn: whoseTurn, noHeroes: false)
+        arrayDispenser = teamFactory.status(whoseTurn: whoseTurn, noHeroes: false) // returns the aarray of dispenser
+        arrayRecipient = teamFactory.status(whoseTurn: whoseTurn, noHeroes: false) // returns the array of recipient
         
         
         if whoseTurn == true {
@@ -533,17 +536,17 @@ class Game {
             switch NewWeaponPlayer {
             case 0 :
                 
-                arrayTeam[heroIndex].equipment = Equipment.Axe
+                arrayTeam[heroIndex].equipment = Equipment.Axe // set the equipement of the hero with enum Equipement at axe
                 print(" 👉 \(emojy) You have a brand new Axe")
                 
             case 1 :
                 
-                arrayTeam[heroIndex].equipment = Equipment.Hammer
+                arrayTeam[heroIndex].equipment = Equipment.Hammer // set the equipement of the hero with enum Equipement at hammer
                 print(" 👉 \(emojy) You have a brand new Hammer")
                 
             case 2 :
                 
-                arrayTeam[heroIndex].equipment = Equipment.Sword
+                arrayTeam[heroIndex].equipment = Equipment.Sword // set the equipement of the hero with enum Equipement at sword
                 print(" 👉 \(emojy) You have a brand new Sword")
                 
             default : print("You must choose a Weapon")
