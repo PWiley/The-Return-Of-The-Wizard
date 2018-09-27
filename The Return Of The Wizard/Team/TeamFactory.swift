@@ -8,32 +8,34 @@
 
 import Foundation
 
-
+/***
+ This class will manage all the settings concerning the two different teams
+***/
 class TeamFactory {
     
     
-    private let heroesFactory = HeroesFactory()
-    let teamFirst = Team()
-    let teamSecond = Team()
+    private let heroesFactory = HeroesFactory() // creates an instance of HeroesFactory
+    let teamFirst = Team() // creates an instance for team First
+    let teamSecond = Team() // creates an instance for team Second
     
     //==============================
     // MARK: - METHODS  HEROES  =
     //==============================
     
     
-    func getHeroeName() -> String { // create the heroeName
+    func getHeroName() -> String { // creates the heroeName
         
-        var nameUnique: Bool = true
-        var heroeName: String
-        var choiceNameHeroe: String
+        var nameUnique: Bool = true // boolean allows to know if the uniqueness of the heros name is respected
+        var heroName: String // will take th value of the accepted name
+        var choiceNameHeroe: String // answer from the player
         repeat {
             
             choiceNameHeroe = readLine()!
-            nameUnique = checkNameHeroe(choiceNameHeroe : choiceNameHeroe.uppercased().trimmingCharacters(in: .whitespaces))
+            nameUnique = checkNameHeroe(choiceNameHeroe :  choiceNameHeroe.uppercased().trimmingCharacters(in: .whitespaces)) // check the uniqueness of the name //
             
         }while nameUnique == false
-        heroeName = choiceNameHeroe
-        return heroeName.uppercased()
+        heroName = choiceNameHeroe // if name unique then we set the accepted name to heroName
+        return heroName.uppercased()
         
     }
     
@@ -41,17 +43,19 @@ class TeamFactory {
     // MARK: - METHODS  TEAM  =
     //==============================
     
+    /*** Method creates the team one or two by adding the hero after check to either array for teamFirst
+                                                                                or array for teamSecond ***/
     func composeTeam(heroeName : String, heroesInt: String, teamType: TeamType) { // method createTeam
         
-        let heroe = heroesFactory.getHeroe(heroesInt: heroesInt)!
-        heroe.heroName = heroeName
+        let hero = heroesFactory.getHeroe(heroesInt: heroesInt)! // get the type of hero and set its name with the name chose by the player
+        hero.heroName = heroeName
         
         
         if teamType == .firstTeam {
-            teamFirst.arrayTeam.append(heroe) // add heroes in array for first team
+            teamFirst.arrayTeam.append(hero) // add heroes in array for first team
         }
         else {
-            teamSecond.arrayTeam.append(heroe) // add heroes in array for second team
+            teamSecond.arrayTeam.append(hero) // add heroes in array for second team
         }
         
     }
@@ -59,6 +63,8 @@ class TeamFactory {
     //==============================
     // MARK: - METHODS EQUIPEMENT  =
     //==============================
+    
+    /*** Method giving with random a new equipement   ***/
    
     func NewEquipement(whoseTurn: Bool, heroeType: TypeHero, heroIndex: Int) { // method for randoming the new equipement
         
