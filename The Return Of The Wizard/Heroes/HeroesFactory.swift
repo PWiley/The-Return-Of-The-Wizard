@@ -8,7 +8,7 @@
 
 import Foundation
 
-
+/*** allows to create the hero ask by the player ***/
 class HeroesFactory {
     
     func getHeroe(heroesInt : String) -> Heroes? {

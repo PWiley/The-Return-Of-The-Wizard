@@ -13,6 +13,6 @@ class Fighter: Heroes { // setting proporties for Warrior
 
     init() {     // initialization of Warrior proporties
         
-        super.init(lifeStrength: 100, shotStrength: 10, armorStrength: 5, typeHero: .Fighter, equipment : Equipment.Sword)
+        super.init(lifeStrength: 100, shotStrength: 10, armorStrength: 5, typeHero: TypeHero.Fighter, equipment : Equipment.Sword)
     }
 }

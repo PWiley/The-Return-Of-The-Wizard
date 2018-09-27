@@ -9,7 +9,7 @@
 import Foundation
 
 
-// setting parameter for each Character
+// parameter for each Character
 
 class Heroes {
     

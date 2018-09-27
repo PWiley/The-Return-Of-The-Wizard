@@ -106,7 +106,7 @@ class Game {
                 var heroName: String  // that will be the name of the hero chose by the Player
                 repeat {
                     print(" 👉 How do you want to name your heroe?") // Asking the name of the Team
-                    heroName = teamFactory.getHeroeName().trimmingCharacters(in: .whitespaces)
+                    heroName = teamFactory.getHeroName().trimmingCharacters(in: .whitespaces)
                 } while heroName.isEmpty // check if no input of name which is forbidden
                 
                 teamFactory.composeTeam(heroeName: heroName, heroesInt: playerAnswer! ,teamType: teamType) // adding the Heroes
@@ -155,18 +155,18 @@ class Game {
         else {
             if whoseTurn == true {
                 emojyDispenser = "🤺"
-                greetings = "\n\n\t\t▶️ TEAM ONE ◀️"
+                greetings = "Team One"
                 
             } else {
                 emojyDispenser = "🔱"
-                greetings = "\n\n\t\t▶️ TEAM TWO ◀️"
+                greetings = "Team Two"
             }
             
             maxValueDispenser = calculateHeroes(whoseTurn: whoseTurn) // so will start our possible choice by 1 for the dispensers possibility
             elementHeroe = 0                                                                 // wizard = true (only wizard reasearch) wizard = false (all the heroes and not only the wizard)
             //        repeat {
             print(greetings)
-            print("\n 👉 Choose you hero \(emojyDispenser): ❓")
+            print("\n 👉 \(greetings) choose you hero \(emojyDispenser): ❓")
             repeat {
                 playerAnswer = ((game.choicePlayer(maxValue: maxValueDispenser)))
             }while playerAnswer == nil
@@ -214,18 +214,18 @@ class Game {
         var emojyRecipient: String = "" // emojy is declare for the recipient
         var heroType: TypeHero! // variable used for having the type of hero dispenser who would like to fight
         let specialSpell: Bool = false // property allowing to do a deathSpell for the wizard only
-        
+        var greetings: String // greetings message
         maxValueRecipient = calculateHeroes(whoseTurn: !whoseTurn) /* so will start our possible choice by 1 for the recipients possibility
          (all the heroes and not only the wizard) */
         
         elementHeroe = 0
         if whoseTurn == true {
             emojyRecipient = "🔱"
-            //greetings = "\n\n\t\t▶️ TEAM ONE ◀️"
+            greetings = "Team One "
         }
         else {
             emojyRecipient = "🤺"
-            // greetings = "\n\n\t\t▶️ TEAM TWO ◀️"
+            greetings = "Team Two "
         }
         heroType = teamFactory.status(whoseTurn: whoseTurn, noHeroes: false)[dispenserRow].type
         
@@ -233,12 +233,12 @@ class Game {
             print("\n ⚡️ I am a wizard"
                 + "\n ⚡️ I can kill with spell of death")
         }
-        else {
-            print("\n You are a normal hero")
-        }
+//        else {
+//            print("\n You are a normal hero")
+//        }
         
         
-        print("\n 👉 Choose your opponent \(emojyRecipient): ❓")
+        print("\n 👉 \(greetings) choose your opponent \(emojyRecipient): ❓")
         
         repeat {
             playerAnswer = (game.choicePlayer(maxValue: maxValueRecipient)) // testing the correct anser with choicePlayer method
@@ -267,10 +267,10 @@ class Game {
         elementHeroe = 0
         
         if whoseTurn == true {
-            print(" 👉 TEAM ONE \n Choose the hero to heal: ❓")
+            print(" 👉 Team One \n Choose the hero to heal: ❓")
         }
         else {
-            print(" 👉 TEAM TWO \n Choose the hero to heal: ❓")
+            print(" 👉 Team Two \n Choose the hero to heal: ❓")
         }
         
         repeat {
@@ -378,7 +378,7 @@ class Game {
             
             
             if newLifeStrength == 0 {
-                print("\n ⚡️ This hero is dead!!")
+                print("\n 👉 😢 This hero is dead!!")
             }
         }
         
@@ -412,7 +412,7 @@ class Game {
             emojyRecipient = "🤺" // setting the emojy for the team attacked
         }
         
-        print("\(emojyDispenser) Would you like to do a normal Spell, or using your Spell of death?")
+        //print("\n 👉 (emojyDispenser) Would you like to do a normal Spell, or using your Spell of death?")
         
         repeat {
             
@@ -431,24 +431,24 @@ class Game {
         
         
         if answer == 1  { // if answer is normal spell
-            print("\n \(emojyRecipient) Before the attack")
+            print("\n 👉 \(emojyRecipient) Before the attack")
             game.printHeroStatus(emojy: emojyRecipient, hero: (arrayRecipient[recipient])) // print the characters of recipient hero
             newLifeStrength = teamFactory.fight(dispenser: dispenser, recipient: recipient, whoseTurn: whoseTurn, specialSpell: false)
-            print("\n \(emojyRecipient) After the attack")
+            print("\n 👉 \(emojyRecipient) After the attack")
             game.printHeroStatus(emojy: emojyRecipient, hero: (arrayRecipient[recipient])) // print the characters of recipient hero
             if newLifeStrength == 0 { // check if hero is dead
-                print(" \(emojyRecipient) Your hero \(arrayRecipient[recipient].heroName) is dead")
+                print("\n 👉 \(emojyRecipient) Your hero \(arrayRecipient[recipient].heroName) is dead  😢")
             }
         }
         if answer == 2  { // if answer is spell of death
-            print("\n \(emojyRecipient) Before the attack with spell of death")
+            print("\n 👉 \(emojyRecipient) Before the attack with spell of death")
             game.printHeroStatus(emojy: emojyRecipient, hero: (arrayRecipient[recipient])) // print the characters of recipient hero
             newLifeStrength = teamFactory.fight(dispenser: dispenser, recipient: recipient, whoseTurn: whoseTurn, specialSpell: true)
-            print("\n \(emojyRecipient) After the attack")
+            print("\n 👉 \(emojyRecipient) After the attack")
             game.printHeroStatus(emojy: emojyRecipient, hero: (arrayRecipient[recipient])) // print the characters of recipient hero
-            print("\n \(emojyDispenser) ⚡️ Your wizard is now having :")
+            print("\n 👉 \(emojyDispenser) ⚡️ Your wizard is now having :")
             game.printHeroStatus(emojy: emojyDispenser, hero: (arrayDispenser[dispenser])) // print the characters of dispenser hero
-            print("\n \(emojyRecipient) Your hero \(arrayRecipient[recipient].heroName) is dead")
+            print("\n 👉 \(emojyRecipient) Your hero \(arrayRecipient[recipient].heroName) is dead  😢")
         }
         
     }
@@ -471,12 +471,12 @@ class Game {
         } else {
             emojyDispenser = "🔱" // emojy for the dispense
         }
-        print("\n\(emojyDispenser) The savior is:")
+        print("\n 👉 \(emojyDispenser) The savior is:")
         game.printHeroStatus(emojy: emojyDispenser, hero: (arrayDispenser[dispenser])) // print the characters of dispenser hero
-        print("\n\(emojyDispenser) Before the heal Action")
+        print("\n 👉 \(emojyDispenser) Before the heal Action")
         game.printHeroStatus(emojy: emojyDispenser, hero: (arrayRecipient[recipient])) // print the characters of recipient hero
         newLifeStrength = teamFactory.heal(dispenser: dispenser, recipient: recipient, whoseTurn: whoseTurn)
-        print("\n\(emojyDispenser) The hero you have just heal:")
+        print("\n 👉 \(emojyDispenser) The hero you have just heal:")
         game.printHeroStatus(emojy: emojyDispenser, hero: (arrayRecipient[recipient])) // print the characters of dispenser hero
         print("\n 👉 Your hero is now having: \(newLifeStrength)")
     }
@@ -498,30 +498,35 @@ class Game {
             emojy = "🔱"
         }
         
+        print(""
+            + "\n\t\t***************************"
+            + "\n\t\t* 🎲  A chest opens  2    *"
+            + "\n\t\t***************************")
+        
         if heroeType == .Wizard {
             arrayTeam[heroIndex].equipment = Equipment.Scepter
-            print(" \(emojy) Your have a brand new Scepter")
+            print("\n 👉 \(emojy) You have a brand new Scepter")
         }
         else {
             equipementRoll = (Int.random(max: 3)-1)
-            print(equipementRoll)
+            //print(equipementRoll)
             
             let NewWeaponPlayer = equipementRoll
             switch NewWeaponPlayer {
             case 0 :
                 
                 arrayTeam[heroIndex].equipment = Equipment.Axe
-                print(" \(emojy) Your new equipment is an Axe")
+                print(" 👉 \(emojy) You have a brand new Axe")
                 
             case 1 :
                 
                 arrayTeam[heroIndex].equipment = Equipment.Hammer
-                print(" \(emojy) Your new equipment is an Hammer")
+                print(" 👉 \(emojy) You have a brand new Hammer")
                 
             case 2 :
                 
                 arrayTeam[heroIndex].equipment = Equipment.Sword
-                print(" \(emojy) Your new equipment is an Sword")
+                print(" 👉 \(emojy) You have a brand new Sword")
                 
             default : print("You must choose a Weapon")
             }
@@ -557,8 +562,7 @@ class Game {
         
         var choiceGiven: Int
         
-        print("\n"
-            + "\n 👉 You are going to fight?")
+        print("\n 👉 You are going to fight")
         choiceGiven = 1 // the player as he is having a normal hero in playRoll can just attack so no choice
         return choiceGiven
     }
@@ -575,16 +579,18 @@ class Game {
             + "\n\(emojy) ArmorStrength : \(hero.armorStrength)"
             + " \(emojy) Equipement : \(hero.equipment)")
     }
+    
     /***
      Method displays when the game is over
      ***/
+    
     func theGAmeIsFinish() {
         print("\n 👉 The game is finish")
         if teamFactory.status(whoseTurn: true, noHeroes: false).isEmpty {
             print("\n 🎉 Team One you won!!")
         }
         else {
-            print(" 🎉 Team Two you won!!")
+            print("\n 🎉 Team Two you won!!")
         }
     }
     
