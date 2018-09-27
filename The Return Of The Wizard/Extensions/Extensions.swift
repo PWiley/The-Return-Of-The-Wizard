@@ -1,5 +1,5 @@
 //
-//  isAnInt.swift
+//  Extensions.swift
 //  The Return Of The Wizard
 //
 //  Created by Patrick Wiley on 12/09/2018.
