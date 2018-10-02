@@ -8,10 +8,10 @@
 
 
 /***
-Class game is controlling all the tasks of the game calling the methods from TeamFactory in case of needs
-It will manage also the roll of the game.
-it controls the playRoll and the different display of the game
-***/
+ Class game is controlling all the tasks of the game calling the methods from TeamFactory in case of needs
+ It will manage also the roll of the game.
+ it controls the playRoll and the different display of the game
+ ***/
 
 class Game {
     
@@ -34,7 +34,7 @@ class Game {
     
     /***
      This is the start menu which welcomes the player and ask him if he wants to play
-    ***/
+     ***/
     
     func gameStartMenu() {
         var correctAnswer: Bool = true
@@ -72,7 +72,7 @@ class Game {
                         + "\n\t\t*    Maybe next time     *"
                         + "\n\t\t**************************")
                     
-                    game.gameStartMenu()
+                    game.gameStartMenu() // calls the startMenu
                     
                 default:
                     
@@ -89,7 +89,7 @@ class Game {
         
         var teamAlias = 0 // teamAlias will block the team creation at 2, set at begin at 0
         var teamType = TeamType.firstTeam /* teamNameAlias is having two states -> First for the first Team
-                                                                                -> Second for the Second Team */
+         -> Second for the Second Team */
         print("\n             ▶️ Description of the game ◀️"
             + "\n\n"
             + "\n ⚠️ At the beginning of the game, each player will build his team by choosing from these types of possible characters."
@@ -145,7 +145,7 @@ class Game {
         
         game.statusTeamDisplay(whoseTurn: false) // shows the status of team Two (all the heroes and not only the wizard)
         whoseTurn.toggle() // give the hand to player One
-        game.actionMenuDisplay(whoseTurn: true)
+        game.actionMenuDisplay(whoseTurn: true) // return to actionMenuDisplay with play roll first Team
         
     }
     
@@ -168,7 +168,7 @@ class Game {
         var heroType: TypeHero! // declaration of the type of hero variable, will allow to show to that wizard a unique power (spell of death) for all the game
         
         if teamFactory.status(whoseTurn: whoseTurn, noHeroes: true).isEmpty || teamFactory.status(whoseTurn: !whoseTurn, noHeroes: true).isEmpty { // cheks if the game is over by test of no more heroes alived in at least one array of the teams
-            game.theGAmeIsFinish() // calls method which ends the game
+            game.theGameIsFinish() // calls method which ends the game
         }
             
         else {
@@ -183,7 +183,6 @@ class Game {
             
             maxValueDispenser = calculateHeroes(whoseTurn: whoseTurn) // so will start our possible choice by 1 for the dispensers possibility
             elementHeroe = 0                                                                 // wizard = true (only wizard reasearch) wizard = false (all the heroes and not only the wizard)
-            //        repeat {
             
             print("\n 👉 \(greetings) choose you hero \(emojyDispenser): ❓")
             repeat {
@@ -253,7 +252,7 @@ class Game {
             print("\n ⚡️ I am a wizard"
                 + "\n ⚡️ I can kill with spell of death")
         }
-
+        
         print("\n 👉 \(greetings) choose your opponent \(emojyRecipient): ❓")
         
         repeat {
@@ -283,10 +282,10 @@ class Game {
         elementHeroe = 0
         
         if whoseTurn == true {
-            print(" 👉 Team One \n Choose the hero to heal: ❓")
+            print(" 👉 Team One choose the hero to heal: ❓")
         }
         else {
-            print(" 👉 Team Two \n Choose the hero to heal: ❓")
+            print(" 👉 Team Two choose the hero to heal: ❓")
         }
         
         repeat {
@@ -391,10 +390,10 @@ class Game {
             
             print("\n 👉 You were attacked by:")
             game.printHeroStatus(emojy: emojyDispenser, hero: (arrayDispenser[dispenser])) // displays the hero dispenser
-            print("\n 👉 Before the attack no wizard")
+            print("\n 👉 Before the attack: ")
             game.printHeroStatus(emojy: emojyRecipient, hero: (arrayRecipient[recipient])) // displays the hero recipient
             newLifeStrength = teamFactory.fight(dispenser: dispenser, recipient: recipient, whoseTurn: whoseTurn, specialSpell: !(arrayDispenser[dispenser].type != .Wizard)) // gets the attack result
-            print("\n 👉After the attack:")
+            print("\n 👉After the attack: ")
             game.printHeroStatus(emojy: emojyRecipient, hero: (arrayRecipient[recipient])) // displays the hero recipient
             
             
@@ -450,29 +449,47 @@ class Game {
         
         
         if answer == 1  { // if answer is normal spell
+            print("\n 👉 You were attacked by:")
+            game.printHeroStatus(emojy: emojyDispenser, hero: (arrayDispenser[dispenser])) // displays the hero dispenser
             print("\n 👉 \(emojyRecipient) Before the attack")
             game.printHeroStatus(emojy: emojyRecipient, hero: (arrayRecipient[recipient])) // print the characters of recipient hero
             newLifeStrength = teamFactory.fight(dispenser: dispenser, recipient: recipient, whoseTurn: whoseTurn, specialSpell: false)
             print("\n 👉 \(emojyRecipient) After the attack")
             game.printHeroStatus(emojy: emojyRecipient, hero: (arrayRecipient[recipient])) // print the characters of recipient hero
-            if newLifeStrength == 0 { // check if hero is dead
+            if arrayDispenser[dispenser].lifeStrength < 0 {
+                print("\n 👉 \(emojyRecipient) Your hero \(arrayDispenser[dispenser].heroName) is dead  😢")
+            }
+            else {
+                print("\n 👉 \(emojyDispenser) ⚡️ Your wizard is now having :")
+                game.printHeroStatus(emojy: emojyDispenser, hero: (arrayDispenser[dispenser])) // print the characters of dispenser hero
+            }
+            if newLifeStrength < 0 { // check if hero is dead
                 print("\n 👉 \(emojyRecipient) Your hero \(arrayRecipient[recipient].heroName) is dead  😢")
             }
         }
         if answer == 2  { // if answer is spell of death
+            print("\n 👉 You were attacked by:")
+            game.printHeroStatus(emojy: emojyDispenser, hero: (arrayDispenser[dispenser])) // displays the hero dispenser
             print("\n 👉 \(emojyRecipient) Before the attack with spell of death")
             game.printHeroStatus(emojy: emojyRecipient, hero: (arrayRecipient[recipient])) // print the characters of recipient hero
             newLifeStrength = teamFactory.fight(dispenser: dispenser, recipient: recipient, whoseTurn: whoseTurn, specialSpell: true)
             print("\n 👉 \(emojyRecipient) After the attack")
             game.printHeroStatus(emojy: emojyRecipient, hero: (arrayRecipient[recipient])) // print the characters of recipient hero
-            print("\n 👉 \(emojyDispenser) ⚡️ Your wizard is now having :")
-            game.printHeroStatus(emojy: emojyDispenser, hero: (arrayDispenser[dispenser])) // print the characters of dispenser hero
+            if arrayDispenser[dispenser].lifeStrength < 0 {
+                print("\n 👉 \(emojyDispenser) Your hero \(arrayDispenser[dispenser].heroName) is dead  😢")
+                
+            }
+            else {
+                print("\n 👉 \(emojyDispenser) ⚡️ Your wizard is now having :")
+                game.printHeroStatus(emojy: emojyDispenser, hero: (arrayDispenser[dispenser])) // print the characters of dispenser hero
+            }
             print("\n 👉 \(emojyRecipient) Your hero \(arrayRecipient[recipient].heroName) is dead  😢")
+            
         }
         
     }
     /***
-    Displays team is healing someone
+     Displays team is healing someone
      ***/
     func teamHealingDisplay(dispenser: Int, recipient: Int, whoseTurn: Bool) {
         
@@ -499,7 +516,7 @@ class Game {
         newLifeStrength = teamFactory.heal(dispenser: dispenser, recipient: recipient, whoseTurn: whoseTurn)
         print("\n 👉 \(emojyDispenser) The hero you have just heal:")
         game.printHeroStatus(emojy: emojyDispenser, hero: (arrayRecipient[recipient])) // print the characters of dispenser hero
-        print("\n 👉 Your hero is now having: \(newLifeStrength)")
+        print("\n 👉 Your hero is now having: \(newLifeStrength) of lifeStrenght")
     }
     /***
      methods wich allows with random a new equipement
@@ -521,7 +538,7 @@ class Game {
         
         print(""
             + "\n\t\t***************************"
-            + "\n\t\t* 🎲  A chest opens  2    *"
+            + "\n\t\t* 🎲  A chest opens       *"
             + "\n\t\t***************************")
         
         if heroeType == .Wizard {
@@ -529,7 +546,7 @@ class Game {
             print("\n 👉 \(emojy) You have a brand new Scepter")
         }
         else {
-            equipementRoll = (Int.random(max: 3)-1)
+            equipementRoll = (Int.random(max: 3))
             //print(equipementRoll)
             
             let NewWeaponPlayer = equipementRoll
@@ -605,9 +622,9 @@ class Game {
      Method displays when the game is over
      ***/
     
-    func theGAmeIsFinish() {
+    func theGameIsFinish() {
         print("\n 👉 The game is finish")
-        if teamFactory.status(whoseTurn: true, noHeroes: false).isEmpty {
+        if teamFactory.status(whoseTurn: whoseTurn, noHeroes: true).isEmpty {
             print("\n 🎉 Team One you won!!")
         }
         else {
@@ -663,10 +680,10 @@ class Game {
     func controlAnswer(choicePlayer: Int,maxValue: Int) -> Bool {
         for num in 1...maxValue {
             if choicePlayer == num { // Answer must be contained between 1 and max for 2 possible answers then 1 or 2
-                //print("Your value is in between the possible answers")
+                
                 return true
             }
-            //return false
+            
         }
         return false
     }
